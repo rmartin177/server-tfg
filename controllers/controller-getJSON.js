@@ -2,6 +2,7 @@ const path = require("path")
 const fs = require("fs")
 const {performance} = require('perf_hooks');
 const stringHelper = require("../utils/stringHelper")
+const scrappingFilter = require("../utils/scrappingFilter")
 //Refactorizar esta funcion en otras mas pequeñas
 exports.getJSON = async (req, res) => {
     let autores = req.body;
@@ -27,6 +28,8 @@ exports.getJSON = async (req, res) => {
         await page.type('input[type="search"]', autores[i])
         await page.keyboard.press("Enter");
         await page.waitForTimeout(2000);
+        await autoScroll(page)
+        await page.waitForTimeout(2000);
         //Vamos a obtener un objeto con los enlaces separados de los tipos article, uncollections e inproceedings, descartando los informal
         const results = await page.evaluate( () => {
             let articlesParse = [], inproceedingsParse = [], incollectionParse = [];
@@ -50,27 +53,118 @@ exports.getJSON = async (req, res) => {
         })  
         //Una vez tienes el 100% de enlaces de la web hacia los XML, procedemos a ir a ellos y extraer la info para completar los arrays
         for(let j = 0; j < results.articles.length; j++){
-            datosArticulo = {}
+            datosArticulo = { type : "article", authors: [], issue: null}
             await page.goto(results.articles[j], {waitUntil: "networkidle2"})
-            let extraerInfoXML = await page.evaluate( () => {
-                return document.querySelector(".opened").innerText;
-            }, [])
-            /*
-                Aqui traigo el contenido del xlm a un string, toca leer la info de este string y completar, idoneo crear una carpeta utils donde crear funciones
-                especificas para leer y procesar string (dividirlos por lineas, quitar acentos, quitar mayusculas, leer si un string tiene cadenas especificas como <author>
-                y todo lo que necesitemos)
-            */
-            console.log(extraerInfoXML)
+            let extraerInfoXML = await page.evaluate( (datosArticulo) => {
+                let articleDataHTML = document.querySelectorAll("#folder1 .opened .line span:nth-child(2):not(.html-attribute-value)")
+                let articleTypeDataHTML = document.querySelectorAll("#folder1 .opened .line > span:first-child")
 
-            //en este for hay que abrir nuevas pestañas al navegador y mandarlas a otras webs para calcular algunos indices que se basan en el acronimo de los articulos
-
-            /*Controlar si este articulo ya esta incluido en el array datosPublicaciones, ejemplo si nos dan dos autores de los cuales extraer info
-            y adrian y verdejo han participado en el mismo articulo, cuando procesas adrian por primera vez lo incluyes, pero cuando procesas a verdejo
-            ese articulo ya esta incluido, por lo que no se debe incluir otra vez pero si lo debes usar para calcular los indices de verdejo y demas*/
+                for(let z = 0; z < articleDataHTML.length; z++){
+                    if(articleTypeDataHTML[z].innerText.includes("author")){
+                        datosArticulo.authors.push(articleDataHTML[z].innerText)
+                    }else if(articleTypeDataHTML[z].innerText.includes("title")){
+                        datosArticulo.title = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("pages")){
+                        datosArticulo.pages = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("year")){
+                        datosArticulo.year = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("volume")){
+                        datosArticulo.volume = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("journal")){
+                        datosArticulo.journal = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("issue")){
+                        datosArticulo.issue = articleDataHTML[z].innerText;
+                    }
+                }
+                return datosArticulo;
+            }, datosArticulo)
+            datosPublicaciones.push(extraerInfoXML);
+             //en este for hay que abrir nuevas pestañas al navegador y mandarlas a otras webs para calcular algunos indices que se basan en el acronimo de los articulos
         }
 
-    }
+        for(let j = 0; j < results.inproceedings.length; j++){
+            datosArticulo = { type : "inproceeding", authors: []}
+            await page.goto(results.inproceedings[j], {waitUntil: "networkidle2"})
+            let extraerInfoXML = await page.evaluate( (datosArticulo) => {
+                let articleDataHTML = document.querySelectorAll("#folder1 .opened .line span:nth-child(2):not(.html-attribute-value)")
+                let articleTypeDataHTML = document.querySelectorAll("#folder1 .opened .line > span:first-child")
+
+                for(let z = 0; z < articleDataHTML.length; z++){
+                    if(articleTypeDataHTML[z].innerText.includes("author")){
+                        datosArticulo.authors.push(articleDataHTML[z].innerText)
+                    }else if(articleTypeDataHTML[z].innerText.includes("pages")){
+                        datosArticulo.pages = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("year")){
+                        datosArticulo.year = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("booktitle")){
+                        datosArticulo.book_title = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("title")){
+                        datosArticulo.title = articleDataHTML[z].innerText;
+                    }
+                }
+                return datosArticulo;
+            }, datosArticulo)
+            datosPublicaciones.push(extraerInfoXML);
+             //en este for hay que abrir nuevas pestañas al navegador y mandarlas a otras webs para calcular algunos indices que se basan en el acronimo de los articulos
+        }
+
+        for(let j = 0; j < results.incollection.length; j++){
+            datosArticulo = { type : "incollection", authors: [], issue: null}
+            await page.goto(results.incollection[j], {waitUntil: "networkidle2"})
+            let extraerInfoXML = await page.evaluate( (datosArticulo) => {
+                let articleDataHTML = document.querySelectorAll("#folder1 .opened .line span:nth-child(2):not(.html-attribute-value)")
+                let articleTypeDataHTML = document.querySelectorAll("#folder1 .opened .line > span:first-child")
+
+                for(let z = 0; z < articleDataHTML.length; z++){
+                    if(articleTypeDataHTML[z].innerText.includes("author")){
+                        datosArticulo.authors.push(articleDataHTML[z].innerText)
+                    }else if(articleTypeDataHTML[z].innerText.includes("pages")){
+                        datosArticulo.pages = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("year")){
+                        datosArticulo.year = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("booktitle")){
+                        datosArticulo.book_title = articleDataHTML[z].innerText;
+                    }else if(articleTypeDataHTML[z].innerText.includes("title")){
+                        datosArticulo.title = articleDataHTML[z].innerText;
+                    }
+                }
+                return datosArticulo;
+            }, datosArticulo)
+            datosPublicaciones.push(extraerInfoXML);
+             //en este for hay que abrir nuevas pestañas al navegador y mandarlas a otras webs para calcular algunos indices que se basan en el acronimo de los articulos
+        }
+    console.log(datosPublicaciones)
+    console.log("hay " + results.articles.length + " articulos")
+    console.log("hay " + results.inproceedings.length + " inproceedings")
+    console.log("hay " + results.incollection.length + " incollection")
     
-    res.send("Si lo intento hasta lograrlo... Lo lograre")
+        /*Controlar si este articulo ya esta incluido en el array datosPublicaciones, ejemplo si nos dan dos autores de los cuales extraer info
+        y adrian y verdejo han participado en el mismo articulo, cuando procesas adrian por primera vez lo incluyes, pero cuando procesas a verdejo
+        ese articulo ya esta incluido, por lo que no se debe incluir otra vez pero si lo debes usar para calcular los indices de verdejo y demas*/
+        
+        datosAutores.push(datosAutor)
+    }
+    let finalResult = {
+        "authors": datosAutores,
+        "publications": datosPublicaciones
+    }
+    res.json(finalResult)
 }
 
+async function autoScroll(page){
+    await page.evaluate(async () => {
+        await new Promise((resolve, reject) => {
+            var totalHeight = 0;
+            var distance = 100;
+            var timer = setInterval(() => {
+                var scrollHeight = document.body.scrollHeight;
+                window.scrollBy(0, distance);
+                totalHeight += distance;
+                if(totalHeight >= scrollHeight){
+                    clearInterval(timer);
+                    resolve();
+                }
+            }, 100);
+        });
+    });
+}
