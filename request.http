@@ -4,6 +4,4 @@
 POST http://localhost:4000/api/getjson
 Content-Type: application/json
 
-{
-    "author":"adrian" 
-}
+["adrian riesco"]
