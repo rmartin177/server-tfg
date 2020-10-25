@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 
 //middleware que inicializa el servidor con una instancia de chrome
 app.use( async (req, res, next) => {
-    res.locals.browser = await pup.launch({headless: true})
+    res.locals.browser = await pup.launch({headless: false})
     next();
 })
 app.use('/api', require("./routes/route-getJSON"))
