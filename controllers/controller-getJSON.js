@@ -107,6 +107,7 @@ let finalResult = {
     "authors": AuthorsData,
     "publications": publicationsData
 }
+
 res.json(finalResult)
 }
 
