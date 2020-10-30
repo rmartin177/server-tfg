@@ -7,7 +7,7 @@ const morgan = require("morgan");
 app.use(cors())
 app.use(hemlet())
 
-const port = process.env.PORT || "4000";
+const port = process.env.port || "4000";
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -19,6 +19,6 @@ app.use( async (req, res, next) => {
     next();
 })
 app.use('/api', require("./routes/route-getJSON"))
-app.listen(port, ()=>{
+app.listen(port, "0.0.0.0", ()=>{
     console.log("escuchando")
 })
