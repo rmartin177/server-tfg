@@ -99,7 +99,7 @@ exports.getJSON = async (req, res) => {
 
     /*Controlar si este articulo ya esta incluido en el array publicationsData, ejemplo si nos dan dos autores de los cuales extraer info
     y adrian y verdejo han participado en el mismo articulo, cuando procesas adrian por primera vez lo incluyes, pero cuando procesas a verdejo
-    ese articulo ya esta incluido, por lo que no se debe incluir otra vez pero si lo debes usar para calcular los indices de verdejo y demas*/
+    ese articulo ya esta incluido, por lo que no se debe incluir otra vez pero si lo debes usar para calcular los indices de verdejo y demas*//*
     publicationsData = publications.concat(publicationsData)
     console.log("longitud de publicaciones: 59 esperadas, resultado: " + publications.length)
     AuthorsData.push(autorData)
