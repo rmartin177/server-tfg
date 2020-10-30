@@ -5,6 +5,7 @@ const stringHelper = require("../utils/stringHelper")
 const scrappingFilter = require("../utils/scrappingFilter")
 //Refactorizar esta funcion en otras mas pequeñas
 exports.getJSON = async (req, res) => {
+    /*
     let authors = req.body;
     console.log(authors)
     let page = await res.locals.browser.newPage();
@@ -107,7 +108,12 @@ let finalResult = {
     "authors": AuthorsData,
     "publications": publicationsData
 }
-res.json(finalResult)
+*/
+let prueba = {
+    "authors": [],
+    "publications": []
+}
+res.json(prueba)
 }
 
 async function autoScroll(page) {
