@@ -58,7 +58,7 @@ exports.getJSON = async (req, res) => {
             }
             let doc = { authors : []}, checkIfIsInformal = false; publicationsDataAux = []; contValues = 0;
             for (let i = 0; i < fullHTML.length; i++) {
-                if (fullHTML[i].className == "folder-button fold") {
+                if (fullHTML[i].className == "folder-button fold") { //Inicio de un articulo nuevo, procedemos a cargar el antiguo y resetear el objeto que lo lee
                     if(!checkIfIsInformal && i > 0) publicationsDataAux.push(doc)
                     doc = { authors : []}; checkIfIsInformal = false;
                     if (valuesHTML[contValues].innerText.includes("informal")) checkIfIsInformal = true;
