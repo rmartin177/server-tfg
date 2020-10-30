@@ -18,6 +18,9 @@ app.use( async (req, res, next) => {
     next();
 })
 app.use('/api', require("./routes/route-getJSON"))
+app.get("/",(req, res) => {
+    res.send("hola")
+})
 app.listen(port, ()=>{
     console.log("escuchando en puerto: " + port)
 })
