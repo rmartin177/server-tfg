@@ -6,12 +6,11 @@ const pup = require("puppeteer")
 const morgan = require("morgan"); 
 app.use(cors())
 app.use(hemlet())
-
-const port = process.env.port || 4000;
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("dev"));
+
+const port = process.env.PORT || "4000";
 
 //middleware que inicializa el servidor con una instancia de chrome
 app.use( async (req, res, next) => {
@@ -19,6 +18,6 @@ app.use( async (req, res, next) => {
     next();
 })
 app.use('/api', require("./routes/route-getJSON"))
-app.listen(port, "0.0.0.0", ()=>{
+app.listen(port, ()=>{
     console.log("escuchando en puerto: " + port)
 })
