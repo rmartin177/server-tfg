@@ -1,7 +1,17 @@
 ###
-
-
 POST http://localhost:4000/api/getjson
 Content-Type: application/json
 
 ["adrian riesco"]
+
+###
+POST http://localhost:4000/api/getjson
+Content-Type: application/json
+
+["alberto verdejo"]
+
+###
+POST https://tfg-scrapping.herokuapp.com/api/getjson
+Content-Type: application/json
+
+["alberto verdejo"]
