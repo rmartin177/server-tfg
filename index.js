@@ -14,13 +14,11 @@ const port = process.env.PORT || "4000";
 
 //middleware que inicializa el servidor con una instancia de chrome
 app.use( async (req, res, next) => {
-    res.locals.browser = await pup.launch({headless: true, args: ['--no-sandbox']})
+    res.locals.browser = await pup.launch({headless: false, args: ['--no-sandbox']})
     next();
 })
 app.use('/api', require("./routes/route-getJSON"))
-app.get("/",(req, res) => {
-    res.send("hola")
-})
+
 app.listen(port, ()=>{
     console.log("escuchando en puerto: " + port)
 })
