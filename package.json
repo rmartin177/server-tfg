@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
-    "open": "node index.js"
+    "start": "node index.js",
+    "open": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "convert-excel-to-json": "^1.7.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^4.1.1",
