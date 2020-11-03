@@ -22,7 +22,6 @@ exports.getJSON = async (req, res) => {
         let publications = await page.evaluate( (checkName) => {
             let valuesHTML = null, fullHTML = null; 
             if(checkName){
-                console.log("tiene homonimo")
                 //Si hay dos con el mismo nombre el XML cambia, debe usar estos selectores
                 fullHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line > span:first-child");
                 valuesHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line span:nth-child(2):not(.html-attribute-value):not(.html-attribute)")
@@ -40,7 +39,11 @@ exports.getJSON = async (req, res) => {
                 if (fullHTML[i].className == "folder-button fold") { //Inicio de un articulo nuevo, procedemos a cargar el antiguo y resetear el objeto que lo lee
                     if(!checkIfIsInformal && i > 0) {
                         if(doc.type === "Inproceedings"){
-                            publicationsDataAux.inproceedings.push(doc)
+                            if(doc.book_title !== null){
+                                let linkToCORE = "http://portal.core.edu.au/conf-ranks/?search=" + doc.book_title + "&by=acronym&source=all&sort=atitle&page=1"
+                                /* await page.goto(linkToCORE, { waitUntil: "networkidle2" })*/
+                                publicationsDataAux.inproceedings.push(doc)
+                        }
                         }else if(doc.type === "Incollection"){
                             publicationsDataAux.incollections.push(doc)
                         }else if(doc.type === "Articles"){
@@ -90,7 +93,6 @@ exports.getJSON = async (req, res) => {
         for(let i = 0; i < publications.inproceedings.length; i++){
             if(publications.inproceedings[i].book_title !== null){
                 publications.inproceedings[i].gss = core2018.readExcelCORE2018(publications.inproceedings[i].book_title)
-
             }
         }
 
@@ -102,7 +104,7 @@ exports.getJSON = async (req, res) => {
         publicationsData = publications.articles.concat(publicationsData)
         AuthorsData.push(autorData)
     }
-    await page.close()
+    /*await page.close()*/
     let finalResult = {
         "authors": AuthorsData,
         "publications": publicationsData
