@@ -2,53 +2,27 @@ const path = require("path")
 const fs = require("fs")
 const { performance } = require('perf_hooks');
 const stringHelper = require("../utils/stringHelper")
-const scrappingFilter = require("../utils/scrappingFilter")
+const scrappingHelper = require("../utils/scrappingHelper")
+const excelCORE2018 = require("../utils/excelHelper")
 //Refactorizar esta funcion en otras mas pequeñas
 exports.getJSON = async (req, res) => {
     let authors = req.body;
     console.log(authors)
     let page = await res.locals.browser.newPage();
-    await page.setRequestInterception(true);
-    page.on('request', req => {
-        if (req.resourceType() === 'image' || req.resourceType() === 'media')
-            req.abort();
-        else
-            req.continue();
-    });
-    await page.setDefaultNavigationTimeout(0) //dejamos en infinito el tiempo que puede tardar la pagina en cargar
-    await page.setViewport({ width: 1920, height: 1080 })
+    let core2018 = new excelCORE2018();
+    let scrapping = new scrappingHelper();
+    await scrapping.optimizationWeb(page);
     let AuthorsData = [], publicationsData = []; //arrays donde meteremos los datos extraidos de cada autor y publicaciones, resultado final a procesar
     for (let i = 0; i < authors.length; i++) {
         //este objeto se completa durante la iteracion del for y se introduce en el array de autores
         let autorData = {
             "name": authors[i]
         }
-        await page.goto("https://dblp.org/", { waitUntil: "networkidle2" })
-        await page.waitForTimeout(2000);
-        await page.type('input[type="search"]', authors[i])
-        await page.keyboard.press("Enter");
-        await page.waitForTimeout(2000);
-        //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
-        let sameName; checkName = true;
-        let link = await page.evaluate(() => {
-            return document.querySelector("#completesearch-authors ul.result-list li a").href; //controlar mas adelante usuarios con mismo nombre
-        })
-        page.goto(link, { waitUntil: "networkidle2" })
-        await page.waitForTimeout(2000);
-        try{
-            sameName =  await page.waitForSelector("#homonyms", {timeout: 2000});
-        }catch(e){
-            sameName = null;
-        }
-        //Como sameName no lo puedo mandar como parametro luego (si haces console log tiene un valor raro si no es null) uso checkName
-        if(sameName === null) checkName = false;
-        const linkToData = await page.evaluate(() => {
-            return document.querySelector("#headline .export .body ul li:nth-child(5) a").href;
-        })
-        await page.goto(linkToData, { waitUntil: "networkidle2" })
-        let publications = await page.evaluate( checkName => {
+        let checkName = await goToXML(page, authors[i])
+        let publications = await page.evaluate( (checkName) => {
             let valuesHTML = null, fullHTML = null; 
             if(checkName){
+                console.log("tiene homonimo")
                 //Si hay dos con el mismo nombre el XML cambia, debe usar estos selectores
                 fullHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line > span:first-child");
                 valuesHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line span:nth-child(2):not(.html-attribute-value):not(.html-attribute)")
@@ -56,10 +30,23 @@ exports.getJSON = async (req, res) => {
                 valuesHTML = document.querySelectorAll("#folder0  > .opened  > .folder .opened .folder:first-child .line span:nth-child(2):not(.html-attribute-value):not(.html-attribute)")
                 fullHTML = document.querySelectorAll("#folder0  > .opened  > .folder .opened .folder:first-child .line > span:first-child");
             }
-            let doc = { authors : []}, checkIfIsInformal = false; publicationsDataAux = []; contValues = 0;
+            let doc = { authors : []}, checkIfIsInformal = false, contValues = 0;
+            let publicationsDataAux = {
+                inproceedings: [],
+                articles: [],
+                incollections: []
+            }; 
             for (let i = 0; i < fullHTML.length; i++) {
-                if (fullHTML[i].className == "folder-button fold") {
-                    if(!checkIfIsInformal && i > 0) publicationsDataAux.push(doc)
+                if (fullHTML[i].className == "folder-button fold") { //Inicio de un articulo nuevo, procedemos a cargar el antiguo y resetear el objeto que lo lee
+                    if(!checkIfIsInformal && i > 0) {
+                        if(doc.type === "Inproceedings"){
+                            publicationsDataAux.inproceedings.push(doc)
+                        }else if(doc.type === "Incollection"){
+                            publicationsDataAux.incollections.push(doc)
+                        }else if(doc.type === "Articles"){
+                            publicationsDataAux.articles.push(doc)
+                        }
+                    }
                     doc = { authors : []}; checkIfIsInformal = false;
                     if (valuesHTML[contValues].innerText.includes("informal")) checkIfIsInformal = true;
                     else if (valuesHTML[contValues].innerText.includes("inproceedings")) doc.type = "Inproceedings";
@@ -88,51 +75,72 @@ exports.getJSON = async (req, res) => {
                 }
                 contValues++;
             }
-            if(!checkIfIsInformal) publicationsDataAux.push(doc)
+            if(!checkIfIsInformal){
+                if(doc.type === "Inproceedings"){
+                    publicationsDataAux.inproceedings.push(doc)
+                }else if(doc.type === "Incollection"){
+                    publicationsDataAux.incollections.push(doc)
+                }else if(doc.type === "Articles"){
+                    publicationsDataAux.articles.push(doc)
+                }
+            } 
             return publicationsDataAux;
         }, checkName)
 
-     
-    console.log(publications)
+        for(let i = 0; i < publications.inproceedings.length; i++){
+            if(publications.inproceedings[i].book_title !== null){
+                publications.inproceedings[i].gss = core2018.readExcelCORE2018(publications.inproceedings[i].book_title)
 
+            }
+        }
 
-    /*Controlar si este articulo ya esta incluido en el array publicationsData, ejemplo si nos dan dos autores de los cuales extraer info
-    y adrian y verdejo han participado en el mismo articulo, cuando procesas adrian por primera vez lo incluyes, pero cuando procesas a verdejo
-    ese articulo ya esta incluido, por lo que no se debe incluir otra vez pero si lo debes usar para calcular los indices de verdejo y demas*/
-    publicationsData = publications.concat(publicationsData)
-    console.log("longitud de publicaciones: 59 esperadas, resultado: " + publications.length)
-    AuthorsData.push(autorData)
-}
-let finalResult = {
-    "authors": AuthorsData,
-    "publications": publicationsData
-}
-res.json(finalResult)
-}
-
-async function autoScroll(page) {
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 100;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
-                if (totalHeight >= scrollHeight) {
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 100);
-        });
-    });
+        /*Controlar si este articulo ya esta incluido en el array publicationsData, ejemplo si nos dan dos autores de los cuales extraer info
+        y adrian y verdejo han participado en el mismo articulo, cuando procesas adrian por primera vez lo incluyes, pero cuando procesas a verdejo
+        ese articulo ya esta incluido, por lo que no se debe incluir otra vez pero si lo debes usar para calcular los indices de verdejo y demas*/
+        publicationsData = publications.incollections.concat(publicationsData)
+        publicationsData = publications.inproceedings.concat(publicationsData)
+        publicationsData = publications.articles.concat(publicationsData)
+        AuthorsData.push(autorData)
+    }
+    await page.close()
+    let finalResult = {
+        "authors": AuthorsData,
+        "publications": publicationsData
+    }
+    /*console.log(finalResult)*/
+    res.json(finalResult)
 }
 
+async function goToXML(page, author){
+    await page.goto("https://dblp.org/", { waitUntil: "networkidle2" })
+    await page.type('input[type="search"]', author)
+    await page.keyboard.press("Enter");
+    await page.waitForTimeout(1000);
+    //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
+    let sameName; checkName = true;
+    let link = await page.evaluate(() => {
+        return document.querySelector("#completesearch-authors ul.result-list li a").href; //controlar mas adelante usuarios con mismo nombre
+    })
+    page.goto(link, { waitUntil: "networkidle2" })
+    try{
+        sameName =  await page.waitForSelector("#homonyms", {timeout: 1000});
+    }catch(e){
+        sameName = null;
+    }
+    //Como sameName no lo puedo mandar como parametro luego (si haces console log tiene un valor raro si no es null) uso checkName
+    if(sameName === null) checkName = false;
+    const linkToData = await page.evaluate(() => {
+        return document.querySelector("#headline .export .body ul li:nth-child(5) a").href;
+    })
+    await page.goto(linkToData, { waitUntil: "networkidle2" })
+    return checkName;
+}
 
 
 
 
-   /*   CODIGO VIEJO QUE ENTRABA ARTICULO POR ARTICULO EN EL XML, LO DEJO AQUI POR SI POR CUALQUIER COSA LO NECESITASE RESCATAR
+
+/*   CODIGO VIEJO QUE ENTRABA ARTICULO POR ARTICULO EN EL XML, LO DEJO AQUI POR SI POR CUALQUIER COSA LO NECESITASE RESCATAR
 
         const results = await page.evaluate(() => {
             let articlesParse = [], inproceedingsParse = [], incollectionParse = [];
