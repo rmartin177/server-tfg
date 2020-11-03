@@ -1,17 +1,11 @@
-exports.StringHelper = (cadena, objetive) =>{
-    switch(objetive){
-        case "dividir en lineas":
-            return dividirLineas(cadena)
-            break;
-        case "otra cosa":
-            break;
-        default:
-            break;
+class stringHelper {
+
+    unaFuncionCualquiera = (params) => {
+        return 0;
     }
 
+    unaFuncionCualquiera2 = (params) => {
+        return 0;
+    }
 }
-
-function dividirLineas(cadena){
-    let result;
-    return result;
-}
+module.exports = stringHelper;
