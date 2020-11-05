@@ -3,7 +3,8 @@ const fs = require("fs")
 const { performance } = require('perf_hooks');
 const stringHelper = require("../utils/stringHelper")
 const scrappingHelper = require("../utils/scrappingHelper")
-const excelGGS = require("../utils/excelHelper")
+const excelGGS = require("../utils/excelHelper");
+const { table } = require("console");
 //Refactorizar esta funcion en otras mas pequeñas
 exports.getJSON = async (req, res) => {
     let authors = req.body;
@@ -17,7 +18,6 @@ exports.getJSON = async (req, res) => {
         //este objeto se completa durante la iteracion del for y se introduce en el array de autores
         let checkAndBibtexAndName = await goToXML(page, authors[i])
         let authorData = initAuthor(checkAndBibtexAndName.authorName)
-        console.log(authorData)
         let checkName = checkAndBibtexAndName.checkName;
         let authorsChecking = {
             authors: AuthorsData,
@@ -123,25 +123,8 @@ exports.getJSON = async (req, res) => {
         }, checkName, authorsChecking)
 
         let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex)
-
-        for (let i = 0; i < publications.inproceedings.length; i++) {
-            if (publications.inproceedings[i].acronym !== null) {
-                publications.inproceedings[i].book_title = book_titles[i]
-                publications.inproceedings[i].ggs = ggs.filterGSSperYear(publications.inproceedings[i].acronym, publications.inproceedings[i].year)
-                if(publications.inproceedings[i].ggs.class == 1) authorData.ggs.numero_publicaciones_class_1++;
-                else if(publications.inproceedings[i].ggs.class == 2) authorData.ggs.numero_publicaciones_class_2++;
-                else if(publications.inproceedings[i].ggs.class == 3) authorData.ggs.numero_publicaciones_class_3++;
-            }
-        }
-        for (let i = 0; i < publications.duplicateInproceedings.length; i++) {
-            if (publications.duplicateInproceedings[i].acronym !== null) {
-                publications.duplicateInproceedings[i].book_title = book_titles[i]
-                publications.duplicateInproceedings[i].ggs = ggs.filterGSSperYear(publications.inproceedings[i].acronym, publications.inproceedings[i].year)
-                if(publications.duplicateInproceedings[i].ggs.class == 1) authorData.ggs.numero_publicaciones_class_1++;
-                else if(publications.duplicateInproceedings[i].ggs.class == 2) authorData.ggs.numero_publicaciones_class_2++;
-                else if(publications.duplicateInproceedings[i].ggs.class == 3) authorData.ggs.numero_publicaciones_class_3++;
-            }
-        }
+        await countGGSandCore(publications.inproceedings, ggs,authorData, book_titles, page)
+        await countGGSandCore(publications.duplicateInproceedings,ggs,authorData, book_titles, page)
         publicationsData = publications.incollections.concat(publicationsData)
         publicationsData = publications.inproceedings.concat(publicationsData)
         publicationsData = publications.articles.concat(publicationsData)
@@ -154,6 +137,56 @@ exports.getJSON = async (req, res) => {
     }
     /*console.log(finalResult)*/
     res.json(finalResult)
+}
+
+
+async function countGGSandCore(publications, ggs, authorData, book_titles, page){
+    for (let i = 0; i < publications.length; i++) {
+        if (publications[i].acronym !== null) {
+            publications[i].book_title = book_titles[i]
+            publications[i].ggs = ggs.filterGSSperYear(publications[i].acronym, publications[i].year)
+            if(publications[i].ggs.class == 1) authorData.ggs.numero_publicaciones_class_1++;
+            else if(publications[i].ggs.class == 2) authorData.ggs.numero_publicaciones_class_2++;
+            else if(publications[i].ggs.class == 3) authorData.ggs.numero_publicaciones_class_3++;
+            let link = "http://portal.core.edu.au/conf-ranks/?search=" + publications[i].acronym + "&by=all&source=all&sort=atitle&page=1";
+            await page.goto(link, { waitUntil: "networkidle2" })
+            let example = await page.evaluate( (acronym) => {
+                let tableData = document.querySelectorAll("tr td:nth-child(2)");
+                for(let j = 0; j < tableData.length; j++){
+                    if(tableData[j].innerText == acronym) return "table tr:nth-child(" + (j+2)+ ") td:first-child"
+                }
+                return null;
+            }, publications[i].acronym)
+            if(example !== null){
+                await page.click(example)
+                await page.waitForSelector("#detail")
+                let core = await page.evaluate( (year)=> {
+                    let coreHTML = document.querySelectorAll(".detail div:first-child")
+                    let rankHTML = document.querySelectorAll(".detail div:nth-child(2)")
+                    for(let i = 2; i < coreHTML.length; i++){
+                        let rank = rankHTML[i-2].innerText.substring(6), core = null;
+                        if(coreHTML[i].innerText.includes("ERA")) core = coreHTML[i].innerText.substring(11)
+                        else core = coreHTML[i].innerText.substring(12)
+                        if(core <= year || coreHTML.length == (i+1)){
+                            return {
+                                core_year: core,
+                                core_category: rank
+                            }
+                        }
+                    }
+                    return null;
+                },publications[i].year)
+                publications[i].core = core;
+                if(publications[i].core.core_category === "A*")authorData.core.numero_publicaciones_AA++;
+                else if(publications[i].core.core_category === "A")authorData.core.numero_publicaciones_A++;
+                else if(publications[i].core.core_category === "B")authorData.core.numero_publicaciones_B++;
+                else if(publications[i].core.core_category === "C")authorData.core.numero_publicaciones_C++;
+            }else publications[i].core = {
+                core_year: null,
+                core_category: null /* Si no tiene ranking CORE, ambos a null */
+            }
+        }
+    }
 }
 
 async function goToXML(page, author) {
@@ -215,14 +248,14 @@ function initAuthor(name){
         name: name,
         indices: {
             indice_h_total_google_scholar: 0,
-            indice_h_5_años_google_scholar: 0,
+            indice_h_5_years_google_scholar: 0,
             indice_i10_total_google_scholar: 0,
-            indice_i10_5_años_google_scholar: 0,
+            indice_i10_5_years_google_scholar: 0,
             indice_h_total_scopus: 0
         },
         citas: {
             citas_total_google_scholar: 0,
-            citas_total_5_años_google_scholar: 0,
+            citas_total_5_years_google_scholar: 0,
             citas_total_scopus: 0
         },
         jcr: {
