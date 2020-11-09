@@ -1,0 +1,8884 @@
+{
+    "GGS": [
+        {
+            "A": "Acronym",
+            "B": "GGS Class"
+        },
+        {
+            "A": "3DIM",
+            "B": "Not Rated"
+        },
+        {
+            "A": "3DPVT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "3DUI",
+            "B": 3
+        },
+        {
+            "A": "3G",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "3PGCIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "A MOST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AAA IDEA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AAAAECC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AAAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AAAI",
+            "B": 1
+        },
+        {
+            "A": "AAIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AAMAS",
+            "B": 1
+        },
+        {
+            "A": "AAMAS-TRUST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ABZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACCESSNETS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACCV",
+            "B": 3
+        },
+        {
+            "A": "ACE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACE (DIMEA)",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACHI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACID",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACII",
+            "B": 3
+        },
+        {
+            "A": "ACIIDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACIS ICIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACISP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACIVS",
+            "B": 3
+        },
+        {
+            "A": "ACL",
+            "B": 1
+        },
+        {
+            "A": "ACL2",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACM SAC",
+            "B": 2
+        },
+        {
+            "A": "ACMICEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACML",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACMMM",
+            "B": 1
+        },
+        {
+            "A": "ACM-SIGMIS CPR",
+            "B": 3
+        },
+        {
+            "A": "ACM-SOCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACNS",
+            "B": 3
+        },
+        {
+            "A": "ACP4IS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACRI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ACSAC",
+            "B": 2
+        },
+        {
+            "A": "ACSD",
+            "B": 3
+        },
+        {
+            "A": "ACSSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADA EUROPE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADBIS",
+            "B": 3
+        },
+        {
+            "A": "ADC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADHOC NOW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADHOCNETS",
+            "B": 3
+        },
+        {
+            "A": "ADHOC-NOW",
+            "B": 3
+        },
+        {
+            "A": "ADMA",
+            "B": 3
+        },
+        {
+            "A": "ADMI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADNTIIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADPRL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADTI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ADVIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AFETE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AFRICACRYPT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AFRIGRAPH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AGI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AGILE",
+            "B": 3
+        },
+        {
+            "A": "AGILE_A",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AHS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AI*IA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AICCSA",
+            "B": 3
+        },
+        {
+            "A": "AICI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AICT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AID",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIED",
+            "B": 2
+        },
+        {
+            "A": "AIIDE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIKM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIME",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIML",
+            "B": 3
+        },
+        {
+            "A": "AIMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIMSA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AINA",
+            "B": 3
+        },
+        {
+            "A": "AINTEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIPR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIRS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIRWEB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AIS SIGED: IAIM",
+            "B": 3
+        },
+        {
+            "A": "AISAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AISB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AISC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AISEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AISM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AISTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AISTATS",
+            "B": 3
+        },
+        {
+            "A": "AITC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ALENEX",
+            "B": 2
+        },
+        {
+            "A": "ALEX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ALG",
+            "B": 3
+        },
+        {
+            "A": "ALGOSENSORS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ALICE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ALIFE",
+            "B": 3
+        },
+        {
+            "A": "ALP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ALPIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ALT",
+            "B": 3
+        },
+        {
+            "A": "AMAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMAST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMCC",
+            "B": 2
+        },
+        {
+            "A": "AMCIS",
+            "B": 3
+        },
+        {
+            "A": "AMDO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMFG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMIA",
+            "B": 2
+        },
+        {
+            "A": "AMIGE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMIRE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AML.D",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMOC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMSTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AMTA",
+            "B": 3
+        },
+        {
+            "A": "AMW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ANALCO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ANCS",
+            "B": 3
+        },
+        {
+            "A": "ANNES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ANNIE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ANNPR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ANSS",
+            "B": 3
+        },
+        {
+            "A": "AO-ASIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AOFA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AOIR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AOIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AOM ANNUAL MEETING",
+            "B": "Not Rated"
+        },
+        {
+            "A": "AOSD",
+            "B": 2
+        },
+        {
+            "A": "APBC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APCCAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APCCM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APCHDL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APCHI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APCOMIN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APDSI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APGV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APLAS",
+            "B": 3
+        },
+        {
+            "A": "APNOMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APORS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APPIA/GULP/PRODE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APPROX",
+            "B": 3
+        },
+        {
+            "A": "APPT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APRSAIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APSCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APSEC",
+            "B": 3
+        },
+        {
+            "A": "APWCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "APWEB",
+            "B": 3
+        },
+        {
+            "A": "AQSDT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ARACNE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ARC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ARCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ARES",
+            "B": 3
+        },
+        {
+            "A": "ARITH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AROB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ARSO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ARTCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ARTDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ARTSIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ARVLSI",
+            "B": "Not Rated"
+        },
+        {
+            "A": "ASAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ASAP",
+            "B": 3
+        },
+        {
+            "A": "ASCM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ASDAC",
+            "B": 3
+        },
+        {
+            "A": "ASE",
+            "B": 2
+        },
+        {
+            "A": "ASIACCS",
+            "B": 2
+        },
+        {
+            "A": "ASIACRYPT",
+            "B": 1
+        },
+        {
+            "A": "ASIAN",
+            "B": "Not Rated"
+        },
+        {
+            "A": "ASIASIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ASM(W)",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ASMTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ASONAM",
+            "B": 3
+        },
+        {
+            "A": "ASPLOS",
+            "B": 1
+        },
+        {
+            "A": "ASR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ASRU",
+            "B": 3
+        },
+        {
+            "A": "ASSETS",
+            "B": 3
+        },
+        {
+            "A": "AST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ASWC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ASWEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ASYNC",
+            "B": 3
+        },
+        {
+            "A": "ATC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ATMOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ATS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ATVA",
+            "B": 3
+        },
+        {
+            "A": "AUC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AUCADC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AUIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AUS AI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AUSDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AUTOMATA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AUTONOMICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "AVI",
+            "B": 3
+        },
+        {
+            "A": "AVSS",
+            "B": 3
+        },
+        {
+            "A": "AWIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BALTIC HLT",
+            "B": 3
+        },
+        {
+            "A": "BASYS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BCB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BCS-HCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BFCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIBE",
+            "B": 3
+        },
+        {
+            "A": "BIBM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BICA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BICC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIODEVICES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIOINFORMATICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIOMED",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIONETICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIOSIG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIOSIGNALS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIOSTEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIOTECHNO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIOVIZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIRD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIRTE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BIS",
+            "B": 3
+        },
+        {
+            "A": "BMEI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BMSD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BMVC",
+            "B": 2
+        },
+        {
+            "A": "BNAIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BNCOD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BPD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BPI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BPM",
+            "B": 2
+        },
+        {
+            "A": "BPMDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BPSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BROADNETS",
+            "B": 3
+        },
+        {
+            "A": "BSB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BSN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BTAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BUILTVIZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "BWCCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "C#",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "C5",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CAADRIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CAAN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CACSD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CAD GRAPHICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CADE",
+            "B": 2
+        },
+        {
+            "A": "CAIA",
+            "B": "Not Rated"
+        },
+        {
+            "A": "CAINE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CAIP",
+            "B": 3
+        },
+        {
+            "A": "CAISE",
+            "B": 2
+        },
+        {
+            "A": "CAIVDE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CALCO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CAMAD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CANS",
+            "B": 3
+        },
+        {
+            "A": "CAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CARDIS",
+            "B": 3
+        },
+        {
+            "A": "CARE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CARS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CASA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CASC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CASCON",
+            "B": 3
+        },
+        {
+            "A": "CASE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CASES",
+            "B": 3
+        },
+        {
+            "A": "CASON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CATA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CATAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CATS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CAV",
+            "B": 1
+        },
+        {
+            "A": "CBMI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CBMS",
+            "B": 3
+        },
+        {
+            "A": "CBSE",
+            "B": 3
+        },
+        {
+            "A": "CC",
+            "B": 2
+        },
+        {
+            "A": "CCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CCC",
+            "B": 2
+        },
+        {
+            "A": "CCCG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CCECE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CCG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CCGRID",
+            "B": 2
+        },
+        {
+            "A": "CCIW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CCNC",
+            "B": 3
+        },
+        {
+            "A": "CCRTS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CCS",
+            "B": 1
+        },
+        {
+            "A": "CCSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CCTAF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CCW",
+            "B": 3
+        },
+        {
+            "A": "CD",
+            "B": 3
+        },
+        {
+            "A": "CDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CDC",
+            "B": 2
+        },
+        {
+            "A": "CDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CDVE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CEAS",
+            "B": 3
+        },
+        {
+            "A": "CEC",
+            "B": 2
+        },
+        {
+            "A": "CEC/EEE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CEG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CERE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CERIAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CFET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CFP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CGA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CGAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CGAMES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CGI",
+            "B": 3
+        },
+        {
+            "A": "CGIE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CGIV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CGO",
+            "B": 2
+        },
+        {
+            "A": "CGTDG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CGW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CHASE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CHES",
+            "B": 2
+        },
+        {
+            "A": "CHI",
+            "B": 1
+        },
+        {
+            "A": "CHIMIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CHINZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CHKV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIAA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIARP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIBB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIBCB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIBSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CICC",
+            "B": 3
+        },
+        {
+            "A": "CICLING",
+            "B": 3
+        },
+        {
+            "A": "CICSYN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIDR",
+            "B": 2
+        },
+        {
+            "A": "CIE",
+            "B": 3
+        },
+        {
+            "A": "CIEAEM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIG",
+            "B": 3
+        },
+        {
+            "A": "CIHSPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIISP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIKM",
+            "B": 1
+        },
+        {
+            "A": "CIMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIMCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIMSA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIRAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIS",
+            "B": 3
+        },
+        {
+            "A": "CISCHED",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CISIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CISIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CISS",
+            "B": 3
+        },
+        {
+            "A": "CISSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CISST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CISTM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIT",
+            "B": 3
+        },
+        {
+            "A": "CITA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CITB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CIVR",
+            "B": 2
+        },
+        {
+            "A": "CLA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CLADE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CLEF",
+            "B": 3
+        },
+        {
+            "A": "CLEI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CLIHC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CLIMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CLIN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CLIP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CLOSER",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CLOUD",
+            "B": 3
+        },
+        {
+            "A": "CLOUDCOM",
+            "B": 3
+        },
+        {
+            "A": "CLUSTER",
+            "B": 2
+        },
+        {
+            "A": "CMC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CMMR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CMSB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CMV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CNNA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CNS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CNSM",
+            "B": 3
+        },
+        {
+            "A": "CNSR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COCOA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COCOON",
+            "B": 3
+        },
+        {
+            "A": "CODAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CODASPY",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CODATA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CODES+ISSS",
+            "B": 3
+        },
+        {
+            "A": "COGART",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COGROBO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COGSCI",
+            "B": 3
+        },
+        {
+            "A": "COIN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COLING",
+            "B": 2
+        },
+        {
+            "A": "COLIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COLLABORATECOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COLLECTER",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COLT",
+            "B": 1
+        },
+        {
+            "A": "COMAD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COMMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COMMONSENSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COMPDES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COMPLEX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COMPLIFE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COMPSAC",
+            "B": 3
+        },
+        {
+            "A": "COMPSYSTECH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COMPUTE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COMSNETS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COMSWARE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CONCUR",
+            "B": 2
+        },
+        {
+            "A": "CONEXT",
+            "B": 2
+        },
+        {
+            "A": "CONF-IRM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CONIELECOMP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CONLL",
+            "B": 2
+        },
+        {
+            "A": "CONPAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CONTEXT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COOLCHIPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COOP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COOPIS",
+            "B": 2
+        },
+        {
+            "A": "COORDINATION",
+            "B": 3
+        },
+        {
+            "A": "COPLAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CORES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COSIGN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "COSIT",
+            "B": 2
+        },
+        {
+            "A": "COV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CP",
+            "B": 2
+        },
+        {
+            "A": "CPA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CPAIOR",
+            "B": 3
+        },
+        {
+            "A": "CPD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CPM",
+            "B": 3
+        },
+        {
+            "A": "CRISIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CRITIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CRIWG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CROWNCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CRV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CRYPAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CRYPTO",
+            "B": 1
+        },
+        {
+            "A": "CSA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSB",
+            "B": 3
+        },
+        {
+            "A": "CSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSCL",
+            "B": 3
+        },
+        {
+            "A": "CSCW",
+            "B": 1
+        },
+        {
+            "A": "CSCWD",
+            "B": 3
+        },
+        {
+            "A": "CSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSEDU",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSEE&T",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSF",
+            "B": 1
+        },
+        {
+            "A": "CSICC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSIE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSL",
+            "B": 3
+        },
+        {
+            "A": "CSLP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSMR",
+            "B": 3
+        },
+        {
+            "A": "CSNDSP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSRC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CSWWS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CTAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CTIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CTS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CTW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CVPR",
+            "B": 1
+        },
+        {
+            "A": "CW",
+            "B": 3
+        },
+        {
+            "A": "CXS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "CYBERC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DAARC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DAC",
+            "B": 1
+        },
+        {
+            "A": "DAFX",
+            "B": 3
+        },
+        {
+            "A": "DAG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DAIS",
+            "B": 3
+        },
+        {
+            "A": "DALT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DAMON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DARS",
+            "B": 3
+        },
+        {
+            "A": "DAS",
+            "B": 3
+        },
+        {
+            "A": "DASC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DASD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DASFAA",
+            "B": 3
+        },
+        {
+            "A": "DASWIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DATA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DATE",
+            "B": 2
+        },
+        {
+            "A": "DAVIZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DAWAK",
+            "B": 3
+        },
+        {
+            "A": "DB&IS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DBISP2P",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DBKDA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DBPL",
+            "B": 3
+        },
+        {
+            "A": "DBSEC",
+            "B": 3
+        },
+        {
+            "A": "DBSOCIAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DBTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DCAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DCC",
+            "B": 2
+        },
+        {
+            "A": "DCM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DCOSS",
+            "B": 3
+        },
+        {
+            "A": "DCW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DDDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DDECS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DEBS",
+            "B": 3
+        },
+        {
+            "A": "DECI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DELFI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DELTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DEON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DEPCOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DESRIST",
+            "B": 3
+        },
+        {
+            "A": "DEXA",
+            "B": 3
+        },
+        {
+            "A": "DFMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DFRWS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DFT",
+            "B": 3
+        },
+        {
+            "A": "DGCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DGO",
+            "B": 3
+        },
+        {
+            "A": "DGW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DIAGRAMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DICTA",
+            "B": 3
+        },
+        {
+            "A": "DICTA/IVCNZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DICTAP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DIGITEL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DIGRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DILS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DIMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DIMACS INTRINSIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DIMEA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DIMVA",
+            "B": 3
+        },
+        {
+            "A": "DIS",
+            "B": 2
+        },
+        {
+            "A": "DISC",
+            "B": 3
+        },
+        {
+            "A": "DISRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DITW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DLS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DLT",
+            "B": 3
+        },
+        {
+            "A": "DM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DM-CCG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DMDW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DMKD",
+            "B": "Not Rated"
+        },
+        {
+            "A": "DMO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DMSN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DMTCS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "DMVC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DNA",
+            "B": 3
+        },
+        {
+            "A": "DNIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DOCEIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DOCENG",
+            "B": 3
+        },
+        {
+            "A": "DOLAP",
+            "B": 2
+        },
+        {
+            "A": "DOOD",
+            "B": "Not Rated"
+        },
+        {
+            "A": "DP-COOL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DPPI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DRCN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DRM",
+            "B": "Not Rated"
+        },
+        {
+            "A": "DRR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DS",
+            "B": 3
+        },
+        {
+            "A": "DSAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DSD",
+            "B": 3
+        },
+        {
+            "A": "DSDE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DSI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DSKDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DSLSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DSM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DSN",
+            "B": 2
+        },
+        {
+            "A": "DSOM",
+            "B": "Not Rated"
+        },
+        {
+            "A": "DSP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DS-RT",
+            "B": 3
+        },
+        {
+            "A": "DSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DSTKM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DTVE?",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DUTCHCG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DUX",
+            "B": 3
+        },
+        {
+            "A": "DVAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "DYSPAN",
+            "B": 3
+        },
+        {
+            "A": "E4MAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EACL",
+            "B": 2
+        },
+        {
+            "A": "EAMT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EANN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EARLY ASPECTS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EASE",
+            "B": 3
+        },
+        {
+            "A": "EASSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EATIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EC",
+            "B": 2
+        },
+        {
+            "A": "EC TEL",
+            "B": 3
+        },
+        {
+            "A": "ECAI",
+            "B": 2
+        },
+        {
+            "A": "ECAL",
+            "B": 3
+        },
+        {
+            "A": "ECBS",
+            "B": 3
+        },
+        {
+            "A": "ECC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECCB",
+            "B": 3
+        },
+        {
+            "A": "ECCE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECCO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECCTD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECCV",
+            "B": 1
+        },
+        {
+            "A": "ECDL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECEG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECIME",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECIR",
+            "B": 2
+        },
+        {
+            "A": "ECIS",
+            "B": 3
+        },
+        {
+            "A": "ECIW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECKM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECMDA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECMFA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECMR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECOOP",
+            "B": 2
+        },
+        {
+            "A": "ECOWS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECRM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECRTS",
+            "B": 2
+        },
+        {
+            "A": "ECSA",
+            "B": 3
+        },
+        {
+            "A": "ECSCW",
+            "B": 3
+        },
+        {
+            "A": "ECSQARU",
+            "B": 3
+        },
+        {
+            "A": "ECTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECUMN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ECWEB",
+            "B": 3
+        },
+        {
+            "A": "EDBT",
+            "B": 2
+        },
+        {
+            "A": "EDCC",
+            "B": 3
+        },
+        {
+            "A": "EDM",
+            "B": 3
+        },
+        {
+            "A": "ED-MEDIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EDOC",
+            "B": 3
+        },
+        {
+            "A": "EDSER",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EDUCON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EDUTAINMENT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EEE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EEWC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EFIS/EFDBS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EFTF/IFCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EGC",
+            "B": "Not Rated"
+        },
+        {
+            "A": "EGEE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EGOV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EGPGV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EGSR",
+            "B": "Not Rated"
+        },
+        {
+            "A": "EGVE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EHEALTH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EICAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EISWT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EJC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EKAW",
+            "B": 3
+        },
+        {
+            "A": "ELPUB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ELW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EMAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EMBC",
+            "B": 3
+        },
+        {
+            "A": "EMCIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EMEIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EMMCVPR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EMMSAD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EMNETS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "EMNLP",
+            "B": 1
+        },
+        {
+            "A": "EMO",
+            "B": 3
+        },
+        {
+            "A": "EMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EMSOFT",
+            "B": 2
+        },
+        {
+            "A": "ENASE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ENC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ENTER",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EOMAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EP",
+            "B": "Not Rated"
+        },
+        {
+            "A": "EPART",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EPIA",
+            "B": 3
+        },
+        {
+            "A": "EQIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ER",
+            "B": 2
+        },
+        {
+            "A": "ERCIM/CSCLP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESA",
+            "B": 2
+        },
+        {
+            "A": "ESAIR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESANN",
+            "B": 3
+        },
+        {
+            "A": "ESAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESCAPE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "E-SCIENCE",
+            "B": 3
+        },
+        {
+            "A": "ESEA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESEC/FSE",
+            "B": 2
+        },
+        {
+            "A": "ESEM",
+            "B": 2
+        },
+        {
+            "A": "ESGICT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESIAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESOP",
+            "B": 2
+        },
+        {
+            "A": "ESORICS",
+            "B": 2
+        },
+        {
+            "A": "ESQARU",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESSCIRC",
+            "B": 3
+        },
+        {
+            "A": "ESSDERC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESTIMEDIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ESWC",
+            "B": 2
+        },
+        {
+            "A": "ETELEMED",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ETFA",
+            "B": 3
+        },
+        {
+            "A": "ETHICOMP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ETRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ETS",
+            "B": 3
+        },
+        {
+            "A": "ETX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUC",
+            "B": 3
+        },
+        {
+            "A": "EUFIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUMAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EURO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EURO VR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROBOT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROCAST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROCG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROCOLT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROCOMB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROCON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROCRYPT",
+            "B": 1
+        },
+        {
+            "A": "EUROGP",
+            "B": 3
+        },
+        {
+            "A": "EUROGRAPHICS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "EUROIMSA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROITV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROMPI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EURONLG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EURO-PAR",
+            "B": 2
+        },
+        {
+            "A": "EUROPKI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EURO-PLOP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROSEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROSP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROSPEECH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROSPI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROSSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EUROSYS",
+            "B": 1
+        },
+        {
+            "A": "EUROVIS",
+            "B": 3
+        },
+        {
+            "A": "EUSIPCO",
+            "B": 3
+        },
+        {
+            "A": "EVOAPPLICATIONS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EVOBIO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EVOCOP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EVOTE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EVT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EWLR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EWSN",
+            "B": 2
+        },
+        {
+            "A": "EXACT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "EXTREME",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "F-AND-B",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FASE",
+            "B": 3
+        },
+        {
+            "A": "FAST",
+            "B": 1
+        },
+        {
+            "A": "FATES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FAW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FC",
+            "B": 2
+        },
+        {
+            "A": "FCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FCCM",
+            "B": 2
+        },
+        {
+            "A": "FCST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FCT",
+            "B": 3
+        },
+        {
+            "A": "FDG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FDL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FDPE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FDTC",
+            "B": 3
+        },
+        {
+            "A": "FEDCSIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FG",
+            "B": 2
+        },
+        {
+            "A": "FGCN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FIE",
+            "B": 3
+        },
+        {
+            "A": "FIRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FLAIRS",
+            "B": 3
+        },
+        {
+            "A": "FLOPS",
+            "B": 3
+        },
+        {
+            "A": "FM",
+            "B": 2
+        },
+        {
+            "A": "FMCAD",
+            "B": 3
+        },
+        {
+            "A": "FMICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FMIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FMLDO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FMP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FMPPTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FMSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FMSEDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FOAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FOCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FOCS",
+            "B": 1
+        },
+        {
+            "A": "FODO",
+            "B": "Not Rated"
+        },
+        {
+            "A": "FOGA",
+            "B": 2
+        },
+        {
+            "A": "FOIKS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FOIS",
+            "B": 3
+        },
+        {
+            "A": "FOMI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FOOL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FORMATS",
+            "B": 3
+        },
+        {
+            "A": "FORTE",
+            "B": 3
+        },
+        {
+            "A": "FOSSACS",
+            "B": 3
+        },
+        {
+            "A": "FPGA",
+            "B": 2
+        },
+        {
+            "A": "FPL",
+            "B": 2
+        },
+        {
+            "A": "FPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FPSAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FPT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FQAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FROCOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FSEN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FSEW",
+            "B": 2
+        },
+        {
+            "A": "FSKD",
+            "B": 3
+        },
+        {
+            "A": "FSMNLP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FSR",
+            "B": 3
+        },
+        {
+            "A": "FSTTCS",
+            "B": 3
+        },
+        {
+            "A": "FTDCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FTJP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FTP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FTRTFT",
+            "B": "Not Rated"
+        },
+        {
+            "A": "FUN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FUSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "FUSION",
+            "B": 3
+        },
+        {
+            "A": "FUZZ-IEEE",
+            "B": 2
+        },
+        {
+            "A": "GADA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GAMETHEORY",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GCB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GCCCE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GCE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GD",
+            "B": 3
+        },
+        {
+            "A": "GDC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GDN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GECCO",
+            "B": 2
+        },
+        {
+            "A": "GECON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GEFS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GENEME",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GENSIPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GEOCOMP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GEOD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GEOINFO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GEOM UNCERTAINTY",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GEOMFEST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GEOVIZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GHC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GI",
+            "B": 2
+        },
+        {
+            "A": "GIIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GIR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GIS",
+            "B": 3
+        },
+        {
+            "A": "GISCIENCE",
+            "B": 3
+        },
+        {
+            "A": "GISPLANET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GITMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GLOBE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GLOBECOM",
+            "B": 2
+        },
+        {
+            "A": "GLSVLSI",
+            "B": 3
+        },
+        {
+            "A": "GMAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GMP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GOCP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GOR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GPC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GPCE",
+            "B": 2
+        },
+        {
+            "A": "GRAPH-HOC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GRAPHITE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GRAPP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GRC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GREC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GRID",
+            "B": 2
+        },
+        {
+            "A": "GRIDNETS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GROUP",
+            "B": 2
+        },
+        {
+            "A": "GSN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "GWC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HAIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HAPTICS",
+            "B": 3
+        },
+        {
+            "A": "HASE",
+            "B": 3
+        },
+        {
+            "A": "HASKELL",
+            "B": 3
+        },
+        {
+            "A": "HC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HCS",
+            "B": 3
+        },
+        {
+            "A": "HCW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HEALTHCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HEALTHINF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HERCMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HICSS",
+            "B": 2
+        },
+        {
+            "A": "HIPC",
+            "B": 3
+        },
+        {
+            "A": "HIPEAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HIPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HLDVT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HLPP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HOLOMAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HOST",
+            "B": 3
+        },
+        {
+            "A": "HOTI",
+            "B": 2
+        },
+        {
+            "A": "HOTMOBILE",
+            "B": 3
+        },
+        {
+            "A": "HOTNETS",
+            "B": 2
+        },
+        {
+            "A": "HOTOS",
+            "B": 2
+        },
+        {
+            "A": "HOTP2P",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HOTPOWER",
+            "B": 3
+        },
+        {
+            "A": "HOTSWUP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HOTWEB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HPC ASIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HPCA",
+            "B": 1
+        },
+        {
+            "A": "HPCC",
+            "B": 3
+        },
+        {
+            "A": "HPCN",
+            "B": "Not Rated"
+        },
+        {
+            "A": "HPCNCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HPCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HPDC",
+            "B": 2
+        },
+        {
+            "A": "HPGRID",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HPSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HPSR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HPTS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HRI",
+            "B": 2
+        },
+        {
+            "A": "HRPR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HUMANOIDS",
+            "B": 3
+        },
+        {
+            "A": "HVC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "HYPERTEXT",
+            "B": 2
+        },
+        {
+            "A": "I3D",
+            "B": 2
+        },
+        {
+            "A": "I3E",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "I4CS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IA",
+            "B": 3
+        },
+        {
+            "A": "IAAI",
+            "B": 3
+        },
+        {
+            "A": "IADIS AC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IAIF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IAIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IAIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IALP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IARTW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IAWTIC",
+            "B": 3
+        },
+        {
+            "A": "IBERAMIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IBICA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IBIMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IBPRIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IC3",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IC3K",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICA3PP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICAART",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICAC",
+            "B": 2
+        },
+        {
+            "A": "ICAD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICADL",
+            "B": 3
+        },
+        {
+            "A": "IC-AI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICAIL",
+            "B": 3
+        },
+        {
+            "A": "ICAIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICAISC",
+            "B": 3
+        },
+        {
+            "A": "ICAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICALP",
+            "B": 2
+        },
+        {
+            "A": "ICALT",
+            "B": 3
+        },
+        {
+            "A": "ICANN",
+            "B": 3
+        },
+        {
+            "A": "ICANNGA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICAPRDT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICAPS",
+            "B": 2
+        },
+        {
+            "A": "ICAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICARA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICARCV",
+            "B": 3
+        },
+        {
+            "A": "ICARIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICASSP",
+            "B": 2
+        },
+        {
+            "A": "ICAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICATPN",
+            "B": 3
+        },
+        {
+            "A": "ICB",
+            "B": 3
+        },
+        {
+            "A": "ICBBE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICC",
+            "B": 2
+        },
+        {
+            "A": "ICCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCABS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCAD",
+            "B": 2
+        },
+        {
+            "A": "ICCAM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCBR",
+            "B": 3
+        },
+        {
+            "A": "ICCBSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCCN",
+            "B": 2
+        },
+        {
+            "A": "ICCD",
+            "B": 2
+        },
+        {
+            "A": "ICCE",
+            "B": 3
+        },
+        {
+            "A": "ICCHP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCI*CC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCIMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCPOL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCS",
+            "B": 3
+        },
+        {
+            "A": "ICCS_A",
+            "B": 3
+        },
+        {
+            "A": "ICCSA",
+            "B": 3
+        },
+        {
+            "A": "ICCTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICCV",
+            "B": 1
+        },
+        {
+            "A": "ICCVG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICDAR",
+            "B": 2
+        },
+        {
+            "A": "ICDCIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICDCN",
+            "B": 3
+        },
+        {
+            "A": "ICDCS",
+            "B": 2
+        },
+        {
+            "A": "ICDE",
+            "B": 1
+        },
+        {
+            "A": "ICDIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICDKE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICDM",
+            "B": 1
+        },
+        {
+            "A": "ICDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICDSC",
+            "B": 3
+        },
+        {
+            "A": "ICDT",
+            "B": 2
+        },
+        {
+            "A": "ICE B",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICEBE",
+            "B": 3
+        },
+        {
+            "A": "ICECCS",
+            "B": 3
+        },
+        {
+            "A": "ICEE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICEEI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICEIMT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICEIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICER",
+            "B": 3
+        },
+        {
+            "A": "ICES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICESS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICETC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICETE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICFCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICFEM",
+            "B": 3
+        },
+        {
+            "A": "ICFHR",
+            "B": 3
+        },
+        {
+            "A": "ICFIE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICFP",
+            "B": 1
+        },
+        {
+            "A": "ICGA",
+            "B": "Not Rated"
+        },
+        {
+            "A": "ICGEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICGG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICGI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICGSE",
+            "B": 3
+        },
+        {
+            "A": "ICGT",
+            "B": 3
+        },
+        {
+            "A": "ICHIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICHL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIAP",
+            "B": 3
+        },
+        {
+            "A": "ICIAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICICA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICICIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICICS",
+            "B": 3
+        },
+        {
+            "A": "ICICSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICICT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICICTE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIG",
+            "B": 3
+        },
+        {
+            "A": "ICIL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIMP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICINCO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIP",
+            "B": 2
+        },
+        {
+            "A": "ICIQ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIS",
+            "B": 2
+        },
+        {
+            "A": "ICISC",
+            "B": 3
+        },
+        {
+            "A": "ICISO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICISP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICISS",
+            "B": 3
+        },
+        {
+            "A": "ICIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICITA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICITS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICIW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICLP",
+            "B": "Not Rated"
+        },
+        {
+            "A": "ICLR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICM",
+            "B": "Not Rated"
+        },
+        {
+            "A": "ICMAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICMB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICMC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICME",
+            "B": 2
+        },
+        {
+            "A": "ICMENS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICMI",
+            "B": 2
+        },
+        {
+            "A": "ICML",
+            "B": 1
+        },
+        {
+            "A": "ICMLA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICMLC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICMR",
+            "B": 2
+        },
+        {
+            "A": "ICMT",
+            "B": 3
+        },
+        {
+            "A": "ICMV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICNC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICNN",
+            "B": 3
+        },
+        {
+            "A": "ICNP",
+            "B": 2
+        },
+        {
+            "A": "ICNS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICNSC",
+            "B": 3
+        },
+        {
+            "A": "ICO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICOCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICOIN",
+            "B": 3
+        },
+        {
+            "A": "ICON",
+            "B": 3
+        },
+        {
+            "A": "ICONIP",
+            "B": 3
+        },
+        {
+            "A": "ICONS",
+            "B": 3
+        },
+        {
+            "A": "ICORES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICOST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICOTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICPADS",
+            "B": 3
+        },
+        {
+            "A": "ICPC",
+            "B": 3
+        },
+        {
+            "A": "ICPCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICPE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICPP",
+            "B": 2
+        },
+        {
+            "A": "ICPR",
+            "B": 2
+        },
+        {
+            "A": "ICPRAM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICPW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICRA",
+            "B": 2
+        },
+        {
+            "A": "ICS",
+            "B": 2
+        },
+        {
+            "A": "ICSAP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSC2",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSE",
+            "B": 1
+        },
+        {
+            "A": "ICSEA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSENG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSIPA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSM",
+            "B": 2
+        },
+        {
+            "A": "ICSNC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSOB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSOC",
+            "B": 2
+        },
+        {
+            "A": "ICSOFT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSPC",
+            "B": 3
+        },
+        {
+            "A": "ICSR",
+            "B": 3
+        },
+        {
+            "A": "ICSRIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSSEA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICSSP",
+            "B": 3
+        },
+        {
+            "A": "ICST",
+            "B": 3
+        },
+        {
+            "A": "ICT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICTAC",
+            "B": 3
+        },
+        {
+            "A": "ICTAI",
+            "B": 3
+        },
+        {
+            "A": "ICTBM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICTCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICTD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICTERI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICTL",
+            "B": "Not Rated"
+        },
+        {
+            "A": "ICTSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICUIMC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICUMT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICVES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICVR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICVS",
+            "B": 3
+        },
+        {
+            "A": "ICWE",
+            "B": 3
+        },
+        {
+            "A": "ICWITS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICWL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICWMC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICWN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICWS",
+            "B": 2
+        },
+        {
+            "A": "ICWSM",
+            "B": 2
+        },
+        {
+            "A": "ICWUS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ICYCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IDA",
+            "B": 3
+        },
+        {
+            "A": "IDAACS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IDC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IDCTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IDEAL",
+            "B": 3
+        },
+        {
+            "A": "IDEAS",
+            "B": 3
+        },
+        {
+            "A": "IDET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IDFC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IDV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEA AIE",
+            "B": 3
+        },
+        {
+            "A": "IEA-AIE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CCA",
+            "B": 3
+        },
+        {
+            "A": "IEEE CIAA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CIB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CICA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CIFER",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CIIP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CIMSVP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CISDA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CIVE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CIVI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE CIWS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE DEST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE ESDIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE GI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE HIMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE HPCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE ICIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE IDC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE INFOVIS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "IEEE IRI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE IS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE ISWC",
+            "B": 2
+        },
+        {
+            "A": "IEEE MCDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE NCA",
+            "B": 3
+        },
+        {
+            "A": "IEEE NLP-KE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE OC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE RFID",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE RIISS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE SIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE VIS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "IEEE WEAH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE WOMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEE-ICCL",
+            "B": 3
+        },
+        {
+            "A": "IEEE-ICSC",
+            "B": 3
+        },
+        {
+            "A": "IEEE-IV",
+            "B": 3
+        },
+        {
+            "A": "IEEERFID",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEEM-IAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IEMSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IESS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IFAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IFAWC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IFIP",
+            "B": 3
+        },
+        {
+            "A": "IFIPAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IFIP-DSS",
+            "B": 3
+        },
+        {
+            "A": "IFL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IFM",
+            "B": 3
+        },
+        {
+            "A": "IFSA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IGARSS",
+            "B": 3
+        },
+        {
+            "A": "IGCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IGIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IH",
+            "B": 2
+        },
+        {
+            "A": "IHC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IHCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IICAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IICISA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IIH MSP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IIIX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IIR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IISWC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IITA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IIWAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IJCAI",
+            "B": 1
+        },
+        {
+            "A": "IJCBS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IJCNLP",
+            "B": 3
+        },
+        {
+            "A": "IJCNLP2",
+            "B": 3
+        },
+        {
+            "A": "IJCNN",
+            "B": 2
+        },
+        {
+            "A": "IKE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "I-KNOW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ILP",
+            "B": 3
+        },
+        {
+            "A": "IM",
+            "B": 3
+        },
+        {
+            "A": "IMC",
+            "B": 1
+        },
+        {
+            "A": "IMCSIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IMECS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IMF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IMIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IMMERSCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IMR",
+            "B": 3
+        },
+        {
+            "A": "IMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IMVIP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INAP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INBS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INCOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INDIN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INDOCRYPT",
+            "B": 3
+        },
+        {
+            "A": "INET",
+            "B": "Not Rated"
+        },
+        {
+            "A": "INEX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INFOCOM",
+            "B": 1
+        },
+        {
+            "A": "INFOCOMP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INFORMATION PROCESSING",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INFOSCALE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INFOSECCD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INFVIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INISTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INLG",
+            "B": 3
+        },
+        {
+            "A": "INMIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INOC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INSCRYPT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INSITE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INTENSIVE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INTERACT",
+            "B": 2
+        },
+        {
+            "A": "INTERACTION",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INTEROP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INTERSPEECH",
+            "B": 2
+        },
+        {
+            "A": "INTETAIN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "INTUITION",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IOLTS",
+            "B": 3
+        },
+        {
+            "A": "IOT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IPAW",
+            "B": 3
+        },
+        {
+            "A": "IPC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IPCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IPCCC",
+            "B": 3
+        },
+        {
+            "A": "IPCO",
+            "B": 3
+        },
+        {
+            "A": "IPDPS",
+            "B": 2
+        },
+        {
+            "A": "IPEC",
+            "B": 3
+        },
+        {
+            "A": "IPMI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IPMU",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IPOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IPPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IPSN",
+            "B": 1
+        },
+        {
+            "A": "IPTCOMM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IPTPS",
+            "B": 2
+        },
+        {
+            "A": "IPYTHC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IRCDL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IRFC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IRI",
+            "B": 3
+        },
+        {
+            "A": "IRMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IROS",
+            "B": 2
+        },
+        {
+            "A": "ISA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISAAC",
+            "B": 3
+        },
+        {
+            "A": "ISADS",
+            "B": 3
+        },
+        {
+            "A": "ISAGA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISAVIIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISBE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISBI",
+            "B": 3
+        },
+        {
+            "A": "ISBRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISC",
+            "B": 3
+        },
+        {
+            "A": "ISCA",
+            "B": 1
+        },
+        {
+            "A": "ISCAS",
+            "B": 3
+        },
+        {
+            "A": "ISCC",
+            "B": 3
+        },
+        {
+            "A": "ISCID",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISCIS",
+            "B": 3
+        },
+        {
+            "A": "ISCSLP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISD",
+            "B": 3
+        },
+        {
+            "A": "ISDA",
+            "B": 3
+        },
+        {
+            "A": "ISDPE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISDSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISEAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISECON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISECS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "I-SEMANTICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISER",
+            "B": 3
+        },
+        {
+            "A": "ISESE",
+            "B": 3
+        },
+        {
+            "A": "ISESS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISFST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISGC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISI",
+            "B": 3
+        },
+        {
+            "A": "ISIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISICT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISIP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISIPTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISIT",
+            "B": 2
+        },
+        {
+            "A": "ISITA",
+            "B": 3
+        },
+        {
+            "A": "ISKE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISLPED",
+            "B": 2
+        },
+        {
+            "A": "ISM",
+            "B": 3
+        },
+        {
+            "A": "ISMAR",
+            "B": 2
+        },
+        {
+            "A": "ISMB",
+            "B": "Not Rated"
+        },
+        {
+            "A": "ISMIR",
+            "B": 2
+        },
+        {
+            "A": "ISMIS",
+            "B": 3
+        },
+        {
+            "A": "ISMM",
+            "B": 3
+        },
+        {
+            "A": "ISMVL",
+            "B": 3
+        },
+        {
+            "A": "ISNN",
+            "B": 3
+        },
+        {
+            "A": "ISOLA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISORC",
+            "B": 3
+        },
+        {
+            "A": "ISOTAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISPA",
+            "B": 3
+        },
+        {
+            "A": "I-SPAN",
+            "B": 3
+        },
+        {
+            "A": "ISPASS",
+            "B": 3
+        },
+        {
+            "A": "ISPD",
+            "B": 3
+        },
+        {
+            "A": "ISPDC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISPEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISQED",
+            "B": 3
+        },
+        {
+            "A": "ISR",
+            "B": 3
+        },
+        {
+            "A": "ISRR",
+            "B": 3
+        },
+        {
+            "A": "ISSA-AFRICA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISSAC",
+            "B": 2
+        },
+        {
+            "A": "ISSCC",
+            "B": 1
+        },
+        {
+            "A": "ISSDI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISSDQ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISSPA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISSPIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISSRE",
+            "B": 2
+        },
+        {
+            "A": "ISSTA",
+            "B": 1
+        },
+        {
+            "A": "ISTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISTAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISUVR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISVC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISVD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ISVLSI",
+            "B": 3
+        },
+        {
+            "A": "ISWC",
+            "B": 1
+        },
+        {
+            "A": "ISWCS",
+            "B": 3
+        },
+        {
+            "A": "ITA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ITAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ITBAM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ITC",
+            "B": 2
+        },
+        {
+            "A": "ITCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ITHET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ITI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ITICSE",
+            "B": 3
+        },
+        {
+            "A": "ITIRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ITIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ITNG",
+            "B": 3
+        },
+        {
+            "A": "ITP",
+            "B": 3
+        },
+        {
+            "A": "ITRUST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ITS",
+            "B": 2
+        },
+        {
+            "A": "ITW",
+            "B": 3
+        },
+        {
+            "A": "IUI",
+            "B": 2
+        },
+        {
+            "A": "IUKM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IV",
+            "B": 3
+        },
+        {
+            "A": "IVA",
+            "B": 3
+        },
+        {
+            "A": "IVAPP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IV-APP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IVBI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IVCNZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IVE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWAAG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWAAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWACO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWANN",
+            "B": 3
+        },
+        {
+            "A": "IWC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWCF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWCIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWCMC",
+            "B": 3
+        },
+        {
+            "A": "IWDOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWDW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWICSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWINAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWKDDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IW-MMDBMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWOCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWOMP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWPSE",
+            "B": 3
+        },
+        {
+            "A": "IWPT",
+            "B": 3
+        },
+        {
+            "A": "IWQOS",
+            "B": 3
+        },
+        {
+            "A": "IWRT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWSEC",
+            "B": 3
+        },
+        {
+            "A": "IWSM MENSURA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWSM-MENSURA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWSP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWSPM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWSTAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IWUVR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "IZS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JADT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JCDL",
+            "B": 2
+        },
+        {
+            "A": "JCIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JCKBSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JECGI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JELIA",
+            "B": 3
+        },
+        {
+            "A": "JFPLC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JHPC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JMLC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JSSPP",
+            "B": 2
+        },
+        {
+            "A": "JTRES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "JURIX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "K4HELP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "K-CAP",
+            "B": 3
+        },
+        {
+            "A": "KDD",
+            "B": 1
+        },
+        {
+            "A": "KDDMBD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KDEX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KDIR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KDVIZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KEOD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KES",
+            "B": 3
+        },
+        {
+            "A": "KES IDT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KES IIMSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KICSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KIES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KIVS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KR",
+            "B": 1
+        },
+        {
+            "A": "KRDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KSEM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "KYOTOCGGT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "L&L",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LA WEB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LACL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LADC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LANC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LANMAN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LANOMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LATA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LATIN",
+            "B": 3
+        },
+        {
+            "A": "LATINCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LATINCRYPT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LATW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LCCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LCN",
+            "B": 2
+        },
+        {
+            "A": "LCPC",
+            "B": 3
+        },
+        {
+            "A": "LCTES",
+            "B": 3
+        },
+        {
+            "A": "LDTA",
+            "B": 3
+        },
+        {
+            "A": "LENLS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LFCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LICS",
+            "B": 1
+        },
+        {
+            "A": "LID",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LIGHTSEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LION",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LISA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LOCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LOCALGOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LOCWEB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LOPSTR",
+            "B": 3
+        },
+        {
+            "A": "LPAR",
+            "B": 3
+        },
+        {
+            "A": "LPMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "LPNMR",
+            "B": 3
+        },
+        {
+            "A": "LREC",
+            "B": 3
+        },
+        {
+            "A": "M2VIP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MAAMAW",
+            "B": "Not Rated"
+        },
+        {
+            "A": "MABS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MACE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MACIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MAICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MASCOTS",
+            "B": 2
+        },
+        {
+            "A": "MASS",
+            "B": 3
+        },
+        {
+            "A": "MASSIVE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MASSPAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MATES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MATES ENASE",
+            "B": 3
+        },
+        {
+            "A": "MATHINFO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MCA:AS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MCDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MCM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MCO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MCPR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MCS",
+            "B": 3
+        },
+        {
+            "A": "MCU",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MDAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MDDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MDM",
+            "B": 3
+        },
+        {
+            "A": "MDSRIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MEDES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MED-HOC-NET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MEDIACOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MEDINFO",
+            "B": 3
+        },
+        {
+            "A": "MEDIVIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MEMOCODE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MEWS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MFCS",
+            "B": 2
+        },
+        {
+            "A": "MFI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MGC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MICAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MICCAI",
+            "B": 2
+        },
+        {
+            "A": "MICRO",
+            "B": 1
+        },
+        {
+            "A": "MIDDLEWARE",
+            "B": 2
+        },
+        {
+            "A": "MIDI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MIE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MIG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MINES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MIPRO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MIRAGE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MISE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MKM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MKWI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MLDM",
+            "B": 3
+        },
+        {
+            "A": "MLG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MLMI",
+            "B": 3
+        },
+        {
+            "A": "MLSP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MMAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MMCN",
+            "B": "Not Rated"
+        },
+        {
+            "A": "MMDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MME",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MMEDIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MMICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MMIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MMM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MMM ACNS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MMSP",
+            "B": 3
+        },
+        {
+            "A": "MMSYS",
+            "B": 3
+        },
+        {
+            "A": "MMVR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOBICASE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOBICOM",
+            "B": 1
+        },
+        {
+            "A": "MOBIDE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOBIHOC",
+            "B": 1
+        },
+        {
+            "A": "MOBILEHCI",
+            "B": 3
+        },
+        {
+            "A": "MOBILIGHT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOBILITY",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOBILWARE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOBIMEDIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOBIQUITOUS",
+            "B": 3
+        },
+        {
+            "A": "MOBISEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOBISYS",
+            "B": 2
+        },
+        {
+            "A": "MOBIWAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MODELS",
+            "B": 2
+        },
+        {
+            "A": "MODELSWARD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MODSIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MODSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOMM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOMPES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOPTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOVEP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MOVIX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MPC",
+            "B": 3
+        },
+        {
+            "A": "MPCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MPOOL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MPPOI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MRC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MSAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MSN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MSR",
+            "B": 3
+        },
+        {
+            "A": "MSST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MSVVEIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MSWIM",
+            "B": 3
+        },
+        {
+            "A": "MT SUMMIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MTAGS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MTDT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MTNS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MTSR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MTV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MUE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MUM",
+            "B": 3
+        },
+        {
+            "A": "MUSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MVA",
+            "B": 3
+        },
+        {
+            "A": "MVHI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "MWCN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NAACL",
+            "B": 1
+        },
+        {
+            "A": "NABIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NAISO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NANOARCH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NBIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NCM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NCTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NDSS",
+            "B": 1
+        },
+        {
+            "A": "NDT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NEMLAP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NETCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NETGAMES",
+            "B": 3
+        },
+        {
+            "A": "NETSTORE",
+            "B": "Not Rated"
+        },
+        {
+            "A": "NETWORKING",
+            "B": 3
+        },
+        {
+            "A": "NEW2AN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NFM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NGDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NGI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NGITS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NGMAST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NIME",
+            "B": 3
+        },
+        {
+            "A": "NIPS",
+            "B": 1
+        },
+        {
+            "A": "NISDIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NISS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NLDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NMR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NNSP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NOCS",
+            "B": 3
+        },
+        {
+            "A": "NOLISP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NOMS",
+            "B": 3
+        },
+        {
+            "A": "NORCHIP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NORDICHI",
+            "B": 3
+        },
+        {
+            "A": "NOSSDAV",
+            "B": 2
+        },
+        {
+            "A": "NPAR",
+            "B": 2
+        },
+        {
+            "A": "NPC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NPSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NRAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NRDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NSDI",
+            "B": 2
+        },
+        {
+            "A": "NSPW",
+            "B": 3
+        },
+        {
+            "A": "NSS",
+            "B": 3
+        },
+        {
+            "A": "NTMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "NWESP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OASIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ODP",
+            "B": "Not Rated"
+        },
+        {
+            "A": "ODSA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OESS/IOCC/ACOFT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OLA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ONDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ONTOBRAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ONWARD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OODBS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OOIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OOPSLA",
+            "B": 1
+        },
+        {
+            "A": "OP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OPENARCH",
+            "B": "Not Rated"
+        },
+        {
+            "A": "OPODIS",
+            "B": 3
+        },
+        {
+            "A": "OPTICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ORDAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ORGSEM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OSDI",
+            "B": 1
+        },
+        {
+            "A": "OSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OTA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "OWLED",
+            "B": 3
+        },
+        {
+            "A": "OZCHI",
+            "B": 3
+        },
+        {
+            "A": "P&I",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "P2P",
+            "B": 3
+        },
+        {
+            "A": "P2P ECON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PAAM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PAAMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PAAP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PACCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PACES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PACIFICVIS",
+            "B": 3
+        },
+        {
+            "A": "PACIIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PACIS",
+            "B": 3
+        },
+        {
+            "A": "PACLIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PACLING",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PACT",
+            "B": 2
+        },
+        {
+            "A": "PADD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PADL",
+            "B": 3
+        },
+        {
+            "A": "PADO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PADS",
+            "B": 3
+        },
+        {
+            "A": "PAIRING",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PAISI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PAKDD",
+            "B": 3
+        },
+        {
+            "A": "PAKM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PAM",
+            "B": 2
+        },
+        {
+            "A": "PAP/PACT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PARCO",
+            "B": 3
+        },
+        {
+            "A": "PARELEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PASCO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PASTE",
+            "B": 3
+        },
+        {
+            "A": "PATAT",
+            "B": 3
+        },
+        {
+            "A": "PATMOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PAWEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PCM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PCNS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PCS",
+            "B": 3
+        },
+        {
+            "A": "PCW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PDC",
+            "B": 3
+        },
+        {
+            "A": "PDCAT",
+            "B": 3
+        },
+        {
+            "A": "PDCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PDIS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "PDK",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PDP",
+            "B": 3
+        },
+        {
+            "A": "PDPTA",
+            "B": 3
+        },
+        {
+            "A": "PDSW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PE WASUN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PEC&CON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PECCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PEPM",
+            "B": 3
+        },
+        {
+            "A": "PERCOM",
+            "B": 1
+        },
+        {
+            "A": "PERFORMANCE",
+            "B": 3
+        },
+        {
+            "A": "PERSUASIVE",
+            "B": 3
+        },
+        {
+            "A": "PERVASIVE",
+            "B": 1
+        },
+        {
+            "A": "PERVASIVEHEALTH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PET",
+            "B": 3
+        },
+        {
+            "A": "PETRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PG",
+            "B": "Not Rated"
+        },
+        {
+            "A": "PGM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PGT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PIMRC",
+            "B": 2
+        },
+        {
+            "A": "PKAW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PKC",
+            "B": 2
+        },
+        {
+            "A": "PKDD",
+            "B": 2
+        },
+        {
+            "A": "PKI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PLAN-X",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PLATE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PLDI",
+            "B": 1
+        },
+        {
+            "A": "PLOP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PLOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PLPV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PODC",
+            "B": 1
+        },
+        {
+            "A": "PODS",
+            "B": 1
+        },
+        {
+            "A": "POEM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "POPL",
+            "B": 1
+        },
+        {
+            "A": "POST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PPAM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PPCIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PPDP",
+            "B": 3
+        },
+        {
+            "A": "PPIG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PPOPP",
+            "B": 1
+        },
+        {
+            "A": "PPPJ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PPSN",
+            "B": 2
+        },
+        {
+            "A": "PQCRYPT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PRDC",
+            "B": 3
+        },
+        {
+            "A": "PREMI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PRESENCE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PRIB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PRICAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PRIMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PRIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PROFES",
+            "B": 3
+        },
+        {
+            "A": "PROMAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PROMISE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PROPOR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PRO-VE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PROVSEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PSATS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PSB",
+            "B": 3
+        },
+        {
+            "A": "PSD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PSI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PSIVT",
+            "B": 3
+        },
+        {
+            "A": "PSOR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "PVW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QEST",
+            "B": 3
+        },
+        {
+            "A": "QIP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QOIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QOMEX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QOSA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QSHINE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QSIC",
+            "B": 3
+        },
+        {
+            "A": "QUALIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QUANTCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QUATIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "QUO VADIS CRYPTOLOGY",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RAID",
+            "B": 1
+        },
+        {
+            "A": "RAITA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RAM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RAM-SE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RANDOM",
+            "B": "Not Rated"
+        },
+        {
+            "A": "RANLP",
+            "B": 3
+        },
+        {
+            "A": "RAOOL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RAW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RCIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RE",
+            "B": 2
+        },
+        {
+            "A": "REBSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RECOMB",
+            "B": 2
+        },
+        {
+            "A": "RECONFIG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RECOSOC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RECSYS",
+            "B": 2
+        },
+        {
+            "A": "REET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "REFSQ",
+            "B": 3
+        },
+        {
+            "A": "RELMICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "REV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RFF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RFID TA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RFIDSEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RIDE",
+            "B": 3
+        },
+        {
+            "A": "RO MAN",
+            "B": 2
+        },
+        {
+            "A": "ROBIO",
+            "B": 3
+        },
+        {
+            "A": "ROBOCOMM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ROBOCUP",
+            "B": 3
+        },
+        {
+            "A": "ROGICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "ROVPIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RSA",
+            "B": 3
+        },
+        {
+            "A": "RSCTC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RSKT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RSP",
+            "B": 3
+        },
+        {
+            "A": "RSS",
+            "B": 2
+        },
+        {
+            "A": "RTA",
+            "B": 3
+        },
+        {
+            "A": "RTAS",
+            "B": 2
+        },
+        {
+            "A": "RTCSA",
+            "B": 3
+        },
+        {
+            "A": "RTDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RTSS",
+            "B": 1
+        },
+        {
+            "A": "RULEML",
+            "B": 3
+        },
+        {
+            "A": "RV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "RWS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "S&P",
+            "B": 1
+        },
+        {
+            "A": "SA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAB",
+            "B": 3
+        },
+        {
+            "A": "SAC",
+            "B": 3
+        },
+        {
+            "A": "SACI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SACMAT",
+            "B": 2
+        },
+        {
+            "A": "SAFECOMP",
+            "B": 3
+        },
+        {
+            "A": "SAFEPROCESS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAGA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAGT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAICSIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAIGTC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAINT",
+            "B": 3
+        },
+        {
+            "A": "SAM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAMI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAMOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAMT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SARA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SARC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAR-SSI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAS",
+            "B": 3
+        },
+        {
+            "A": "SASC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SASN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SASO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SASP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SAT",
+            "B": 2
+        },
+        {
+            "A": "SBAC-PAD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBBD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBCARS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBCCI",
+            "B": 3
+        },
+        {
+            "A": "SBES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBESC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBGAMES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBLP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBMF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBRC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SBRN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SC",
+            "B": 1
+        },
+        {
+            "A": "SCA",
+            "B": 2
+        },
+        {
+            "A": "SCAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SCAM",
+            "B": 3
+        },
+        {
+            "A": "SCAN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SCC",
+            "B": 2
+        },
+        {
+            "A": "SCCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SCCG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SCCGIV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SCIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SCIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SCN",
+            "B": 3
+        },
+        {
+            "A": "SCOPES",
+            "B": 3
+        },
+        {
+            "A": "SCSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SCW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SDH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SDM",
+            "B": 2
+        },
+        {
+            "A": "SDSDI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEA",
+            "B": 3
+        },
+        {
+            "A": "SEAA",
+            "B": 3
+        },
+        {
+            "A": "SEAFOOD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEAMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEARCH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEC",
+            "B": 3
+        },
+        {
+            "A": "SECON",
+            "B": 2
+        },
+        {
+            "A": "SECRYPT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SECURECOMM",
+            "B": 3
+        },
+        {
+            "A": "SECURITY",
+            "B": 1
+        },
+        {
+            "A": "SECURWARE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEDE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEEP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEFM",
+            "B": 3
+        },
+        {
+            "A": "SE-HPC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEKE",
+            "B": 3
+        },
+        {
+            "A": "SEMCCO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SENSOR NETWORKS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SENSYS",
+            "B": 1
+        },
+        {
+            "A": "SEQAPP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SERA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SERE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SERENE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SERVICES",
+            "B": 3
+        },
+        {
+            "A": "SETE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SETN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SETP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEUS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEVIZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SEW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SGAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SGP",
+            "B": 3
+        },
+        {
+            "A": "SHARCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIBGRAPI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIDEKIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIEDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIGCOMM",
+            "B": 1
+        },
+        {
+            "A": "SIGCSE",
+            "B": 2
+        },
+        {
+            "A": "SIGDIAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIGDOC",
+            "B": 3
+        },
+        {
+            "A": "SIGGRAPH",
+            "B": "Not Rated"
+        },
+        {
+            "A": "SIGIR",
+            "B": 1
+        },
+        {
+            "A": "SIGIR/XML",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIGITE",
+            "B": 3
+        },
+        {
+            "A": "SIGLEX",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIGMAP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIGMETRICS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "SIGMOD",
+            "B": 1
+        },
+        {
+            "A": "SIGOA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIGUCCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIMPAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIMTECT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIMULTECH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIMUTOOLS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIPEW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIPS",
+            "B": 3
+        },
+        {
+            "A": "SIRC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIROCCO",
+            "B": 3
+        },
+        {
+            "A": "SISAP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SIST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SISW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SISY",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SITE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SITIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SKG",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SLATE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SLE",
+            "B": 3
+        },
+        {
+            "A": "SLIP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SLS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SLT",
+            "B": 3
+        },
+        {
+            "A": "SMAP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SMARTGREENS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SMC",
+            "B": 2
+        },
+        {
+            "A": "SMC_A",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SMPS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SNPD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOCASE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOCCER",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOCG",
+            "B": 2
+        },
+        {
+            "A": "SOCGMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOCIALCOM",
+            "B": 3
+        },
+        {
+            "A": "SOCINFO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOCO",
+            "B": 3
+        },
+        {
+            "A": "SOCPAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SODA",
+            "B": 1
+        },
+        {
+            "A": "SOFA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOFSEM",
+            "B": 3
+        },
+        {
+            "A": "SOFTCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOFTVIS",
+            "B": 3
+        },
+        {
+            "A": "SOMET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SOSE",
+            "B": 3
+        },
+        {
+            "A": "SOSP",
+            "B": 1
+        },
+        {
+            "A": "SOUPS",
+            "B": 2
+        },
+        {
+            "A": "SPAA",
+            "B": 2
+        },
+        {
+            "A": "SPAWC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SPEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SPEED",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SPICE",
+            "B": 3
+        },
+        {
+            "A": "SPICIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SPIRE",
+            "B": 3
+        },
+        {
+            "A": "SPLASH",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SPLC",
+            "B": 2
+        },
+        {
+            "A": "SPM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SPRINGER-EUROBOT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SPRINGSIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SQC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SQM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SRDS",
+            "B": 2
+        },
+        {
+            "A": "SREIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SRIG-ET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SRMD",
+            "B": "Not Rated"
+        },
+        {
+            "A": "SSBSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SSC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SSDBM",
+            "B": 3
+        },
+        {
+            "A": "SSGRR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SSIAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SSIRI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SSME",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SSNDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SSPR",
+            "B": 3
+        },
+        {
+            "A": "SSR",
+            "B": 3
+        },
+        {
+            "A": "SSRR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SSTD",
+            "B": 2
+        },
+        {
+            "A": "STACS",
+            "B": 3
+        },
+        {
+            "A": "STAIRS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "STC",
+            "B": 3
+        },
+        {
+            "A": "STEP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "STM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "STOC",
+            "B": 1
+        },
+        {
+            "A": "STRINGOLOGY",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "STYLE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SUM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SUTC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SVR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SWAP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SWAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SWAT4LS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SWDC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SWOD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SWS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SWSTE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SWWS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SYNASC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "SYRCODIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "T4E",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TABLEAUX",
+            "B": 3
+        },
+        {
+            "A": "TABLETOP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TAC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TACAS",
+            "B": 1
+        },
+        {
+            "A": "TAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TAKMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TAMC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TAMODIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TAP",
+            "B": 3
+        },
+        {
+            "A": "TAPIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TAPP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TAPSOFT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TARK",
+            "B": 3
+        },
+        {
+            "A": "TASE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TBILLC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TCC",
+            "B": 2
+        },
+        {
+            "A": "TCOB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TDB",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TEI",
+            "B": 2
+        },
+        {
+            "A": "TENCON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TFP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TGC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TGGT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TIME",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TIPPI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TKE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TLCA",
+            "B": 3
+        },
+        {
+            "A": "TLDI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TMA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TMFCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TMI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TMRA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TOOLS",
+            "B": 3
+        },
+        {
+            "A": "TPDL",
+            "B": 3
+        },
+        {
+            "A": "TPGT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TPHOLS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "TRB VIZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TREC",
+            "B": 2
+        },
+        {
+            "A": "TRI-ADA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TRIDENTCOM",
+            "B": 3
+        },
+        {
+            "A": "TRUST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TRUSTBUS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TRUSTCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "TSD",
+            "B": 3
+        },
+        {
+            "A": "TYPES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "UAI",
+            "B": 1
+        },
+        {
+            "A": "UBICOMM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "UC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "UCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "UDM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "UIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "UIST",
+            "B": 1
+        },
+        {
+            "A": "UMAP",
+            "B": 3
+        },
+        {
+            "A": "UMC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "URSW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "USEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "USENIX",
+            "B": 2
+        },
+        {
+            "A": "USENIX EC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "USITS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "UTP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "UWNTS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VALUETOOLS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VAMOS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VAPP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VAST",
+            "B": 3
+        },
+        {
+            "A": "VCIP",
+            "B": 3
+        },
+        {
+            "A": "VDA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VDAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VDBS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VDEA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VECIMS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VECPAR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VEE",
+            "B": 2
+        },
+        {
+            "A": "VI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VINCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VIP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VISAPP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VISE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VISPLE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VISSOFT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VISUAL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VISUALIZE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VIZSEC",
+            "B": 3
+        },
+        {
+            "A": "VL/HCC",
+            "B": 3
+        },
+        {
+            "A": "VLDB",
+            "B": 1
+        },
+        {
+            "A": "VLFM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VLSI",
+            "B": 3
+        },
+        {
+            "A": "VLSID",
+            "B": 3
+        },
+        {
+            "A": "VLSI-DAT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VLSI-SOC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VMCAI",
+            "B": 2
+        },
+        {
+            "A": "VMV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VNC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VR",
+            "B": 2
+        },
+        {
+            "A": "VRCAI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VRST",
+            "B": 3
+        },
+        {
+            "A": "VS-GAMES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VSMM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VSTTE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VSW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "VTC",
+            "B": 2
+        },
+        {
+            "A": "VTS",
+            "B": 3
+        },
+        {
+            "A": "W2GIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "W4A",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WAAAPL",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WABI",
+            "B": 3
+        },
+        {
+            "A": "WACV",
+            "B": 2
+        },
+        {
+            "A": "WADS",
+            "B": 3
+        },
+        {
+            "A": "WADT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WAFR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WAIFI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WAIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WAIS",
+            "B": "Not Rated"
+        },
+        {
+            "A": "WALCOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WAOA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WARDS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WASA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WASPAA",
+            "B": 3
+        },
+        {
+            "A": "WAW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WBIR",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCAE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCAN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCCE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCCI",
+            "B": 3
+        },
+        {
+            "A": "WCE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCGTC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCNC",
+            "B": 2
+        },
+        {
+            "A": "WCNIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCNN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCO-IMCSIT",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCOP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCRE",
+            "B": 2
+        },
+        {
+            "A": "WCSS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WCW",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WDAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WDDD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WEA",
+            "B": 3
+        },
+        {
+            "A": "WEB3D",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WEBDB",
+            "B": 3
+        },
+        {
+            "A": "WEBIST",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WEBKDD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WEBMEDIA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WEBNET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WEBSIM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WEBVIZ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WEC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WER",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WETICE",
+            "B": 3
+        },
+        {
+            "A": "WFLP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WG",
+            "B": 3
+        },
+        {
+            "A": "WHC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WHPCF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WI",
+            "B": 3
+        },
+        {
+            "A": "WIAMIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WICON",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WICS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WICSA",
+            "B": 3
+        },
+        {
+            "A": "WIDM",
+            "B": 3
+        },
+        {
+            "A": "WIKISYM",
+            "B": 3
+        },
+        {
+            "A": "WILF",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WIMOB",
+            "B": 3
+        },
+        {
+            "A": "WINE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WINSYS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WIOPT",
+            "B": 3
+        },
+        {
+            "A": "WIRN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WISA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WISE",
+            "B": 2
+        },
+        {
+            "A": "WISEC",
+            "B": 3
+        },
+        {
+            "A": "WISES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WISM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WISTP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WITS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WKDD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WMCS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WMSCI",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WMUTE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOCC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOCN",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOLLIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WONS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOOD",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOPP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WORDS",
+            "B": 3
+        },
+        {
+            "A": "WORKS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WORLDCOMP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WORM",
+            "B": "Not Rated"
+        },
+        {
+            "A": "WOSIS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOSP",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOSQ",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOTE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WOWMOM",
+            "B": 3
+        },
+        {
+            "A": "WPC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WPES",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WPMC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WPNC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WRSO",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WS FM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WSC",
+            "B": 2
+        },
+        {
+            "A": "WSCG",
+            "B": 3
+        },
+        {
+            "A": "WSDM",
+            "B": 1
+        },
+        {
+            "A": "WSE",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WSKS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WSOM",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WTASA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WTS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WUWNET",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WWCA",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WWIC",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WWV",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "WWW",
+            "B": 1
+        },
+        {
+            "A": "XIME P",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "XP",
+            "B": 3
+        },
+        {
+            "A": "X-SCHEMAS",
+            "B": "Work in Progress"
+        },
+        {
+            "A": "XSYM",
+            "B": "Work in Progress"
+        }
+    ]
+}

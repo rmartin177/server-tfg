@@ -3,106 +3,134 @@ const fs = require("fs")
 const { performance } = require('perf_hooks');
 const stringHelper = require("../utils/stringHelper")
 const scrappingHelper = require("../utils/scrappingHelper")
-const excelCORE2018 = require("../utils/excelHelper")
+const excelGGS = require("../utils/excelHelper");
+const { table } = require("console");
 //Refactorizar esta funcion en otras mas pequeñas
 exports.getJSON = async (req, res) => {
     let authors = req.body;
     console.log(authors)
     let page = await res.locals.browser.newPage();
-    let core2018 = new excelCORE2018();
+    let ggs = new excelGGS();
     let scrapping = new scrappingHelper();
     await scrapping.optimizationWeb(page);
     let AuthorsData = [], publicationsData = []; //arrays donde meteremos los datos extraidos de cada autor y publicaciones, resultado final a procesar
     for (let i = 0; i < authors.length; i++) {
         //este objeto se completa durante la iteracion del for y se introduce en el array de autores
-        let autorData = {
-            "name": authors[i]
+        let checkAndBibtexAndName = await goToXML(page, authors[i])
+        let authorData = initAuthor(checkAndBibtexAndName.authorName)
+        let checkName = checkAndBibtexAndName.checkName;
+        let authorsChecking = {
+            authors: AuthorsData,
+            actualPosition: i
         }
-        let checkName = await goToXML(page, authors[i])
-        let publications = await page.evaluate( (checkName) => {
-            let valuesHTML = null, fullHTML = null; 
-            if(checkName){
+        let publications = await page.evaluate((checkName, authorsChecking) => {
+            let valuesHTML = null, fullHTML = null;
+            if (checkName) {
                 console.log("tiene homonimo")
                 //Si hay dos con el mismo nombre el XML cambia, debe usar estos selectores
                 fullHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line > span:first-child");
                 valuesHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line span:nth-child(2):not(.html-attribute-value):not(.html-attribute)")
-            }else{ //Estos son los estandard para el 99.9%
+            } else { //Estos son los estandard para el 99.9%
                 valuesHTML = document.querySelectorAll("#folder0  > .opened  > .folder .opened .folder:first-child .line span:nth-child(2):not(.html-attribute-value):not(.html-attribute)")
                 fullHTML = document.querySelectorAll("#folder0  > .opened  > .folder .opened .folder:first-child .line > span:first-child");
             }
-            let doc = { authors : []}, checkIfIsInformal = false, contValues = 0;
+            let doc = { authors: [] }, checkIfIsInformal = false, contValues = 0;
             let publicationsDataAux = {
                 inproceedings: [],
                 articles: [],
-                incollections: []
-            }; 
-            for (let i = 0; i < fullHTML.length; i++) {
-                if (fullHTML[i].className == "folder-button fold") { //Inicio de un articulo nuevo, procedemos a cargar el antiguo y resetear el objeto que lo lee
-                    if(!checkIfIsInformal && i > 0) {
-                        if(doc.type === "Inproceedings"){
-                            publicationsDataAux.inproceedings.push(doc)
-                        }else if(doc.type === "Incollection"){
-                            publicationsDataAux.incollections.push(doc)
-                        }else if(doc.type === "Articles"){
-                            publicationsDataAux.articles.push(doc)
+                incollections: [],
+                duplicateArticles: [],
+                duplicateInproceedings: [],
+                duplicateIncollections: []
+            };
+            for (let j = 0; j < fullHTML.length; j++) {
+                if (fullHTML[j].className == "folder-button fold") { //Inicio de un articulo nuevo, procedemos a cargar el antiguo y resetear el objeto que lo lee
+                    if (!checkIfIsInformal && j > 0) {
+                        let checkArticle = false;
+                        for (let x = 0; x < authorsChecking.actualPosition && !checkArticle; x++) {
+                            for (let z = 0; z < doc.authors.length && !checkArticle; z++) {
+                                if (authorsChecking.authors[x].name.includes(doc.authors[z])) {
+                                    checkArticle = true;
+                                }
+                            }
+                        }
+                        if (!checkArticle) {
+                            if (doc.type === "Inproceedings") {
+                                publicationsDataAux.inproceedings.push(doc)
+                            } else if (doc.type === "Incollection") {
+                                publicationsDataAux.incollections.push(doc)
+                            } else if (doc.type === "Articles") {
+                                publicationsDataAux.articles.push(doc)
+                            }
+                        } else {
+                            if (doc.type === "Inproceedings") {
+                                publicationsDataAux.duplicateInproceedings.push(doc)
+                            } else if (doc.type === "Incollection") {
+                                publicationsDataAux.duplicateIncollections.push(doc)
+                            } else if (doc.type === "Articles") {
+                                publicationsDataAux.duplicateArticles.push(doc)
+                            }
                         }
                     }
-                    doc = { authors : []}; checkIfIsInformal = false;
+                    doc = { authors: [] }; checkIfIsInformal = false;
                     if (valuesHTML[contValues].innerText.includes("informal")) checkIfIsInformal = true;
                     else if (valuesHTML[contValues].innerText.includes("inproceedings")) doc.type = "Inproceedings";
                     else if (valuesHTML[contValues].innerText.includes("article")) doc.type = "Articles";
                     else if (valuesHTML[contValues].innerText.includes("incollection")) doc.type = "Incollection";
                 } else {
-                    if(fullHTML[i].innerText.includes("</")){
+                    if (fullHTML[j].innerText.includes("</")) {
                         contValues--;
-                    }else if (fullHTML[i].innerText.includes("author")) {
+                    } else if (fullHTML[j].innerText.includes("author")) {
                         doc.authors.push(valuesHTML[contValues].innerText)
-                    } else if (fullHTML[i].innerText.includes("booktitle")) {
-                        doc.book_title = valuesHTML[contValues].innerText;
-                    } else if (fullHTML[i].innerText.includes("title")) {
+                    } else if (fullHTML[j].innerText.includes("booktitle")) {
+                        doc.acronym = valuesHTML[contValues].innerText;
+                    } else if (fullHTML[j].innerText.includes("title")) {
                         doc.title = valuesHTML[contValues].innerText;
-                    } else if (fullHTML[i].innerText.includes("pages")) {
+                    } else if (fullHTML[j].innerText.includes("pages")) {
                         doc.pages = valuesHTML[contValues].innerText;
-                    } else if (fullHTML[i].innerText.includes("year")) {
+                    } else if (fullHTML[j].innerText.includes("year")) {
                         doc.year = valuesHTML[contValues].innerText;
-                    } else if (fullHTML[i].innerText.includes("volume")) {
+                    } else if (fullHTML[j].innerText.includes("volume")) {
                         doc.volume = valuesHTML[contValues].innerText;
-                    } else if (fullHTML[i].innerText.includes("journal")) {
+                    } else if (fullHTML[j].innerText.includes("journal")) {
                         doc.journal = valuesHTML[contValues].innerText;
-                    } else if (fullHTML[i].innerText.includes("issue")) {
+                    } else if (fullHTML[j].innerText.includes("number")) {
                         doc.issue = valuesHTML[contValues].innerText;
                     }
                 }
                 contValues++;
             }
-            if(!checkIfIsInformal){
-                if(doc.type === "Inproceedings"){
-                    publicationsDataAux.inproceedings.push(doc)
-                }else if(doc.type === "Incollection"){
-                    publicationsDataAux.incollections.push(doc)
-                }else if(doc.type === "Articles"){
-                    publicationsDataAux.articles.push(doc)
+            if (!checkIfIsInformal) {
+                let checkArticle = false;
+                for (let x = 0; x < authorsChecking.actualPosition && !checkArticle; x++) {
+                    for (let z = 0; z < doc.authors.length && !checkArticle; z++) {
+                        if (authorsChecking.authors[x].name.includes(doc.authors[z])) {
+                            checkArticle = true;
+                        }
+                    }
                 }
-            } 
-            return publicationsDataAux;
-        }, checkName)
-
-        for(let i = 0; i < publications.inproceedings.length; i++){
-            if(publications.inproceedings[i].book_title !== null){
-                publications.inproceedings[i].gss = core2018.readExcelCORE2018(publications.inproceedings[i].book_title)
-
+                if (!checkArticle) {
+                    if (doc.type === "Inproceedings") {
+                        publicationsDataAux.inproceedings.push(doc)
+                    } else if (doc.type === "Incollection") {
+                        publicationsDataAux.incollections.push(doc)
+                    } else if (doc.type === "Articles") {
+                        publicationsDataAux.articles.push(doc)
+                    }
+                }
             }
-        }
+            return publicationsDataAux;
+        }, checkName, authorsChecking)
 
-        /*Controlar si este articulo ya esta incluido en el array publicationsData, ejemplo si nos dan dos autores de los cuales extraer info
-        y adrian y verdejo han participado en el mismo articulo, cuando procesas adrian por primera vez lo incluyes, pero cuando procesas a verdejo
-        ese articulo ya esta incluido, por lo que no se debe incluir otra vez pero si lo debes usar para calcular los indices de verdejo y demas*/
+        let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex)
+        await countGGSandCore(publications.inproceedings, ggs,authorData, book_titles, page)
+        await countGGSandCore(publications.duplicateInproceedings,ggs,authorData, book_titles, page)
         publicationsData = publications.incollections.concat(publicationsData)
         publicationsData = publications.inproceedings.concat(publicationsData)
         publicationsData = publications.articles.concat(publicationsData)
-        AuthorsData.push(autorData)
+        AuthorsData.push(authorData)
     }
-    await page.close()
+    /*await page.close()*/
     let finalResult = {
         "authors": AuthorsData,
         "publications": publicationsData
@@ -111,7 +139,57 @@ exports.getJSON = async (req, res) => {
     res.json(finalResult)
 }
 
-async function goToXML(page, author){
+
+async function countGGSandCore(publications, ggs, authorData, book_titles, page){
+    for (let i = 0; i < publications.length; i++) {
+        if (publications[i].acronym !== null) {
+            publications[i].book_title = book_titles[i]
+            publications[i].ggs = ggs.filterGSSperYear(publications[i].acronym, publications[i].year)
+            if(publications[i].ggs.class == 1) authorData.ggs.numero_publicaciones_class_1++;
+            else if(publications[i].ggs.class == 2) authorData.ggs.numero_publicaciones_class_2++;
+            else if(publications[i].ggs.class == 3) authorData.ggs.numero_publicaciones_class_3++;
+            let link = "http://portal.core.edu.au/conf-ranks/?search=" + publications[i].acronym + "&by=all&source=all&sort=atitle&page=1";
+            await page.goto(link, { waitUntil: "networkidle2" })
+            let example = await page.evaluate( (acronym) => {
+                let tableData = document.querySelectorAll("tr td:nth-child(2)");
+                for(let j = 0; j < tableData.length; j++){
+                    if(tableData[j].innerText == acronym) return "table tr:nth-child(" + (j+2)+ ") td:first-child"
+                }
+                return null;
+            }, publications[i].acronym)
+            if(example !== null){
+                await page.click(example)
+                await page.waitForSelector("#detail")
+                let core = await page.evaluate( (year)=> {
+                    let coreHTML = document.querySelectorAll(".detail div:first-child")
+                    let rankHTML = document.querySelectorAll(".detail div:nth-child(2)")
+                    for(let i = 2; i < coreHTML.length; i++){
+                        let rank = rankHTML[i-2].innerText.substring(6), core = null;
+                        if(coreHTML[i].innerText.includes("ERA")) core = coreHTML[i].innerText.substring(11)
+                        else core = coreHTML[i].innerText.substring(12)
+                        if(core <= year || coreHTML.length == (i+1)){
+                            return {
+                                core_year: core,
+                                core_category: rank
+                            }
+                        }
+                    }
+                    return null;
+                },publications[i].year)
+                publications[i].core = core;
+                if(publications[i].core.core_category === "A*")authorData.core.numero_publicaciones_AA++;
+                else if(publications[i].core.core_category === "A")authorData.core.numero_publicaciones_A++;
+                else if(publications[i].core.core_category === "B")authorData.core.numero_publicaciones_B++;
+                else if(publications[i].core.core_category === "C")authorData.core.numero_publicaciones_C++;
+            }else publications[i].core = {
+                core_year: null,
+                core_category: null /* Si no tiene ranking CORE, ambos a null */
+            }
+        }
+    }
+}
+
+async function goToXML(page, author) {
     await page.goto("https://dblp.org/", { waitUntil: "networkidle2" })
     await page.type('input[type="search"]', author)
     await page.keyboard.press("Enter");
@@ -122,130 +200,80 @@ async function goToXML(page, author){
         return document.querySelector("#completesearch-authors ul.result-list li a").href; //controlar mas adelante usuarios con mismo nombre
     })
     page.goto(link, { waitUntil: "networkidle2" })
-    try{
-        sameName =  await page.waitForSelector("#homonyms", {timeout: 1000});
-    }catch(e){
+    try {
+        sameName = await page.waitForSelector("#homonyms", { timeout: 1000 });
+    } catch (e) {
         sameName = null;
     }
     //Como sameName no lo puedo mandar como parametro luego (si haces console log tiene un valor raro si no es null) uso checkName
-    if(sameName === null) checkName = false;
-    const linkToData = await page.evaluate(() => {
-        return document.querySelector("#headline .export .body ul li:nth-child(5) a").href;
+    if (sameName === null) checkName = false;
+    let linkToDataAndName = await page.evaluate(() => {
+        let links = {}
+        links.xml = document.querySelector("#headline .export .body ul li:nth-child(5) a").href;
+        links.bibtex = document.querySelector("#headline .export .body ul li:nth-child(1) a").href;
+        links.name = document.querySelector(".name.primary").innerText;
+        return links;
     })
-    await page.goto(linkToData, { waitUntil: "networkidle2" })
-    return checkName;
+    await page.goto(linkToDataAndName.xml, { waitUntil: "networkidle2" })
+    let checking = {
+        bibtex: linkToDataAndName.bibtex,
+        checkName: checkName,
+        authorName: linkToDataAndName.name
+    }
+    return checking;
 }
 
-
-
-
-
-/*   CODIGO VIEJO QUE ENTRABA ARTICULO POR ARTICULO EN EL XML, LO DEJO AQUI POR SI POR CUALQUIER COSA LO NECESITASE RESCATAR
-
-        const results = await page.evaluate(() => {
-            let articlesParse = [], inproceedingsParse = [], incollectionParse = [];
-            let articles = document.querySelectorAll(".entry.article nav.publ ul li:nth-child(2) div.body ul li:nth-child(5) a");
-            let inproceedings = document.querySelectorAll(".entry.inproceedings nav.publ ul li:nth-child(2) div.body ul li:nth-child(5) a");
-            let incollection = document.querySelectorAll(".entry.incollection nav.publ ul li:nth-child(2) div.body ul li:nth-child(5) a");
-            let results = {};
-            for (let i = 0; i < articles.length; i++) {
-                articlesParse.push(articles[i].href)
+async function getBooktitles(page, bibtex) {
+    await page.goto(bibtex, { waitUntil: "networkidle2" })
+    return await page.evaluate(() => {
+        let book_titles = []
+        let data = document.querySelectorAll(".verbatim.select-on-click"), checking = false, article = null;
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].innerText.includes("booktitle =")) {
+                article = data[i].innerText.split("},");
+                let book_title = article[3].substring(16).trim().replace(/(\r\n|\n|\r)/gm, " ")
+                    .replace("                ", " ")
+                    .replace("                ", " ")
+                    .replace("                ", " ")
+                    .replace("                ", " ")
+                book_titles.push(book_title)
             }
-            for (let i = 0; i < inproceedings.length; i++) {
-                inproceedingsParse.push(inproceedings[i].href)
-            }
-            for (let i = 0; i < incollection.length; i++) {
-                incollectionParse.push(incollection[i].href)
-            }
-            results.articles = articlesParse;
-            results.inproceedings = inproceedingsParse;
-            results.incollection = incollectionParse;
-            return results;
-        })
-        //Una vez tienes el 100% de enlaces de la web hacia los XML, procedemos a ir a ellos y extraer la info para completar los arrays
-        for (let j = 0; j < results.articles.length; j++) {
-            datosArticulo = { type: "article", authors: [], issue: null }
-            await page.goto(results.articles[j], { waitUntil: "networkidle2" })
-            let extraerInfoXML = await page.evaluate((datosArticulo) => {
-                let articleDataHTML = document.querySelectorAll("#folder1 .opened .line span:nth-child(2):not(.html-attribute-value)")
-                let articleTypeDataHTML = document.querySelectorAll("#folder1 .opened .line > span:first-child")
+        }
+        return book_titles;
+    })
+}
 
-                for (let z = 0; z < articleDataHTML.length; z++) {
-                    if (articleTypeDataHTML[z].innerText.includes("author")) {
-                        datosArticulo.authors.push(articleDataHTML[z].innerText)
-                    } else if (articleTypeDataHTML[z].innerText.includes("booktitle")) {
-                        datosArticulo.book_title = articleDataHTML[z].innerText;
-                    } else if (articleTypeDataHTML[z].innerText.includes("title")) {
-                        datosArticulo.title = articleDataHTML[z].innerText;
-                    } else if (articleTypeDataHTML[z].innerText.includes("pages")) {
-                        datosArticulo.pages = articleDataHTML[z].innerText;
-                    } else if (articleTypeDataHTML[z].innerText.includes("year")) {
-                        datosArticulo.year = articleDataHTML[z].innerText;
-                    } else if (articleTypeDataHTML[z].innerText.includes("volume")) {
-                        datosArticulo.volume = articleDataHTML[z].innerText;
-                    } else if (articleTypeDataHTML[z].innerText.includes("journal")) {
-                        datosArticulo.journal = articleDataHTML[z].innerText;
-                    } else if (articleTypeDataHTML[z].innerText.includes("issue")) {
-                        datosArticulo.issue = articleDataHTML[z].innerText;
-                    }
-                }
-                return datosArticulo;
-            }, datosArticulo)
-    
-           
-        
-        publicationsData.push(extraerInfoXML);
-        //en este for hay que abrir nuevas pestañas al navegador y mandarlas a otras webs para calcular algunos indices que se basan en el acronimo de los articulos
+function initAuthor(name){
+    return  {
+        name: name,
+        indices: {
+            indice_h_total_google_scholar: 0,
+            indice_h_5_years_google_scholar: 0,
+            indice_i10_total_google_scholar: 0,
+            indice_i10_5_years_google_scholar: 0,
+            indice_h_total_scopus: 0
+        },
+        citas: {
+            citas_total_google_scholar: 0,
+            citas_total_5_years_google_scholar: 0,
+            citas_total_scopus: 0
+        },
+        jcr: {
+            numero_publicaciones_q1: 0,
+            numero_publicaciones_q2: 0,
+            numero_publicaciones_q3: 0,
+            numero_publicaciones_q4: 0
+        },
+        ggs: {
+            numero_publicaciones_class_1: 0,
+            numero_publicaciones_class_2: 0,
+            numero_publicaciones_class_3: 0
+        },
+        core: {
+            numero_publicaciones_AA: 0,
+            numero_publicaciones_A: 0,
+            numero_publicaciones_B: 0,
+            numero_publicaciones_C: 0
+        }
     }
-
-    for (let j = 0; j < results.inproceedings.length; j++) {
-        datosArticulo = { type: "inproceeding", authors: [] }
-        await page.goto(results.inproceedings[j], { waitUntil: "networkidle2" })
-        let extraerInfoXML = await page.evaluate((datosArticulo) => {
-            let articleDataHTML = document.querySelectorAll("#folder1 .opened .line span:nth-child(2):not(.html-attribute-value)")
-            let articleTypeDataHTML = document.querySelectorAll("#folder1 .opened .line > span:first-child")
-
-            for (let z = 0; z < articleDataHTML.length; z++) {
-                if (articleTypeDataHTML[z].innerText.includes("author")) {
-                    datosArticulo.authors.push(articleDataHTML[z].innerText)
-                } else if (articleTypeDataHTML[z].innerText.includes("pages")) {
-                    datosArticulo.pages = articleDataHTML[z].innerText;
-                } else if (articleTypeDataHTML[z].innerText.includes("year")) {
-                    datosArticulo.year = articleDataHTML[z].innerText;
-                } else if (articleTypeDataHTML[z].innerText.includes("booktitle")) {
-                    datosArticulo.book_title = articleDataHTML[z].innerText;
-                } else if (articleTypeDataHTML[z].innerText.includes("title")) {
-                    datosArticulo.title = articleDataHTML[z].innerText;
-                }
-            }
-            return datosArticulo;
-        }, datosArticulo)
-        publicationsData.push(extraerInfoXML);
-        //en este for hay que abrir nuevas pestañas al navegador y mandarlas a otras webs para calcular algunos indices que se basan en el acronimo de los articulos
-    }
-
-    for (let j = 0; j < results.incollection.length; j++) {
-        datosArticulo = { type: "incollection", authors: [], issue: null }
-        await page.goto(results.incollection[j], { waitUntil: "networkidle2" })
-        let extraerInfoXML = await page.evaluate((datosArticulo) => {
-            let articleDataHTML = document.querySelectorAll("#folder1 .opened .line span:nth-child(2):not(.html-attribute-value)")
-            let articleTypeDataHTML = document.querySelectorAll("#folder1 .opened .line > span:first-child")
-
-            for (let z = 0; z < articleDataHTML.length; z++) {
-                if (articleTypeDataHTML[z].innerText.includes("author")) {
-                    datosArticulo.authors.push(articleDataHTML[z].innerText)
-                } else if (articleTypeDataHTML[z].innerText.includes("pages")) {
-                    datosArticulo.pages = articleDataHTML[z].innerText;
-                } else if (articleTypeDataHTML[z].innerText.includes("year")) {
-                    datosArticulo.year = articleDataHTML[z].innerText;
-                } else if (articleTypeDataHTML[z].innerText.includes("booktitle")) {
-                    datosArticulo.book_title = articleDataHTML[z].innerText;
-                } else if (articleTypeDataHTML[z].innerText.includes("title")) {
-                    datosArticulo.title = articleDataHTML[z].innerText;
-                }
-            }
-            return datosArticulo;
-        }, datosArticulo)
-        publicationsData.push(extraerInfoXML);
-        //en este for hay que abrir nuevas pestañas al navegador y mandarlas a otras webs para calcular algunos indices que se basan en el acronimo de los articulos
-    }*/
+}
