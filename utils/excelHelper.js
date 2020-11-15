@@ -1,90 +1,81 @@
 const ExcelToJson = require("convert-excel-to-json")
+const fs = require("fs")
 class excel {
-    
-        parseCORE2018 =  (data, acronym) => {
-        data.GII.splice(0, 1);
-        let finishData = data.GII;
-        const result =  this.divide(0,2832,finishData,acronym)
-        if(result.class == "Work in Progress"){
+
+    parseGGS = (data, acronym, year) => {
+        data.GGS.splice(0, 1);
+        let finishData = data.GGS;
+       let result = this.divide(0, data.GGS.length, finishData, acronym, year)
+        if (result.class == "Work in Progress" || result.class == "W") {
             result.year = null;
-            result.class= null;
+            result.class = null;
         }
-        return{
+        return {
             year: result.year,
             class: result.class
         }
     };
 
-    readExcelCORE2018 = (acronym) => {
-        let filename = __dirname.slice(0, -5) + 'data/core2018.xlsx';
+    readExcelGGS = (acronym, year) => {
+        let filename = "";
+        if (year < "2017") filename = __dirname.slice(0, -5) + 'data/GGS2015.xlsx';
+        else if (year < "2018") filename = __dirname.slice(0, -5) + 'data/GGS2017.xlsx';
+        else filename = __dirname.slice(0, -5) + 'data/GGS2018.xlsx';
         let results = ExcelToJson({
             sourceFile: filename
         });
-        let correct = this.parseCORE2018(results, acronym);
+        let correct = this.parseGGS(results, acronym);
         return correct;
     };
-     divide = (ini,fin,data,acronym) => {
-    
-        if((fin - ini) == 0){
-           if(data[ini].A == acronym){
-               return {
-                   year: 2018,
-                   class: data[ini].B
-               }
-           }
-           else{
-               return {
-                   year: null,
-                   class: null
-               }
-           }
-           }
-    
-        else if((fin -ini) == 1){
-           if(data[ini].A == acronym){
-               return {
-                   year: 2018,
-                   class: data[ini].B
-               }
-           }
-           else if(data[fin].A == acronym){
-        
-               return {
-                   year: 2018,
-                   class: data[fin].B
-               }
-           }
-           else{
-               return {
-                   year: null,
-                   class: null
-               } 
-           }
-       }
-       else{
-           let half = Math.floor((ini + fin ) / 2);
-            
-           if(data[half].A == acronym){
-               return {
-                   year: 2018,
-                   class: data[half].B
-               }
-           }
-           else{
-               if(data[half].A > acronym){
-                   return this.divide(ini,half,data,acronym);
-               }
-                
-               else{
-                   return this.divide(half,fin,data,acronym);
-               }
-    
-               
-           }
-       }
+
+    filterGGSperYear = (acronym, year) => {
+        let rawData = "", filename = "";
+        if (year < "2017"){ filename = __dirname.slice(0, -5) + 'data/GGS2015.json'; year = 2015;}
+        else if (year < "2018") {filename = __dirname.slice(0, -5) + 'data/GGS2017.json'; year = 2017;}
+        else {filename = __dirname.slice(0, -5) + 'data/GGS2018.json'; year = 2018;}
+        rawData = fs.readFileSync(filename)
+        let results = JSON.parse(rawData)
+        let correct = this.parseGGS(results, acronym, year);
+        return correct;
     };
     
-    
+    divide = (ini, fin, data, acronym, year) => {
+        if ((fin - ini) == 0) {
+            if (data[ini].A == acronym) return {
+                    year: year,
+                    class: data[ini].B
+                }
+            else return {
+                    year: null,
+                    class: null
+                }
+        }
+        else if ((fin - ini) == 1) {
+            if (data[ini].A == acronym) return {
+                    year: year,
+                    class: data[ini].B
+                }
+            else if (data[fin].A == acronym) return {
+                    year: year,
+                    class: data[fin].B
+                }
+            else return {
+                    year: null,
+                    class: null
+                }
+        }
+        else {
+            let half = Math.floor((ini + fin) / 2);
+            if (data[half].A == acronym) return {
+                    year: year,
+                    class: data[half].B
+                }
+            else {
+                if (data[half].A > acronym) return this.divide(ini, half, data, acronym, year);
+                else return this.divide(half, fin, data, acronym, year);
+            }
+        }
+    };
 }
- 
+
 module.exports = excel;
