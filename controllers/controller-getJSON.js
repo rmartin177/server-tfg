@@ -26,7 +26,6 @@ exports.getJSON = async (req, res) => {
         let publications = await page.evaluate((checkName, authorsChecking) => {
             let valuesHTML = null, fullHTML = null;
             if (checkName) {
-                console.log("tiene homonimo")
                 //Si hay dos con el mismo nombre el XML cambia, debe usar estos selectores
                 fullHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line > span:first-child");
                 valuesHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line span:nth-child(2):not(.html-attribute-value):not(.html-attribute)")
@@ -130,7 +129,7 @@ exports.getJSON = async (req, res) => {
         publicationsData = publications.articles.concat(publicationsData)
         AuthorsData.push(authorData)
     }
-    /*await page.close()*/
+    await page.close()
     let finalResult = {
         "authors": AuthorsData,
         "publications": publicationsData
@@ -144,10 +143,11 @@ async function countGGSandCore(publications, ggs, authorData, book_titles, page)
     for (let i = 0; i < publications.length; i++) {
         if (publications[i].acronym !== null) {
             publications[i].book_title = book_titles[i]
-            publications[i].ggs = ggs.filterGSSperYear(publications[i].acronym, publications[i].year)
+            publications[i].ggs = ggs.filterGGSperYear(publications[i].acronym, publications[i].year)
             if(publications[i].ggs.class == 1) authorData.ggs.numero_publicaciones_class_1++;
             else if(publications[i].ggs.class == 2) authorData.ggs.numero_publicaciones_class_2++;
             else if(publications[i].ggs.class == 3) authorData.ggs.numero_publicaciones_class_3++;
+            //From this point the core code starts
             let link = "http://portal.core.edu.au/conf-ranks/?search=" + publications[i].acronym + "&by=all&source=all&sort=atitle&page=1";
             await page.goto(link, { waitUntil: "networkidle2" })
             let example = await page.evaluate( (acronym) => {
@@ -193,7 +193,7 @@ async function goToXML(page, author) {
     await page.goto("https://dblp.org/", { waitUntil: "networkidle2" })
     await page.type('input[type="search"]', author)
     await page.keyboard.press("Enter");
-    await page.waitForTimeout(1000);
+    await page.waitForSelector("#completesearch-authors");
     //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
     let sameName; checkName = true;
     let link = await page.evaluate(() => {
@@ -207,6 +207,7 @@ async function goToXML(page, author) {
     }
     //Como sameName no lo puedo mandar como parametro luego (si haces console log tiene un valor raro si no es null) uso checkName
     if (sameName === null) checkName = false;
+    await page.waitForSelector("#headline");
     let linkToDataAndName = await page.evaluate(() => {
         let links = {}
         links.xml = document.querySelector("#headline .export .body ul li:nth-child(5) a").href;
