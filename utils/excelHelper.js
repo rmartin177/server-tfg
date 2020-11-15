@@ -2,10 +2,10 @@ const ExcelToJson = require("convert-excel-to-json")
 const fs = require("fs")
 class excel {
 
-    parseGSS = (data, acronym) => {
+    parseGGS = (data, acronym, year) => {
         data.GGS.splice(0, 1);
         let finishData = data.GGS;
-        const result = this.divide(0, data.GGS.length, finishData, acronym)
+       let result = this.divide(0, data.GGS.length, finishData, acronym, year)
         if (result.class == "Work in Progress" || result.class == "W") {
             result.year = null;
             result.class = null;
@@ -16,7 +16,7 @@ class excel {
         }
     };
 
-    readExcelGSS = (acronym, year) => {
+    readExcelGGS = (acronym, year) => {
         let filename = "";
         if (year < "2017") filename = __dirname.slice(0, -5) + 'data/GGS2015.xlsx';
         else if (year < "2018") filename = __dirname.slice(0, -5) + 'data/GGS2017.xlsx';
@@ -24,25 +24,25 @@ class excel {
         let results = ExcelToJson({
             sourceFile: filename
         });
-        let correct = this.parseGSS(results, acronym);
+        let correct = this.parseGGS(results, acronym);
         return correct;
     };
 
-    filterGSSperYear = (acronym, year) => {
+    filterGGSperYear = (acronym, year) => {
         let rawData = "", filename = "";
-        if (year < "2017") filename = __dirname.slice(0, -5) + 'data/GGS2015.json';
-        else if (year < "2018") filename = __dirname.slice(0, -5) + 'data/GGS2017.json';
-        else filename = __dirname.slice(0, -5) + 'data/GGS2018.json';
+        if (year < "2017"){ filename = __dirname.slice(0, -5) + 'data/GGS2015.json'; year = 2015;}
+        else if (year < "2018") {filename = __dirname.slice(0, -5) + 'data/GGS2017.json'; year = 2017;}
+        else {filename = __dirname.slice(0, -5) + 'data/GGS2018.json'; year = 2018;}
         rawData = fs.readFileSync(filename)
         let results = JSON.parse(rawData)
-        let correct = this.parseGSS(results, acronym);
+        let correct = this.parseGGS(results, acronym, year);
         return correct;
     };
     
-    divide = (ini, fin, data, acronym) => {
+    divide = (ini, fin, data, acronym, year) => {
         if ((fin - ini) == 0) {
             if (data[ini].A == acronym) return {
-                    year: 2018,
+                    year: year,
                     class: data[ini].B
                 }
             else return {
@@ -52,11 +52,11 @@ class excel {
         }
         else if ((fin - ini) == 1) {
             if (data[ini].A == acronym) return {
-                    year: 2018,
+                    year: year,
                     class: data[ini].B
                 }
-            else if (data[fin].A == acronym)  return {
-                    year: 2018,
+            else if (data[fin].A == acronym) return {
+                    year: year,
                     class: data[fin].B
                 }
             else return {
@@ -67,12 +67,12 @@ class excel {
         else {
             let half = Math.floor((ini + fin) / 2);
             if (data[half].A == acronym) return {
-                    year: 2018,
+                    year: year,
                     class: data[half].B
                 }
             else {
-                if (data[half].A > acronym) return this.divide(ini, half, data, acronym);
-                else return this.divide(half, fin, data, acronym);
+                if (data[half].A > acronym) return this.divide(ini, half, data, acronym, year);
+                else return this.divide(half, fin, data, acronym, year);
             }
         }
     };
