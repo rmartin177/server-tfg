@@ -1,4 +1,10 @@
 ###
+POST http://localhost:4000/api/getjson
+Content-Type: application/json
+
+["Adrian Riesco", "alberto verdejo"]
+
+###
 POST http://localhost:4000/api/getjsonsanitize
 Content-Type: application/json
 
