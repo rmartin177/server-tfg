@@ -1,8 +1,8 @@
 ###
-POST http://localhost:4000/api/getjson
+POST http://localhost:4000/api/getjsonsanitize
 Content-Type: application/json
 
-["adrian riesco"]
+[{"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"}]
 
 ###
 POST http://localhost:4000/api/getjson
@@ -11,13 +11,13 @@ Content-Type: application/json
 ["alberto verdejo"]
 
 ###
-POST http://localhost:4000/api/getjson
+POST http://localhost:4000/api/getjsongetjsonsanitize
 Content-Type: application/json
 
-["alberto verdejo","adrian riesco"]
+[{"author": "Alberto Verdejo", "link": "https://dblp.org/pid/70/253.html"},{"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"}]
 
 ###
-POST https://tfg-scrapping.herokuapp.com/api/getjson
+POST https://tfg-web-scrapping.web.app/api/getjson
 Content-Type: application/json
 
 ["alberto verdejo"]

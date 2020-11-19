@@ -5,19 +5,46 @@ const stringHelper = require("../utils/stringHelper")
 const scrappingHelper = require("../utils/scrappingHelper")
 const excelGGS = require("../utils/excelHelper");
 const { table } = require("console");
+const { send } = require("process");
 //Refactorizar esta funcion en otras mas pequeñas
+
 exports.getJSON = async (req, res) => {
     let authors = req.body;
     console.log(authors)
     let page = await res.locals.browser.newPage();
+    let scrapping = new scrappingHelper();
+    await scrapping.optimizationWeb(page);
+    let haveHomonymsAndLinks = await checkCorrectAuthors(page, authors)
+    if(haveHomonymsAndLinks.haveHomonyms){
+        await page.close();
+        res.send(haveHomonymsAndLinks.authors)
+    }
+    await page.close();
+    let authorsLinkAndName = []
+    for(let i = 0; i < haveHomonymsAndLinks.authors.length; i++){
+        authorsLinkAndName.push(haveHomonymsAndLinks.authors[i].authors[0])
+    }
+    let result = await getAllData(authorsLinkAndName, res.locals.browser);
+    res.json(result)
+}
+
+exports.getJSONsanitize = async (req, res) => {
+    let authors = req.body;
+    let result = await getAllData(authors, res.locals.browser);
+    res.json(result)
+}
+
+async function getAllData(authors, browser){
+    console.log(authors)
+    let page = await browser.newPage();
     let ggs = new excelGGS();
     let scrapping = new scrappingHelper();
     await scrapping.optimizationWeb(page);
     let AuthorsData = [], publicationsData = []; //arrays donde meteremos los datos extraidos de cada autor y publicaciones, resultado final a procesar
     for (let i = 0; i < authors.length; i++) {
         //este objeto se completa durante la iteracion del for y se introduce en el array de autores
-        let checkAndBibtexAndName = await goToXML(page, authors[i])
-        let authorData = initAuthor(checkAndBibtexAndName.authorName)
+        let checkAndBibtexAndName = await goToXML(page, authors[i].link)
+        let authorData = initAuthor(authors[i].author)
         let checkName = checkAndBibtexAndName.checkName;
         let authorsChecking = {
             authors: AuthorsData,
@@ -26,7 +53,6 @@ exports.getJSON = async (req, res) => {
         let publications = await page.evaluate((checkName, authorsChecking) => {
             let valuesHTML = null, fullHTML = null;
             if (checkName) {
-                console.log("tiene homonimo")
                 //Si hay dos con el mismo nombre el XML cambia, debe usar estos selectores
                 fullHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line > span:first-child");
                 valuesHTML = document.querySelectorAll("#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line span:nth-child(2):not(.html-attribute-value):not(.html-attribute)")
@@ -130,13 +156,12 @@ exports.getJSON = async (req, res) => {
         publicationsData = publications.articles.concat(publicationsData)
         AuthorsData.push(authorData)
     }
-    /*await page.close()*/
-    let finalResult = {
-        "authors": AuthorsData,
-        "publications": publicationsData
+    await page.close()
+    return {
+        authors: AuthorsData,
+        publications: publicationsData
     }
-    /*console.log(finalResult)*/
-    res.json(finalResult)
+
 }
 
 
@@ -144,10 +169,11 @@ async function countGGSandCore(publications, ggs, authorData, book_titles, page)
     for (let i = 0; i < publications.length; i++) {
         if (publications[i].acronym !== null) {
             publications[i].book_title = book_titles[i]
-            publications[i].ggs = ggs.filterGSSperYear(publications[i].acronym, publications[i].year)
+            publications[i].ggs = ggs.filterGGSperYear(publications[i].acronym, publications[i].year)
             if(publications[i].ggs.class == 1) authorData.ggs.numero_publicaciones_class_1++;
             else if(publications[i].ggs.class == 2) authorData.ggs.numero_publicaciones_class_2++;
             else if(publications[i].ggs.class == 3) authorData.ggs.numero_publicaciones_class_3++;
+            //From this point the core code starts
             let link = "http://portal.core.edu.au/conf-ranks/?search=" + publications[i].acronym + "&by=all&source=all&sort=atitle&page=1";
             await page.goto(link, { waitUntil: "networkidle2" })
             let example = await page.evaluate( (acronym) => {
@@ -189,17 +215,41 @@ async function countGGSandCore(publications, ggs, authorData, book_titles, page)
     }
 }
 
-async function goToXML(page, author) {
-    await page.goto("https://dblp.org/", { waitUntil: "networkidle2" })
-    await page.type('input[type="search"]', author)
-    await page.keyboard.press("Enter");
-    await page.waitForTimeout(1000);
+async function checkCorrectAuthors(page, authors){
+    let linkToAuthor = [], homonyms = false;
+    for(let i = 0; i < authors.length; i++){
+        await page.goto("https://dblp.org/", { waitUntil: "networkidle2" })
+        await page.type('input[type="search"]', authors[i])
+        await page.keyboard.press("Enter");
+        await page.waitForSelector("#completesearch-authors");
+        //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
+        let link = await page.evaluate(() => {
+            let result = {authors: []}
+            let namesAndLinks = document.querySelectorAll("#completesearch-authors ul.result-list li a")
+            for(let j = 0; j < namesAndLinks.length; j++){
+                result.authors.push(
+                    {
+                        author: namesAndLinks[j].innerText, 
+                        link: namesAndLinks[j].href
+                    }
+                )
+            }
+            return result;
+        })
+        if(link.authors.length > 1)homonyms = true
+        linkToAuthor.push(link)
+    }
+    return {
+        authors: linkToAuthor,
+        haveHomonyms: homonyms
+    }
+}
+
+
+async function goToXML(page, link) {
     //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
     let sameName; checkName = true;
-    let link = await page.evaluate(() => {
-        return document.querySelector("#completesearch-authors ul.result-list li a").href; //controlar mas adelante usuarios con mismo nombre
-    })
-    page.goto(link, { waitUntil: "networkidle2" })
+    await page.goto(link, { waitUntil: "networkidle2" })
     try {
         sameName = await page.waitForSelector("#homonyms", { timeout: 1000 });
     } catch (e) {
@@ -207,18 +257,17 @@ async function goToXML(page, author) {
     }
     //Como sameName no lo puedo mandar como parametro luego (si haces console log tiene un valor raro si no es null) uso checkName
     if (sameName === null) checkName = false;
+    await page.waitForSelector("#headline");
     let linkToDataAndName = await page.evaluate(() => {
         let links = {}
         links.xml = document.querySelector("#headline .export .body ul li:nth-child(5) a").href;
         links.bibtex = document.querySelector("#headline .export .body ul li:nth-child(1) a").href;
-        links.name = document.querySelector(".name.primary").innerText;
         return links;
     })
     await page.goto(linkToDataAndName.xml, { waitUntil: "networkidle2" })
     let checking = {
         bibtex: linkToDataAndName.bibtex,
         checkName: checkName,
-        authorName: linkToDataAndName.name
     }
     return checking;
 }
