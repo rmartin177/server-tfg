@@ -4,5 +4,6 @@ const controllerGetJSON = require("../controllers/controller-getJSON")
 
 
 router.post("/getjson", controllerGetJSON.getJSON)
+router.post("/getjsonsanitize", controllerGetJSON.getJSONsanitize)
 
 module.exports = router;
