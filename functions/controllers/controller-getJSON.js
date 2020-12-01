@@ -151,8 +151,9 @@ async function getAllData(authors, browser){
         }, checkName, authorsChecking)
 
         let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex)
-        await countGGSandCore(publications.inproceedings, ggs,authorData, book_titles, page)
-        await countGGSandCore(publications.duplicateInproceedings,ggs,authorData, book_titles, page)
+      //  await countGGSandCore(publications.inproceedings, ggs,authorData, book_titles, page)
+     //await countGGSandCore(publications.duplicateInproceedings,ggs,authorData, book_titles, page)
+        await googleScholar(publications.articles,publications.inproceedings,authorData,browser,scrapping)
         publicationsData = publications.incollections.concat(publicationsData)
         publicationsData = publications.inproceedings.concat(publicationsData)
         publicationsData = publications.articles.concat(publicationsData)
@@ -166,6 +167,112 @@ async function getAllData(authors, browser){
 
 }
 
+async function googleScholar(articles,inproceedings,author,browser,scrapping){
+   
+    const page = await browser.newPage();
+    await page.goto("https://scholar.google.com/schhp?hl=en");
+
+
+    //Imput de la busqueda
+    let authorGood = author.name.replace(/[0-9`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,'');
+    await page.waitForSelector("#gs_hdr_tsi");
+    await page.type("#gs_hdr_tsi",authorGood);
+    await page.click("#gs_hdr_tsb");
+
+    await page.waitForSelector(".gs_rt2 a");
+    const linkAuth = await page.evaluate(() =>{
+        return document.querySelector(".gs_rt2 a").href;
+    });
+    await  page.goto(linkAuth);
+    //Aqui cogemos las citas totales h10 etc
+    
+    const AllCites = await page.evaluate(() =>{
+        
+        let cites =  document.querySelectorAll(".gsc_rsb_std");
+        var result = [];
+        for (let i = 0; i < cites.length; i++) {
+            result[i]= cites[i].innerText; 
+            
+        }
+        return  result;
+    });
+    //Paso los indices y las citas obtenidas arriba
+    author.indices.indice_h_total_google_scholar = AllCites[2];
+    author.indices.indice_h_5_years_google_scholar= AllCites[3];
+    author.indices.indice_i10_total_google_scholar= AllCites[4];
+    author.indices.indice_i10_5_years_google_scholar= AllCites[5];
+    author.citas.citas_total_google_scholar= AllCites[0];
+    author.citas.citas_total_5_years_google_scholar= AllCites[1];
+    //Esperamos a que aparezca el botton shor more
+    let botonShowMore;
+    
+    try {
+        botonShowMore = await page.waitForSelector("#gsc_bpf_more", { timeout: 1000 });
+    } catch (e) {
+        botonShowMore = null;
+    }
+
+    if(botonShowMore != null){
+     
+        let lol = [];
+        //A lo mejor no me va porque no hace scroll hay una funcion en utils.
+    let citas = await page.evaluate((lol,) =>{
+        let boton = document.querySelector("#gsc_bpf_more:disabled");
+        let botonActive = document.querySelector("#gsc_bpf_more");
+        while(boton === null){
+
+            //Mirar si esta haciendo click en el boton
+            botonActive.click();
+            boton = document.querySelector("#gsc_bpf_more:disabled");
+        };
+        //scrapping.autoScroll(page);
+        let getDataTitle= document.querySelectorAll(".gsc_a_tr td a.gsc_a_at");
+        console.log(getDataTitle.length);
+        console.log(getDataTitle);
+        let getDataCited= document.querySelectorAll(".gsc_a_tr td a.gsc_a_ac.gs_ibl");
+        for (let i = 0; i < getDataTitle.length; i++) {
+            lol[i] = {};
+            lol[i].title = getDataTitle[i].innerText;
+            lol[i].cited = getDataCited[i].innerText;
+        }
+        return lol;
+        
+    },lol);
+   
+    for (let j = 0; j < articles.length; j++) {
+        for (let i = 0; i < citas.length; i++) {
+            
+            if(articles[j].title.toLowerCase().includes(citas[i].title.toLowerCase())){
+                const cite = {
+                    numero_citas_google_scholar: citas[i].cited,
+                }
+                articles[j].citas=cite;
+               
+            }
+        
+        }
+        
+    }
+    console.log("El tamaño de citas es : " + citas.length);
+    
+    for (let j = 0; j < inproceedings.length; j++) {
+        for (let i = 0; i < citas.length; i++) {
+            
+            if(inproceedings[j].title.toLowerCase().includes(citas[i].title.toLowerCase())){
+                const cite = {
+                    numero_citas_google_scholar: citas[i].cited,
+                }
+                inproceedings[j].citas=cite;
+                citas.splice(i,i);
+            }
+        
+        }
+        
+    }
+    
+    
+}
+}
 
 async function countGGSandCore(publications, ggs, authorData, book_titles, page){
     for (let i = 0; i < publications.length; i++) {
