@@ -19,13 +19,15 @@ exports.getJSON = async (req, res) => {
         await page.close();
         res.send(haveHomonymsAndLinks.authors)
     }
-    await page.close();
-    let authorsLinkAndName = []
-    for(let i = 0; i < haveHomonymsAndLinks.authors.length; i++){
-        authorsLinkAndName.push(haveHomonymsAndLinks.authors[i].authors[0])
+    else{
+        await page.close();
+        let authorsLinkAndName = []
+        for(let i = 0; i < haveHomonymsAndLinks.authors.length; i++){
+            authorsLinkAndName.push(haveHomonymsAndLinks.authors[i].authors[0])
+        }
+        let result = await getAllData(authorsLinkAndName, res.locals.browser);
+        res.json(result)
     }
-    let result = await getAllData(authorsLinkAndName, res.locals.browser);
-    res.json(result)
 }
 
 exports.getJSONsanitize = async (req, res) => {
