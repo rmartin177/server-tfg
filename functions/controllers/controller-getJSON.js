@@ -151,8 +151,8 @@ async function getAllData(authors, browser){
         }, checkName, authorsChecking)
 
         let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex)
-      //  await countGGSandCore(publications.inproceedings, ggs,authorData, book_titles, page)
-     //await countGGSandCore(publications.duplicateInproceedings,ggs,authorData, book_titles, page)
+        await countGGSandCore(publications.inproceedings, ggs,authorData, book_titles, page)
+        await countGGSandCore(publications.duplicateInproceedings,ggs,authorData, book_titles, page)
         await googleScholar(publications.articles,publications.inproceedings,authorData,browser,scrapping)
         publicationsData = publications.incollections.concat(publicationsData)
         publicationsData = publications.inproceedings.concat(publicationsData)
