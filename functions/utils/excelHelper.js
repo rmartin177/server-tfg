@@ -76,6 +76,31 @@ class excel {
             }
         }
     };
+    divideGoogle = (ini, fin, articles, title,) => {
+        if ((fin - ini) == 0) {
+            if (articles[ini].title == title) 
+            return ini
+            else return -1;
+        }
+        else if ((fin - ini) == 1) {
+            if (articles[ini].title == title) 
+                return ini
+            else if (articles[fin].title == title) 
+                return fin
+                   
+            else 
+            return -1;
+        }
+        else {
+            let half = Math.floor((ini + fin) / 2);
+            if (articles[half].title == title) 
+            return half
+            else {
+                if (articles[half].title> title) return this.divide(ini, half, data, acronym);
+                else return this.divide(half, fin, data, acronym);
+            }
+        }
+    };
 }
 
 module.exports = excel;
