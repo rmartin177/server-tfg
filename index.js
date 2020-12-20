@@ -19,7 +19,7 @@ app.use( async (req, res, next) => {
 })
 
 app.get('/', (req, res)=>{
-    res.send("hola")
+    res.sendFile(__dirname + "/public/index.html")
 })
 app.use('/api', require("./functions/routes/route-getJSON"))
 
