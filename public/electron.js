@@ -14,11 +14,11 @@ function createWindow() {
         title: "tfg-scrapping",
         titleBarStyle: "hiddenInset"
     });
-    mainWindow.loadURL(isDev ? 'http://localhost:4000' : `file://${path.join(__dirname, '../build/index.html')}`);
+    mainWindow.loadURL('http://localhost:4000');
     /*if (isDev) {*/
         // Open the DevTools.
         //BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
-        mainWindow.webContents.openDevTools();
+        //mainWindow.webContents.openDevTools();
     /*}*/
     mainWindow.on('closed', () => mainWindow = null);
 }

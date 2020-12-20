@@ -1,11 +1,12 @@
 const path = require("path")
 const fs = require("fs")
 const { performance } = require('perf_hooks');
-const stringHelper = require("../utils/stringHelper")
 const scrappingHelper = require("../utils/scrappingHelper")
 const excelGGS = require("../utils/excelHelper");
-const { table } = require("console");
+const { table, Console } = require("console");
 const { send } = require("process");
+const coreHelper = require("../utils/coreHelper");
+const jsonCore = require("../utils/coreHelper");
 //Refactorizar esta funcion en otras mas pequeñas
 
 exports.getJSON = async (req, res) => {
@@ -15,14 +16,15 @@ exports.getJSON = async (req, res) => {
     let scrapping = new scrappingHelper();
     await scrapping.optimizationWeb(page);
     let haveHomonymsAndLinks = await checkCorrectAuthors(page, authors)
-    if(haveHomonymsAndLinks.haveHomonyms){
+    console.log(haveHomonymsAndLinks)
+    if (haveHomonymsAndLinks.haveHomonyms) {
         await page.close();
         res.send(haveHomonymsAndLinks.authors)
     }
-    else{
+    else {
         await page.close();
         let authorsLinkAndName = []
-        for(let i = 0; i < haveHomonymsAndLinks.authors.length; i++){
+        for (let i = 0; i < haveHomonymsAndLinks.authors.length; i++) {
             authorsLinkAndName.push(haveHomonymsAndLinks.authors[i].authors[0])
         }
         let result = await getAllData(authorsLinkAndName, res.locals.browser);
@@ -36,7 +38,7 @@ exports.getJSONsanitize = async (req, res) => {
     res.json(result)
 }
 
-async function getAllData(authors, browser){
+async function getAllData(authors, browser) {
     console.log(authors)
     let page = await browser.newPage();
     let ggs = new excelGGS();
@@ -151,9 +153,9 @@ async function getAllData(authors, browser){
         }, checkName, authorsChecking)
 
         let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex)
-        await countGGSandCore(publications.inproceedings, ggs,authorData, book_titles, page)
-        await countGGSandCore(publications.duplicateInproceedings,ggs,authorData, book_titles, page)
-        await googleScholar(publications.articles,publications.inproceedings,authorData,browser,scrapping)
+        await countGGSandCore(publications.inproceedings, ggs, authorData, book_titles, page)
+        await countGGSandCore(publications.duplicateInproceedings, ggs, authorData, book_titles, page)
+        await googleScholar(publications.articles, publications.inproceedings, publications.incollections, authorData, page)
         publicationsData = publications.incollections.concat(publicationsData)
         publicationsData = publications.inproceedings.concat(publicationsData)
         publicationsData = publications.articles.concat(publicationsData)
@@ -167,187 +169,257 @@ async function getAllData(authors, browser){
 
 }
 
-async function googleScholar(articles,inproceedings,author,browser,scrapping){
-   
-    const page = await browser.newPage();
-    await page.goto("https://scholar.google.com/schhp?hl=en");
-
-
+async function googleScholar(articles, inproceedings, incollections, author, page) {
+    await page.goto("https://scholar.google.es/citations?view_op=search_authors");
     //Imput de la busqueda
-    let authorGood = author.name.replace(/[0-9`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,'');
+    let authorGood = author.name.replace(/[0-9`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+    console.log("author good: " + authorGood)
+    let aaa = await page.url()
+    console.log("pagina actual: " + aaa + " esperando al selector: #gs_hdr_tsi")
     await page.waitForSelector("#gs_hdr_tsi");
-    await page.type("#gs_hdr_tsi",authorGood);
-    await page.click("#gs_hdr_tsb");
-
-    await page.waitForSelector(".gs_rt2 a");
-    const linkAuth = await page.evaluate(() =>{
-        return document.querySelector(".gs_rt2 a").href;
+    await page.type("#gs_hdr_tsi", authorGood);
+    await page.keyboard.press("Enter");
+    let aaaa = await page.url()
+    console.log("la nueva direccion es: " + aaaa)
+    await page.waitForSelector(".gs_ai_name", { timeout: 3000 });
+    const linkAuth = await page.evaluate(() => {
+        return document.querySelector(".gs_ai_name a").href;
     });
-    await  page.goto(linkAuth);
+    console.log(linkAuth)
+    await page.goto(linkAuth); 
+    /*await page.goto("https://scholar.google.com/citations?user=AT3Eo_IAAAAJ&hl=en&oi=ao")*/
     //Aqui cogemos las citas totales h10 etc
-    
-    const AllCites = await page.evaluate(() =>{
-        
-        let cites =  document.querySelectorAll(".gsc_rsb_std");
+    const AllCites = await page.evaluate(() => {
+        let cites = document.querySelectorAll(".gsc_rsb_std");
         var result = [];
         for (let i = 0; i < cites.length; i++) {
-            result[i]= cites[i].innerText; 
-            
+            result[i] = cites[i].innerText;
+
         }
-        return  result;
+        return result;
     });
     //Paso los indices y las citas obtenidas arriba
     author.indices.indice_h_total_google_scholar = AllCites[2];
-    author.indices.indice_h_5_years_google_scholar= AllCites[3];
-    author.indices.indice_i10_total_google_scholar= AllCites[4];
-    author.indices.indice_i10_5_years_google_scholar= AllCites[5];
-    author.citas.citas_total_google_scholar= AllCites[0];
-    author.citas.citas_total_5_years_google_scholar= AllCites[1];
+    author.indices.indice_h_5_years_google_scholar = AllCites[3];
+    author.indices.indice_i10_total_google_scholar = AllCites[4];
+    author.indices.indice_i10_5_years_google_scholar = AllCites[5];
+    author.citas.citas_total_google_scholar = AllCites[0];
+    author.citas.citas_total_5_years_google_scholar = AllCites[1];
     //Esperamos a que aparezca el botton shor more
     let botonShowMore;
-    
+    console.log("lo logreeeee 234")
     try {
         botonShowMore = await page.waitForSelector("#gsc_bpf_more", { timeout: 1000 });
     } catch (e) {
         botonShowMore = null;
     }
 
-    if(botonShowMore != null){
-     
+    if (botonShowMore != null) {
         let lol = [];
         //A lo mejor no me va porque no hace scroll hay una funcion en utils.
-    let citas = await page.evaluate((lol,) =>{
-        let boton = document.querySelector("#gsc_bpf_more:disabled");
-        let botonActive = document.querySelector("#gsc_bpf_more");
-        while(boton === null){
-
-            //Mirar si esta haciendo click en el boton
-            botonActive.click();
-            boton = document.querySelector("#gsc_bpf_more:disabled");
-        };
-        //scrapping.autoScroll(page);
-        let getDataTitle= document.querySelectorAll(".gsc_a_tr td a.gsc_a_at");
-        console.log(getDataTitle.length);
-        console.log(getDataTitle);
-        let getDataCited= document.querySelectorAll(".gsc_a_tr td a.gsc_a_ac.gs_ibl");
-        for (let i = 0; i < getDataTitle.length; i++) {
-            lol[i] = {};
-            lol[i].title = getDataTitle[i].innerText;
-            lol[i].cited = getDataCited[i].innerText;
-        }
-        return lol;
-        
-    },lol);
-   
-    for (let j = 0; j < articles.length; j++) {
-        for (let i = 0; i < citas.length; i++) {
-            
-            if(articles[j].title.toLowerCase().includes(citas[i].title.toLowerCase())){
-                const cite = {
-                    numero_citas_google_scholar: citas[i].cited,
-                }
-                articles[j].citas=cite;
-               
+        const citas = await page.evaluate(async (lol) => {
+            let boton = document.querySelector("#gsc_bpf_more:disabled");
+            let botonActive = document.querySelector("#gsc_bpf_more");
+            while (boton === null) {
+                //Mirar si esta haciendo click en el boton
+                botonActive.click();
+                boton = document.querySelector("#gsc_bpf_more:disabled");
+            };
+            let timer = {}
+            timer.scroll = async function scroll() {
+                await new Promise((resolve, reject) => {
+                    var totalHeight = 0;
+                    var distance = 100;
+                    var timer = setInterval(() => {
+                        var scrollHeight = document.body.scrollHeight;
+                        window.scrollBy(0, distance);
+                        totalHeight += distance;
+                        if (totalHeight >= scrollHeight) {
+                            clearInterval(timer);
+                            resolve();
+                        }
+                    }, 100);
+                });
             }
-        
-        }
-        
-    }
-    console.log("El tamaño de citas es : " + citas.length);
-    
-    for (let j = 0; j < inproceedings.length; j++) {
-        for (let i = 0; i < citas.length; i++) {
-            
-            if(inproceedings[j].title.toLowerCase().includes(citas[i].title.toLowerCase())){
-                const cite = {
-                    numero_citas_google_scholar: citas[i].cited,
-                }
-                inproceedings[j].citas=cite;
-                citas.splice(i,i);
+            await timer.scroll();
+            let getDataTitle = document.querySelectorAll(".gsc_a_tr td a.gsc_a_at");
+            let getDataCited = document.querySelectorAll(".gsc_a_tr td a.gsc_a_ac.gs_ibl");
+            for (let i = 0; i < getDataTitle.length; i++) {
+                lol[i] = {};
+                lol[i].title = getDataTitle[i].innerText;
+                lol[i].cited = getDataCited[i].innerText;
             }
-        
+            return lol;
+
+        }, lol);
+
+
+        //– -
+        for (let j = 0; j < articles.length; j++) {
+            articles[j].citas = { "numero_citas_google_scholar": null };
+            let checkFor = false;
+            for (let i = 0; i < citas.length && !checkFor; i++) {
+                if (articles[j].title.toLowerCase().replace("–", "-").includes(citas[i].title.toLowerCase().replace("–", "-"))) {
+                    const cite = {
+                        numero_citas_google_scholar: citas[i].cited,
+                    }
+                    if (cite.numero_citas_google_scholar === "") cite.numero_citas_google_scholar = "0";
+                    articles[j].citas = cite;
+                    checkFor = true;
+                }
+            }
         }
-        
+        for (let j = 0; j < inproceedings.length; j++) {
+            inproceedings[j].citas = { "numero_citas_google_scholar": null };
+            let checkFor = false;
+            for (let i = 0; i < citas.length && !checkFor; i++) {
+                if (inproceedings[j].title.toLowerCase().replace("–", "-").includes(citas[i].title.toLowerCase().replace("–", "-"))) {
+                    const cite = {
+                        numero_citas_google_scholar: citas[i].cited,
+                    }
+                    if (cite.numero_citas_google_scholar === "") cite.numero_citas_google_scholar = "0";
+                    inproceedings[j].citas = cite;
+                    checkFor = true;
+                }
+            }
+        }
+        for (let j = 0; j < incollections.length; j++) {
+            incollections[j].citas = { "numero_citas_google_scholar": null };
+            let checkFor = false;
+            for (let i = 0; i < citas.length && !checkFor; i++) {
+                if (incollections[j].title.toLowerCase().replace("–", "-").includes(citas[i].title.toLowerCase().replace("–", "-"))) {
+                    const cite = {
+                        numero_citas_google_scholar: citas[i].cited,
+                    }
+                    if (cite.numero_citas_google_scholar === "") cite.numero_citas_google_scholar = "0";
+                    incollections[j].citas = cite;
+                    checkFor = true;
+                }
+            }
+        }
     }
-    
-    
-}
 }
 
-async function countGGSandCore(publications, ggs, authorData, book_titles, page){
+async function countGGSandCore(publications, ggs, authorData, book_titles, page) {
+    let coreHelper = new jsonCore()
     for (let i = 0; i < publications.length; i++) {
         if (publications[i].acronym !== null) {
             publications[i].book_title = book_titles[i]
             publications[i].ggs = ggs.filterGGSperYear(publications[i].acronym, publications[i].year)
-            if(publications[i].ggs.class == 1) authorData.ggs.numero_publicaciones_class_1++;
-            else if(publications[i].ggs.class == 2) authorData.ggs.numero_publicaciones_class_2++;
-            else if(publications[i].ggs.class == 3) authorData.ggs.numero_publicaciones_class_3++;
+            if (publications[i].ggs.class == 1) authorData.ggs.numero_publicaciones_class_1++;
+            else if (publications[i].ggs.class == 2) authorData.ggs.numero_publicaciones_class_2++;
+            else if (publications[i].ggs.class == 3) authorData.ggs.numero_publicaciones_class_3++;
             //From this point the core code starts
-            let link = "http://portal.core.edu.au/conf-ranks/?search=" + publications[i].acronym + "&by=all&source=all&sort=atitle&page=1";
-            await page.goto(link, { waitUntil: "networkidle2" })
-            let example = await page.evaluate( (acronym) => {
-                let tableData = document.querySelectorAll("tr td:nth-child(2)");
-                for(let j = 0; j < tableData.length; j++){
-                    if(tableData[j].innerText == acronym) return "table tr:nth-child(" + (j+2)+ ") td:first-child"
+            let coreResult = coreHelper.checkAcronym(publications[i].acronym, publications[i].year)
+            if (coreResult !== null) {
+                if (!coreResult) {
+                    publications[i].core = {
+                        core_year: null,
+                        core_category: null /* Si no tiene ranking CORE, ambos a null */
+                    }
+                } else {
+                    publications[i].core = coreResult;
+                    if (publications[i].core.core_category === "A*") authorData.core.numero_publicaciones_AA++;
+                    else if (publications[i].core.core_category === "A") authorData.core.numero_publicaciones_A++;
+                    else if (publications[i].core.core_category === "B") authorData.core.numero_publicaciones_B++;
+                    else if (publications[i].core.core_category === "C") authorData.core.numero_publicaciones_C++;
                 }
-                return null;
-            }, publications[i].acronym)
-            if(example !== null){
-                await page.click(example)
-                await page.waitForSelector("#detail")
-                let core = await page.evaluate( (year)=> {
-                    let coreHTML = document.querySelectorAll(".detail div:first-child")
-                    let rankHTML = document.querySelectorAll(".detail div:nth-child(2)")
-                    for(let i = 2; i < coreHTML.length; i++){
-                        let rank = rankHTML[i-2].innerText.substring(6), core = null;
-                        if(coreHTML[i].innerText.includes("ERA")) core = coreHTML[i].innerText.substring(11)
-                        else core = coreHTML[i].innerText.substring(12)
-                        if(core <= year || coreHTML.length == (i+1)){
-                            return {
-                                core_year: core,
-                                core_category: rank
-                            }
-                        }
+
+            } else {
+                let link = "http://portal.core.edu.au/conf-ranks/?search=" + publications[i].acronym + "&by=all&source=all&sort=atitle&page=1";
+                await page.goto(link, { waitUntil: "networkidle2" })
+                let example = await page.evaluate((acronym) => {
+                    let tableData = document.querySelectorAll("tr td:nth-child(2)");
+                    for (let j = 0; j < tableData.length; j++) {
+                        if (tableData[j].innerText == acronym) return "table tr:nth-child(" + (j + 2) + ") td:first-child"
                     }
                     return null;
-                },publications[i].year)
-                publications[i].core = core;
-                if(publications[i].core.core_category === "A*")authorData.core.numero_publicaciones_AA++;
-                else if(publications[i].core.core_category === "A")authorData.core.numero_publicaciones_A++;
-                else if(publications[i].core.core_category === "B")authorData.core.numero_publicaciones_B++;
-                else if(publications[i].core.core_category === "C")authorData.core.numero_publicaciones_C++;
-            }else publications[i].core = {
-                core_year: null,
-                core_category: null /* Si no tiene ranking CORE, ambos a null */
+                }, publications[i].acronym)
+                if (example !== null) {
+                    await page.click(example)
+                    await page.waitForSelector("#detail")
+                    let core = await page.evaluate((year, acronym) => {
+                        let coreHTML = document.querySelectorAll(".detail div:first-child")
+                        let rankHTML = document.querySelectorAll(".detail div:nth-child(2)")
+                        let completeAcronym = { acronym: acronym, tableCore: [] }, returnAcronym = null;
+                        for (let i = 2; i < coreHTML.length; i++) {
+                            let rank = rankHTML[i - 2].innerText.substring(6), core = null;
+                            if (coreHTML[i].innerText.includes("ERA")) core = coreHTML[i].innerText.substring(11)
+                            else core = coreHTML[i].innerText.substring(12)
+                            if (core <= year || coreHTML.length == (i + 1)) {
+                                returnAcronym = {
+                                    core_year: core,
+                                    core_category: rank
+                                }
+                            }
+                            completeAcronym.tableCore.push({
+                                core_year: core,
+                                core_category: rank,
+                            }
+                            )
+                        }
+                        completeAcronym.active = true;
+                        return {
+                            completeAcronym,
+                            returnAcronym
+                        }
+                    }, publications[i].year, publications[i].acronym)
+                    publications[i].core = core.returnAcronym;
+                    coreHelper.addAcronym(core.completeAcronym)
+                    if (publications[i].core.core_category === "A*") authorData.core.numero_publicaciones_AA++;
+                    else if (publications[i].core.core_category === "A") authorData.core.numero_publicaciones_A++;
+                    else if (publications[i].core.core_category === "B") authorData.core.numero_publicaciones_B++;
+                    else if (publications[i].core.core_category === "C") authorData.core.numero_publicaciones_C++;
+                } else {
+                    publications[i].core = {
+                        core_year: null,
+                        core_category: null /* Si no tiene ranking CORE, ambos a null */
+                    }
+                    let completeAcronym = { acronym: publications[i].acronym, tableCore: [], active: false }
+                    coreHelper.addAcronym(completeAcronym)
+                }
             }
         }
     }
 }
 
-async function checkCorrectAuthors(page, authors){
+async function checkCorrectAuthors(page, authors) {
     let linkToAuthor = [], homonyms = false;
-    for(let i = 0; i < authors.length; i++){
+    for (let i = 0; i < authors.length; i++) {
         await page.goto("https://dblp.org/", { waitUntil: "networkidle2" })
         await page.type('input[type="search"]', authors[i])
         await page.keyboard.press("Enter");
         await page.waitForSelector("#completesearch-authors");
         //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
         let link = await page.evaluate(() => {
-            let result = {authors: []}
-            let namesAndLinks = document.querySelectorAll("#completesearch-authors ul.result-list li a")
-            for(let j = 0; j < namesAndLinks.length; j++){
-                result.authors.push(
-                    {
-                        author: namesAndLinks[j].innerText, 
-                        link: namesAndLinks[j].href
+            let result = { authors: [] }
+            let namesAndLinks = document.querySelectorAll("#completesearch-authors ul.result-list li")
+            for (let j = 0; j < namesAndLinks.length; j++) {
+                for (let t = 0; t < namesAndLinks[j].children.length; t++) {
+                    console.log(namesAndLinks[j].children[t].localName)
+                    if (namesAndLinks[j].children[t].localName === "a") {
+                        result.authors.push(
+                            {
+                                author: namesAndLinks[j].children[t].innerText,
+                                link: namesAndLinks[j].children[t].href
+                            }
+                        )
+                    } else if (namesAndLinks[j].children[t].localName === "small") {
+                        let data = namesAndLinks[j].children[t].innerText, aux = "";
+                        aux = data.split("\n")
+                        if (!aux[aux.length - 1].includes("aka") && aux[aux.length - 1] !== '') {
+                            result.authors[result.authors.length - 1].identified = aux[aux.length - 1];
+                        }
                     }
-                )
+                }
+
             }
             return result;
         })
-        if(link.authors.length > 1)homonyms = true
+        if (link.authors.length > 1) homonyms = true
         linkToAuthor.push(link)
     }
+    /*await page.waitTimeout("300000")*/
     return {
         authors: linkToAuthor,
         haveHomonyms: homonyms
@@ -401,8 +473,8 @@ async function getBooktitles(page, bibtex) {
     })
 }
 
-function initAuthor(name){
-    return  {
+function initAuthor(name) {
+    return {
         name: name,
         indices: {
             indice_h_total_google_scholar: 0,

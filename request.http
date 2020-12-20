@@ -17,7 +17,15 @@ Content-Type: application/json
 ["alberto verdejo"]
 
 ###
-POST http://localhost:4000/api/getjsongetjsonsanitize
+POST http://localhost:5001/tfg-web-scrapping/us-central1/app/api/getjsonsanitize
+Content-Type: application/json
+
+[{"author": "enrique martin-martin", "link": "https://dblp.org/pid/15/7982.html"}]
+
+
+###
+
+POST http://localhost:4000/api/getjsonsanitize
 Content-Type: application/json
 
 [{"author": "Alberto Verdejo", "link": "https://dblp.org/pid/70/253.html"},{"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"}]
@@ -26,10 +34,13 @@ Content-Type: application/json
 POST https://us-central1-tfg-web-scrapping.cloudfunctions.net/app/api/getjson
 Content-Type: application/json
 
-["alberto verdejo", "isabel pita"]
+["alberto verdejo"]
 
 ###
 POST https://us-central1-tfg-web-scrapping.cloudfunctions.net/app/api/getjsonsanitize
 Content-Type: application/json
 
 [{"author": "Alberto Verdejo", "link": "https://dblp.org/pid/70/253.html"},{"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"},{"author": "Isabel Pita", "link": "https://dblp.org/pid/35/2414.html"} ]
+
+
+// front ubicacion

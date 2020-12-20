@@ -5,7 +5,7 @@ class excel {
     parseGGS = (data, acronym, year) => {
         data.GGS.splice(0, 1);
         let finishData = data.GGS;
-       let result = this.divide(0, data.GGS.length, finishData, acronym, year)
+        let result = this.divide(0, data.GGS.length, finishData, acronym, year)
         if (result.class == "Work in Progress" || result.class == "W") {
             result.year = null;
             result.class = null;
