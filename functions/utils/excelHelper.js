@@ -5,7 +5,7 @@ class excel {
     parseGGS = (data, acronym, year) => {
         data.GGS.splice(0, 1);
         let finishData = data.GGS;
-       let result = this.divide(0, data.GGS.length, finishData, acronym, year)
+        let result = this.divide(0, data.GGS.length, finishData, acronym, year)
         if (result.class == "Work in Progress" || result.class == "W") {
             result.year = null;
             result.class = null;
@@ -73,6 +73,31 @@ class excel {
             else {
                 if (data[half].A > acronym) return this.divide(ini, half, data, acronym, year);
                 else return this.divide(half, fin, data, acronym, year);
+            }
+        }
+    };
+    divideGoogle = (ini, fin, articles, title,) => {
+        if ((fin - ini) == 0) {
+            if (articles[ini].title == title) 
+            return ini
+            else return -1;
+        }
+        else if ((fin - ini) == 1) {
+            if (articles[ini].title == title) 
+                return ini
+            else if (articles[fin].title == title) 
+                return fin
+                   
+            else 
+            return -1;
+        }
+        else {
+            let half = Math.floor((ini + fin) / 2);
+            if (articles[half].title == title) 
+            return half
+            else {
+                if (articles[half].title> title) return this.divide(ini, half, data, acronym);
+                else return this.divide(half, fin, data, acronym);
             }
         }
     };
