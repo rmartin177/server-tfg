@@ -166,7 +166,6 @@ async function getAllData(authors, browser) {
         authors: AuthorsData,
         publications: publicationsData
     }
-
 }
 
 async function googleScholar(articles, inproceedings, incollections, author, page) {
@@ -175,20 +174,14 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
     let authorGood = author.name.replace(/[0-9`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
     console.log("author good: " + authorGood)
     let aaa = await page.url()
-    console.log("pagina actual: " + aaa + " esperando al selector: #gs_hdr_tsi")
     await page.waitForSelector("#gs_hdr_tsi");
     await page.type("#gs_hdr_tsi", authorGood);
     await page.keyboard.press("Enter");
-    let aaaa = await page.url()
-    console.log("la nueva direccion es: " + aaaa)
     await page.waitForSelector(".gs_ai_name", { timeout: 3000 });
     const linkAuth = await page.evaluate(() => {
         return document.querySelector(".gs_ai_name a").href;
     });
-    console.log(linkAuth)
     await page.goto(linkAuth); 
-    /*await page.goto("https://scholar.google.com/citations?user=AT3Eo_IAAAAJ&hl=en&oi=ao")*/
-    //Aqui cogemos las citas totales h10 etc
     const AllCites = await page.evaluate(() => {
         let cites = document.querySelectorAll(".gsc_rsb_std");
         var result = [];
@@ -207,7 +200,6 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
     author.citas.citas_total_5_years_google_scholar = AllCites[1];
     //Esperamos a que aparezca el botton shor more
     let botonShowMore;
-    console.log("lo logreeeee 234")
     try {
         botonShowMore = await page.waitForSelector("#gsc_bpf_more", { timeout: 1000 });
     } catch (e) {
