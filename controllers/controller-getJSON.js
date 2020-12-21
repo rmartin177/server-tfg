@@ -19,7 +19,7 @@ exports.getJSON = async (req, res) => {
         await page.close();
         res.send(haveHomonymsAndLinks.authors)
     }
-    await page.close();
+    //await page.close();
     let authorsLinkAndName = []
     for(let i = 0; i < haveHomonymsAndLinks.authors.length; i++){
         authorsLinkAndName.push(haveHomonymsAndLinks.authors[i].authors[0])
