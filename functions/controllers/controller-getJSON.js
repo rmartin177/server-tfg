@@ -3,10 +3,8 @@ const fs = require("fs")
 const { performance } = require('perf_hooks');
 const scrappingHelper = require("../utils/scrappingHelper")
 const excelGGS = require("../utils/excelHelper");
-const { table, Console } = require("console");
 const { send } = require("process");
-const coreHelper = require("../utils/coreHelper");
-const jsonCore = require("../utils/coreHelper");
+
 //Refactorizar esta funcion en otras mas pequeñas
 
 exports.getJSON = async (req, res) => {
@@ -27,18 +25,18 @@ exports.getJSON = async (req, res) => {
         for (let i = 0; i < haveHomonymsAndLinks.authors.length; i++) {
             authorsLinkAndName.push(haveHomonymsAndLinks.authors[i].authors[0])
         }
-        let result = await getAllData(authorsLinkAndName, res.locals.browser);
+        let result = await getAllData(authorsLinkAndName, res.locals.browser,res.locals.dataCore);
         res.json(result)
     }
 }
 
 exports.getJSONsanitize = async (req, res) => {
     let authors = req.body;
-    let result = await getAllData(authors, res.locals.browser);
+    let result = await getAllData(authors, res.locals.browser, res.locals.dataCore);
     res.json(result)
 }
 
-async function getAllData(authors, browser) {
+async function getAllData(authors, browser, dataCore) {
     console.log(authors)
     let page = await browser.newPage();
     let ggs = new excelGGS();
@@ -153,8 +151,8 @@ async function getAllData(authors, browser) {
         }, checkName, authorsChecking)
 
         let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex)
-        await countGGSandCore(publications.inproceedings, ggs, authorData, book_titles, page)
-        await countGGSandCore(publications.duplicateInproceedings, ggs, authorData, book_titles, page)
+        await countGGSandCore(publications.inproceedings, ggs, authorData, book_titles, page, dataCore)
+        await countGGSandCore(publications.duplicateInproceedings, ggs, authorData, book_titles, page, dataCore)
         await googleScholar(publications.articles, publications.inproceedings, publications.incollections, authorData, page)
         publicationsData = publications.incollections.concat(publicationsData)
         publicationsData = publications.inproceedings.concat(publicationsData)
@@ -251,6 +249,8 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
             articles[j].citas = { "numero_citas_google_scholar": null };
             let checkFor = false;
             for (let i = 0; i < citas.length && !checkFor; i++) {
+                // console.log("articulos: " +articles[j].title)
+                // console.log("citas: " + citas[i].title)
                 if (articles[j].title.toLowerCase().replace("–", "-").includes(citas[i].title.toLowerCase().replace("–", "-"))) {
                     const cite = {
                         numero_citas_google_scholar: citas[i].cited,
@@ -292,8 +292,7 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
     }
 }
 
-async function countGGSandCore(publications, ggs, authorData, book_titles, page) {
-    let coreHelper = new jsonCore()
+async function countGGSandCore(publications, ggs, authorData, book_titles, page, dataCore) {
     for (let i = 0; i < publications.length; i++) {
         if (publications[i].acronym !== null) {
             publications[i].book_title = book_titles[i]
@@ -302,7 +301,7 @@ async function countGGSandCore(publications, ggs, authorData, book_titles, page)
             else if (publications[i].ggs.class == 2) authorData.ggs.numero_publicaciones_class_2++;
             else if (publications[i].ggs.class == 3) authorData.ggs.numero_publicaciones_class_3++;
             //From this point the core code starts
-            let coreResult = coreHelper.checkAcronym(publications[i].acronym, publications[i].year)
+            let coreResult = checkAcronym(dataCore, publications[i].acronym, publications[i].year); //funcion checkObjetcCore
             if (coreResult !== null) {
                 if (!coreResult) {
                     publications[i].core = {
@@ -330,7 +329,7 @@ async function countGGSandCore(publications, ggs, authorData, book_titles, page)
                 if (example !== null) {
                     await page.click(example)
                     await page.waitForSelector("#detail")
-                    let core = await page.evaluate((year, acronym) => {
+                    let coreScrapping = await page.evaluate((year, acronym) => {
                         let coreHTML = document.querySelectorAll(".detail div:first-child")
                         let rankHTML = document.querySelectorAll(".detail div:nth-child(2)")
                         let completeAcronym = { acronym: acronym, tableCore: [] }, returnAcronym = null;
@@ -356,8 +355,8 @@ async function countGGSandCore(publications, ggs, authorData, book_titles, page)
                             returnAcronym
                         }
                     }, publications[i].year, publications[i].acronym)
-                    publications[i].core = core.returnAcronym;
-                    coreHelper.addAcronym(core.completeAcronym)
+                    publications[i].core = coreScrapping.returnAcronym;
+                    dataCore.push(coreScrapping.completeAcronym)
                     if (publications[i].core.core_category === "A*") authorData.core.numero_publicaciones_AA++;
                     else if (publications[i].core.core_category === "A") authorData.core.numero_publicaciones_A++;
                     else if (publications[i].core.core_category === "B") authorData.core.numero_publicaciones_B++;
@@ -368,7 +367,7 @@ async function countGGSandCore(publications, ggs, authorData, book_titles, page)
                         core_category: null /* Si no tiene ranking CORE, ambos a null */
                     }
                     let completeAcronym = { acronym: publications[i].acronym, tableCore: [], active: false }
-                    coreHelper.addAcronym(completeAcronym)
+                    dataCore.push(completeAcronym)
                 }
             }
         }
@@ -463,6 +462,26 @@ async function getBooktitles(page, bibtex) {
         }
         return book_titles;
     })
+}
+
+function checkAcronym(data, acronym, year){
+    let finishData = data;
+    let check = false;
+    for(let i = 0; i < finishData.length && !check; i++){
+        if(finishData[i].acronym.toLowerCase() === acronym.toLowerCase()){
+            if(!finishData[i].active) return false;
+            check = true;
+            let checkYear = false;
+            for(let j = 0; j < finishData[i].tableCore.length && !checkYear; j++){
+                if(finishData[i].tableCore[j].core_year <= year || finishData[i].tableCore.length == (j+1)){
+                    return {
+                        core_year: finishData[i].tableCore[j].core_year,
+                        core_category: finishData[i].tableCore[j].core_category
+                    }
+                }
+            }
+        }
+    } return null;
 }
 
 function initAuthor(name) {
