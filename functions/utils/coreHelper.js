@@ -1,8 +1,7 @@
 const fs = require("fs")
 class jsonCore {
 
-    checkAcronym = (acronym, year) => {
-        let data = this.getData()
+    checkAcronym = (data, acronym, year) => {
         let finishData = data.acronyms;
         let check = false;
         for(let i = 0; i < finishData.length && !check; i++){
@@ -24,15 +23,13 @@ class jsonCore {
 
     getData = () =>{
         let filename = __dirname.slice(0, -5) + 'data/core.json'
-        let rawData = fs.readFileSync(filename, (err)=>{console.log("MIERDON")})
+        let rawData = fs.readFileSync(filename, (err)=>{console.log("explota")})
         let jsonData = JSON.parse(rawData)
         return jsonData;
     }
 
-    addAcronym =  (acronymData) =>{
-        let data =  this.getData();
-        data.acronyms.push(acronymData)
-        let dataReverseParser = JSON.stringify(data)
+    updateJson = (newData) =>{
+        let dataReverseParser = JSON.stringify(newData)
         fs.writeFileSync(__dirname.slice(0, -5) + "data/core.json", dataReverseParser, (err) => { console.log(err); });
         return true;
     }
