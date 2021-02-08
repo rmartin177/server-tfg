@@ -14,10 +14,7 @@ app.use(morgan("dev"));
 
 const port = process.env.PORT || "4000";
 
-admin.initializeApp(/*{
-    credential: admin.credential.cert('./credencials.json'),
-    databaseURL: "https://tfg-web-scrapping.firebaseio.com"
-  }*/);
+admin.initializeApp();
 //middleware que inicializa el servidor con una instancia de chrome
 app.use( async (req, res, next) => {
     res.locals.browser = await pup.launch({headless: true, args: ['--no-sandbox']})
@@ -29,10 +26,4 @@ app.get( "/hello", (req, res)=> {
 })
 app.use('/api', require("./routes/route-getJSON"))
 
-/* NECESITAMOS ESTO PARA ELECTRON
-app.listen(port, ()=>{
-    console.log("escuchando en puerto: " + port)
-})
-*/
-
-exports.app = functions.runWith({memory: '512MB', timeoutSeconds: 540}).https.onRequest(app)
+exports.app = functions.runWith({memory: '1GB', timeoutSeconds: 540}).https.onRequest(app)
