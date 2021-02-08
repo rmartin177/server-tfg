@@ -288,11 +288,21 @@ async function googleScholar(
     let lol = [];
     //A lo mejor no me va porque no hace scroll hay una funcion en utils.
     const citas = await page.evaluate(async (lol) => {
+      async function delay(time) {
+        return new Promise(function (resolve) {
+          setTimeout(resolve, time);
+        });
+      }
       let boton = document.querySelector("#gsc_bpf_more:disabled");
       let botonActive = document.querySelector("#gsc_bpf_more");
+      console.log("Boton esta en =", boton);
+
       while (boton === null) {
         //Mirar si esta haciendo click en el boton
         botonActive.click();
+
+        await delay(2000);
+
         boton = document.querySelector("#gsc_bpf_more:disabled");
       }
       let timer = {};
@@ -329,13 +339,9 @@ async function googleScholar(
       articles[j].citas = { numero_citas_google_scholar: null };
       let checkFor = false;
       for (let i = 0; i < citas.length && !checkFor; i++) {
-        // console.log("articulos: " +articles[j].title)
-        // console.log("citas: " + citas[i].title)
         if (
-          articles[j].title
-            .toLowerCase()
-            .replace("–", "-")
-            .includes(citas[i].title.toLowerCase().replace("–", "-"))
+          articles[j].title.toLowerCase().replace("–", "-").replace(".", "") ===
+          citas[i].title.toLowerCase().replace("–", "-")
         ) {
           const cite = {
             numero_citas_google_scholar: citas[i].cited,
@@ -355,6 +361,7 @@ async function googleScholar(
           inproceedings[j].title
             .toLowerCase()
             .replace("–", "-")
+            .replace(".", "")
             .includes(citas[i].title.toLowerCase().replace("–", "-"))
         ) {
           const cite = {
@@ -375,6 +382,7 @@ async function googleScholar(
           incollections[j].title
             .toLowerCase()
             .replace("–", "-")
+            .replace(".", "")
             .includes(citas[i].title.toLowerCase().replace("–", "-"))
         ) {
           const cite = {
