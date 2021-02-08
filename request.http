@@ -11,6 +11,12 @@ Content-Type: application/json
 [{"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"}]
 
 ###
+POST http://localhost:4000/api/getjsonsanitize
+Content-Type: application/json
+
+[{"author": "Narciso Martí-Oliet", "link": "https://dblp.org/pid/34/4176.html"}]
+
+###
 POST http://localhost:4000/api/getjson
 Content-Type: application/json
 
