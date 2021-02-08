@@ -73,6 +73,8 @@ async function getAllData(authors, browser) {
                 duplicateInproceedings: [],
                 duplicateIncollections: []
             };
+           
+            
             for (let j = 0; j < fullHTML.length; j++) {
                 if (fullHTML[j].className == "folder-button fold") { //Inicio de un articulo nuevo, procedemos a cargar el antiguo y resetear el objeto que lo lee
                     if (!checkIfIsInformal && j > 0) {
@@ -127,6 +129,9 @@ async function getAllData(authors, browser) {
                     } else if (fullHTML[j].innerText.includes("number")) {
                         doc.issue = valuesHTML[contValues].innerText;
                     }
+                    else if (fullHTML[j].innerText.includes("url")) {
+                        doc.url = valuesHTML[contValues].innerText;
+                    }
                 }
                 contValues++;
             }
@@ -156,6 +161,7 @@ async function getAllData(authors, browser) {
         await countGGSandCore(publications.inproceedings, ggs, authorData, book_titles, page)
         await countGGSandCore(publications.duplicateInproceedings, ggs, authorData, book_titles, page)
         await googleScholar(publications.articles, publications.inproceedings, publications.incollections, authorData, page)
+       // await jrc(publications.articles,authorData,page,browser);
         publicationsData = publications.incollections.concat(publicationsData)
         publicationsData = publications.inproceedings.concat(publicationsData)
         publicationsData = publications.articles.concat(publicationsData)
@@ -167,7 +173,134 @@ async function getAllData(authors, browser) {
         publications: publicationsData
     }
 }
+async function jrc(articles,author,page,browser){
+ const mail= "franga06@ucm.es";
+ const pass = "GAFITAS99";
+ let contardor_q1= 0;
+ let contardor_q2= 0;
+ let contardor_q3= 0;
+ let contardor_q4= 0;
+ //Selecionar UCM 
+ await page.goto("http://jcr-incites.fecyt.es/")
+ await page.waitForSelector(".dd-selected")
+ await page.click(".dd-selected")
+ await page.evaluate( () =>{
+        let a = document.querySelectorAll(".dd-option")
+        let check = false
+        for(let i = 0; i < a.length && !check; i++){
+            if(a[i].children[2].innerText.includes("ompluten")){
+                check = true;
+                a[i].click()
+                a[i].click()
+            }
+        }
+    })
+    await page.click("#form_submit_wayf")
 
+ //Meter username y pass en la pagina de la UCM de login
+ await page.waitForSelector("#username");
+ await page.waitForSelector("#password");
+ await page.type("#username", mail);
+ await page.type("#password", pass);
+ await page.keyboard.press("Enter");
+
+ //Buscamos publicacion por publicacion
+ for (let i = 0; i < 1; i++) {
+    //Cogemos el nombre de la revista 
+    let link = "https://dblp.org/" + articles[i].url;
+    const pageAux = await browser.newPage();
+    await pageAux.goto(link)
+    await pageAux.waitForSelector("#breadcrumbs ul li a span");
+    let a = await pageAux.evaluate(() => {
+      let a = document.querySelectorAll("#breadcrumbs ul li a span");
+      return a[a.length - 1].innerText;
+    });
+    await pageAux.close();
+    //Meter el nombre de la revista
+    await page.waitForSelector("#search-inputEl");
+    await page.type("#search-inputEl",a);
+    await page.waitForSelector(".fa-search");
+    await page.click("#search-inputEl"); 
+    await page.focus("#search-inputEl");
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Enter");
+    
+ 
+ 
+    //Click en ALL YEARS document.querySelectorAll(".journal-profile-years-tabset > .tabset-head > div"
+   // await page.waitForSelector(".journal-profile-years-tabset > .tabset-head > div");
+   // await page.evaluate( () =>{
+     //   let botone = document.querySelectorAll(".journal-profile-years-tabset > .tabset-head > div")
+       // botone[botone.length].click();
+    //})
+
+    //Coger la tabla de All Years
+    //Coger la fila del año sin pasarse
+    //Coger y guardar de esa fila el dato de la columna "Journal Impact Factor"
+    //Darle click en "rank" y coger la tabla
+    //Para darle click en rank usamos ".tabset-head div" y hacemos el for que hecho ruben y click en el que incluya rank
+   /* await page.waitForSelector(".rank-table-categories");
+    let b = await page.evaluate(() => {
+        let b =  document.querySelector(".rank-table-categories > div > td > div ");
+        return b.innerText;
+    });*/
+    
+    //De todas las categorias que haya hay que coher el que tiene mayor JIG Percentil
+    //De eso cogemos y guardamos  "categoria". "rank" y "quartile"
+    //Despues añadimos al author los contadores de perfil.
+    
+}
+
+ //Browser.pages o allpages y luego para hacer la principal pages[1], me hago una nueva page bringtofront() para traerlo a la principal.
+
+ //await page.click(".tab-1");
+
+    // await page.goto("https://apps.clarivate.com/jif/home/?journal=THEOR%20PRACT%20LOG%20PROG&year=2019&editions=SCIE&pssid=H4-hljUKMP2CE0JwcB11RfSjafqeslEjvhrY6-rOEeU7NXFAZCWgFS4NZnuwPXCJAtWepN0CGCYsh0h6OTqeTlZErc48quw6WuyKasAr-qBgNuLRjcgZrPm66fhjx2Fmwx3Dx3D-h9tQNJ9Nv4eh45yLvkdX3gx3Dx3D")
+    //Click en ALL YEARS document.querySelectorAll(".journal-profile-years-tabset > .tabset-head > div"
+    await page.waitForSelector(".journal-profile-years-tabset > .tabset-head > div");
+    await page.evaluate( () =>{
+        let b = document.querySelectorAll(".journal-profile-years-tabset > .tabset-head > div")
+        let check = false
+        for(let i = 0; i < b.length && !check; i++){
+            if(b[i].outerHTML.includes("tab-1")){
+                check = true;
+                b[i].click()
+                b[i].click()   
+            }
+        }
+        
+    });
+    //Para darle click en rank usamos ".tabset-head div" y hacemos el for que hecho ruben y click en el que incluya rank
+   await page.waitForSelector(".tabset-head div");
+    await page.evaluate(() => {
+        let b =  document.querySelectorAll(".tabset-head div");
+        let check = false
+        for(let i = 0; i < b.length && !check; i++){
+            if(b[i].innerText.includes("Rank")){
+                check = true;
+                b[i].click()
+                b[i].click()   
+            }
+        }
+    });
+    //document.querySelectorAll(" .rank-table > div > div") la tabla de rank
+    await page.waitForSelector(".rank-table-categories");
+    let categorias = await page.evaluate(() => {
+    let b =  document.querySelectorAll(".rank-table-categories > td > div");
+    console.log(b);
+    let categorias = [];
+    let cont = 0;
+        for (let i = 1; i < b.length / 2 ; i++){
+            console.log(i);
+            categorias[cont] = b[i].attributes[0].value;
+            cont++;        
+        }
+    return categorias
+    });
+    
+   
+
+}
 async function googleScholar(articles, inproceedings, incollections, author, page) {
     await page.goto("https://scholar.google.es/citations?view_op=search_authors");
     //Imput de la busqueda
@@ -181,7 +314,7 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
     const linkAuth = await page.evaluate(() => {
         return document.querySelector(".gs_ai_name a").href;
     });
-    await page.goto(linkAuth); 
+    await page.goto(linkAuth);  
     const AllCites = await page.evaluate(() => {
         let cites = document.querySelectorAll(".gsc_rsb_std");
         var result = [];
@@ -210,12 +343,23 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
         let lol = [];
         //A lo mejor no me va porque no hace scroll hay una funcion en utils.
         const citas = await page.evaluate(async (lol) => {
+            async function delay(time) {
+                return new Promise(function(resolve) { 
+                    setTimeout(resolve, time)
+                });
+            }
             let boton = document.querySelector("#gsc_bpf_more:disabled");
             let botonActive = document.querySelector("#gsc_bpf_more");
+            console.log("Boton esta en =" , boton);
+
             while (boton === null) {
                 //Mirar si esta haciendo click en el boton
                 botonActive.click();
+                
+                await delay(2000);
+
                 boton = document.querySelector("#gsc_bpf_more:disabled");
+                
             };
             let timer = {}
             timer.scroll = async function scroll() {
@@ -245,13 +389,12 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
 
         }, lol);
 
-
         //– -
         for (let j = 0; j < articles.length; j++) {
             articles[j].citas = { "numero_citas_google_scholar": null };
             let checkFor = false;
             for (let i = 0; i < citas.length && !checkFor; i++) {
-                if (articles[j].title.toLowerCase().replace("–", "-").includes(citas[i].title.toLowerCase().replace("–", "-"))) {
+                if (articles[j].title.toLowerCase().replace("–", "-").replace(".","") === citas[i].title.toLowerCase().replace("–", "-")) {
                     const cite = {
                         numero_citas_google_scholar: citas[i].cited,
                     }
@@ -265,7 +408,7 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
             inproceedings[j].citas = { "numero_citas_google_scholar": null };
             let checkFor = false;
             for (let i = 0; i < citas.length && !checkFor; i++) {
-                if (inproceedings[j].title.toLowerCase().replace("–", "-").includes(citas[i].title.toLowerCase().replace("–", "-"))) {
+                if (inproceedings[j].title.toLowerCase().replace("–", "-").replace(".","").includes(citas[i].title.toLowerCase().replace("–", "-"))) {
                     const cite = {
                         numero_citas_google_scholar: citas[i].cited,
                     }
@@ -279,7 +422,7 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
             incollections[j].citas = { "numero_citas_google_scholar": null };
             let checkFor = false;
             for (let i = 0; i < citas.length && !checkFor; i++) {
-                if (incollections[j].title.toLowerCase().replace("–", "-").includes(citas[i].title.toLowerCase().replace("–", "-"))) {
+                if (incollections[j].title.toLowerCase().replace("–", "-").replace(".","").includes(citas[i].title.toLowerCase().replace("–", "-"))) {
                     const cite = {
                         numero_citas_google_scholar: citas[i].cited,
                     }
@@ -289,6 +432,7 @@ async function googleScholar(articles, inproceedings, incollections, author, pag
                 }
             }
         }
+        
     }
 }
 
