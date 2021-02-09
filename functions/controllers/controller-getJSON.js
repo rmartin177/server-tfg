@@ -35,7 +35,7 @@ exports.getJSON = async (req, res) => {
 };
 
 exports.getJSONsanitize = async (req, res) => {
-  let { authors, filters };
+  let { authors, filters } = req.body;
   console.log(req.body);
   let result = await getAllData(
     authors,
