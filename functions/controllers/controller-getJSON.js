@@ -8,7 +8,7 @@ const { send } = require("process");
 //Refactorizar esta funcion en otras mas pequeñas
 
 exports.getJSON = async (req, res) => {
-  let authors = req.body;
+  let { authors, filters } = req.body;
   console.log(authors);
   let page = await res.locals.browser.newPage();
   let scrapping = new scrappingHelper();
@@ -27,23 +27,26 @@ exports.getJSON = async (req, res) => {
     let result = await getAllData(
       authorsLinkAndName,
       res.locals.browser,
-      res.locals.dataCore
+      res.locals.dataCore,
+      filters
     );
     res.json(result);
   }
 };
 
 exports.getJSONsanitize = async (req, res) => {
-  let authors = req.body;
+  let { authors, filters };
+  console.log(req.body);
   let result = await getAllData(
     authors,
     res.locals.browser,
-    res.locals.dataCore
+    res.locals.dataCore,
+    filters
   );
   res.json(result);
 };
 
-async function getAllData(authors, browser, dataCore) {
+async function getAllData(authors, browser, dataCore, filters) {
   console.log(authors);
   let page = await browser.newPage();
   let ggs = new excelGGS();
@@ -61,7 +64,7 @@ async function getAllData(authors, browser, dataCore) {
       actualPosition: i,
     };
     let publications = await page.evaluate(
-      (checkName, authorsChecking) => {
+      (checkName, authorsChecking, filter) => {
         let valuesHTML = null,
           fullHTML = null;
         if (checkName) {
@@ -111,19 +114,49 @@ async function getAllData(authors, browser, dataCore) {
                 }
               }
               if (!checkArticle) {
-                if (doc.type === "Inproceedings") {
+                if (
+                  doc.type === "Inproceedings" &&
+                  filter.checkInproceedings &&
+                  doc.year >= filter.initYear &&
+                  doc.year <= filter.endYear
+                ) {
                   publicationsDataAux.inproceedings.push(doc);
-                } else if (doc.type === "Incollection") {
+                } else if (
+                  doc.type === "Incollection" &&
+                  filter.checkIncollections &&
+                  doc.year >= filter.initYear &&
+                  doc.year <= filter.endYear
+                ) {
                   publicationsDataAux.incollections.push(doc);
-                } else if (doc.type === "Articles") {
+                } else if (
+                  doc.type === "Articles" &&
+                  filter.checkArticles &&
+                  doc.year >= filter.initYear &&
+                  doc.year <= filter.endYear
+                ) {
                   publicationsDataAux.articles.push(doc);
                 }
               } else {
-                if (doc.type === "Inproceedings") {
+                if (
+                  doc.type === "Inproceedings" &&
+                  filter.checkInproceedings &&
+                  doc.year >= filter.initYear &&
+                  doc.year <= filter.endYear
+                ) {
                   publicationsDataAux.duplicateInproceedings.push(doc);
-                } else if (doc.type === "Incollection") {
+                } else if (
+                  doc.type === "Incollection" &&
+                  filter.checkIncollections &&
+                  doc.year >= filter.initYear &&
+                  doc.year <= filter.endYear
+                ) {
                   publicationsDataAux.duplicateIncollections.push(doc);
-                } else if (doc.type === "Articles") {
+                } else if (
+                  doc.type === "Articles" &&
+                  filter.checkArticles &&
+                  doc.year >= filter.initYear &&
+                  doc.year <= filter.endYear
+                ) {
                   publicationsDataAux.duplicateArticles.push(doc);
                 }
               }
@@ -175,11 +208,26 @@ async function getAllData(authors, browser, dataCore) {
             }
           }
           if (!checkArticle) {
-            if (doc.type === "Inproceedings") {
+            if (
+              doc.type === "Inproceedings" &&
+              filter.checkInproceedings &&
+              doc.year >= filter.initYear &&
+              doc.year <= filter.endYear
+            ) {
               publicationsDataAux.inproceedings.push(doc);
-            } else if (doc.type === "Incollection") {
+            } else if (
+              doc.type === "Incollection" &&
+              filter.checkIncollections &&
+              doc.year >= filter.initYear &&
+              doc.year <= filter.endYear
+            ) {
               publicationsDataAux.incollections.push(doc);
-            } else if (doc.type === "Articles") {
+            } else if (
+              doc.type === "Articles" &&
+              filter.checkArticles &&
+              doc.year >= filter.initYear &&
+              doc.year <= filter.endYear
+            ) {
               publicationsDataAux.articles.push(doc);
             }
           }
@@ -187,33 +235,41 @@ async function getAllData(authors, browser, dataCore) {
         return publicationsDataAux;
       },
       checkName,
-      authorsChecking
+      authorsChecking,
+      filters
     );
 
     let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex);
-    await countGGSandCore(
-      publications.inproceedings,
-      ggs,
-      authorData,
-      book_titles,
-      page,
-      dataCore
-    );
-    await countGGSandCore(
-      publications.duplicateInproceedings,
-      ggs,
-      authorData,
-      book_titles,
-      page,
-      dataCore
-    );
-    await googleScholar(
-      publications.articles,
-      publications.inproceedings,
-      publications.incollections,
-      authorData,
-      page
-    );
+    if (filters.checkGGS || filters.checkCore)
+      await countGGSandCore(
+        publications.inproceedings,
+        ggs,
+        authorData,
+        book_titles,
+        page,
+        dataCore,
+        filters.checkGGS,
+        filters.checkCore
+      );
+    if (filters.checkGGS || filters.checkCore)
+      await countGGSandCore(
+        publications.duplicateInproceedings,
+        ggs,
+        authorData,
+        book_titles,
+        page,
+        dataCore,
+        filters.checkGGS,
+        filters.checkCore
+      );
+    if (filters.checkSchoolar)
+      await googleScholar(
+        publications.articles,
+        publications.inproceedings,
+        publications.incollections,
+        authorData,
+        page
+      );
     publicationsData = publications.incollections.concat(publicationsData);
     publicationsData = publications.inproceedings.concat(publicationsData);
     publicationsData = publications.articles.concat(publicationsData);
@@ -361,8 +417,7 @@ async function googleScholar(
           inproceedings[j].title
             .toLowerCase()
             .replace("–", "-")
-            .replace(".", "")
-            .includes(citas[i].title.toLowerCase().replace("–", "-"))
+            .replace(".", "") === citas[i].title.toLowerCase().replace("–", "-")
         ) {
           const cite = {
             numero_citas_google_scholar: citas[i].cited,
@@ -382,8 +437,7 @@ async function googleScholar(
           incollections[j].title
             .toLowerCase()
             .replace("–", "-")
-            .replace(".", "")
-            .includes(citas[i].title.toLowerCase().replace("–", "-"))
+            .replace(".", "") === citas[i].title.toLowerCase().replace("–", "-")
         ) {
           const cite = {
             numero_citas_google_scholar: citas[i].cited,
@@ -404,124 +458,130 @@ async function countGGSandCore(
   authorData,
   book_titles,
   page,
-  dataCore
+  dataCore,
+  checkGGS,
+  checkCore
 ) {
   for (let i = 0; i < publications.length; i++) {
     if (publications[i].acronym !== null) {
       publications[i].book_title = book_titles[i];
-      publications[i].ggs = ggs.filterGGSperYear(
-        publications[i].acronym,
-        publications[i].year
-      );
-      if (publications[i].ggs.class == 1)
-        authorData.ggs.numero_publicaciones_class_1++;
-      else if (publications[i].ggs.class == 2)
-        authorData.ggs.numero_publicaciones_class_2++;
-      else if (publications[i].ggs.class == 3)
-        authorData.ggs.numero_publicaciones_class_3++;
+      if (checkGGS) {
+        publications[i].ggs = ggs.filterGGSperYear(
+          publications[i].acronym,
+          publications[i].year
+        );
+        if (publications[i].ggs.class == 1)
+          authorData.ggs.numero_publicaciones_class_1++;
+        else if (publications[i].ggs.class == 2)
+          authorData.ggs.numero_publicaciones_class_2++;
+        else if (publications[i].ggs.class == 3)
+          authorData.ggs.numero_publicaciones_class_3++;
+      }
       //From this point the core code starts
-      let coreResult = checkAcronym(
-        dataCore,
-        publications[i].acronym,
-        publications[i].year
-      ); //funcion checkObjetcCore
-      if (coreResult !== null) {
-        if (!coreResult) {
-          publications[i].core = {
-            core_year: null,
-            core_category: null /* Si no tiene ranking CORE, ambos a null */,
-          };
-        } else {
-          publications[i].core = coreResult;
-          if (publications[i].core.core_category === "A*")
-            authorData.core.numero_publicaciones_AA++;
-          else if (publications[i].core.core_category === "A")
-            authorData.core.numero_publicaciones_A++;
-          else if (publications[i].core.core_category === "B")
-            authorData.core.numero_publicaciones_B++;
-          else if (publications[i].core.core_category === "C")
-            authorData.core.numero_publicaciones_C++;
-        }
-      } else {
-        let link =
-          "http://portal.core.edu.au/conf-ranks/?search=" +
-          publications[i].acronym +
-          "&by=all&source=all&sort=atitle&page=1";
-        await page.goto(link, { waitUntil: "networkidle2" });
-        let example = await page.evaluate((acronym) => {
-          let tableData = document.querySelectorAll("tr td:nth-child(2)");
-          for (let j = 0; j < tableData.length; j++) {
-            if (tableData[j].innerText == acronym)
-              return "table tr:nth-child(" + (j + 2) + ") td:first-child";
+      if (checkCore) {
+        let coreResult = checkAcronym(
+          dataCore,
+          publications[i].acronym,
+          publications[i].year
+        ); //funcion checkObjetcCore
+        if (coreResult !== null) {
+          if (!coreResult) {
+            publications[i].core = {
+              core_year: null,
+              core_category: null /* Si no tiene ranking CORE, ambos a null */,
+            };
+          } else {
+            publications[i].core = coreResult;
+            if (publications[i].core.core_category === "A*")
+              authorData.core.numero_publicaciones_AA++;
+            else if (publications[i].core.core_category === "A")
+              authorData.core.numero_publicaciones_A++;
+            else if (publications[i].core.core_category === "B")
+              authorData.core.numero_publicaciones_B++;
+            else if (publications[i].core.core_category === "C")
+              authorData.core.numero_publicaciones_C++;
           }
-          return null;
-        }, publications[i].acronym);
-        if (example !== null) {
-          await page.click(example);
-          await page.waitForSelector("#detail");
-          let coreScrapping = await page.evaluate(
-            (year, acronym) => {
-              let coreHTML = document.querySelectorAll(
-                ".detail div:first-child"
-              );
-              let rankHTML = document.querySelectorAll(
-                ".detail div:nth-child(2)"
-              );
-              let completeAcronym = { acronym: acronym, tableCore: [] },
-                returnAcronym = null;
-
-              let checkCore = false;
-              for (let i = 2; i < coreHTML.length && !checkCore; i++) {
-                let rank = rankHTML[i - 2].innerText.substring(6),
-                  core = null;
-                if (coreHTML[i].innerText.includes("ERA"))
-                  core = coreHTML[i].innerText.substring(11);
-                else core = coreHTML[i].innerText.substring(12);
-                if (acronym === "PPDP") {
-                  console.log("valor core: " + core + " valor year: " + year);
-                }
-                if (core <= year || coreHTML.length == i + 1) {
-                  returnAcronym = {
-                    core_year: core,
-                    core_category: rank,
-                  };
-                  checkCore = true;
-                  completeAcronym.tableCore.push({
-                    core_year: core,
-                    core_category: rank,
-                  });
-                }
-              }
-              completeAcronym.active = true;
-              return {
-                completeAcronym,
-                returnAcronym,
-              };
-            },
-            publications[i].year,
-            publications[i].acronym
-          );
-          publications[i].core = coreScrapping.returnAcronym;
-          dataCore.push(coreScrapping.completeAcronym);
-          if (publications[i].core.core_category === "A*")
-            authorData.core.numero_publicaciones_AA++;
-          else if (publications[i].core.core_category === "A")
-            authorData.core.numero_publicaciones_A++;
-          else if (publications[i].core.core_category === "B")
-            authorData.core.numero_publicaciones_B++;
-          else if (publications[i].core.core_category === "C")
-            authorData.core.numero_publicaciones_C++;
         } else {
-          publications[i].core = {
-            core_year: null,
-            core_category: null /* Si no tiene ranking CORE, ambos a null */,
-          };
-          let completeAcronym = {
-            acronym: publications[i].acronym,
-            tableCore: [],
-            active: false,
-          };
-          dataCore.push(completeAcronym);
+          let link =
+            "http://portal.core.edu.au/conf-ranks/?search=" +
+            publications[i].acronym +
+            "&by=all&source=all&sort=atitle&page=1";
+          await page.goto(link, { waitUntil: "networkidle2" });
+          let example = await page.evaluate((acronym) => {
+            let tableData = document.querySelectorAll("tr td:nth-child(2)");
+            for (let j = 0; j < tableData.length; j++) {
+              if (tableData[j].innerText == acronym)
+                return "table tr:nth-child(" + (j + 2) + ") td:first-child";
+            }
+            return null;
+          }, publications[i].acronym);
+          if (example !== null) {
+            await page.click(example);
+            await page.waitForSelector("#detail");
+            let coreScrapping = await page.evaluate(
+              (year, acronym) => {
+                let coreHTML = document.querySelectorAll(
+                  ".detail div:first-child"
+                );
+                let rankHTML = document.querySelectorAll(
+                  ".detail div:nth-child(2)"
+                );
+                let completeAcronym = { acronym: acronym, tableCore: [] },
+                  returnAcronym = null;
+
+                let checkCore = false;
+                for (let i = 2; i < coreHTML.length && !checkCore; i++) {
+                  let rank = rankHTML[i - 2].innerText.substring(6),
+                    core = null;
+                  if (coreHTML[i].innerText.includes("ERA"))
+                    core = coreHTML[i].innerText.substring(11);
+                  else core = coreHTML[i].innerText.substring(12);
+                  if (acronym === "PPDP") {
+                    console.log("valor core: " + core + " valor year: " + year);
+                  }
+                  if (core <= year || coreHTML.length == i + 1) {
+                    returnAcronym = {
+                      core_year: core,
+                      core_category: rank,
+                    };
+                    checkCore = true;
+                    completeAcronym.tableCore.push({
+                      core_year: core,
+                      core_category: rank,
+                    });
+                  }
+                }
+                completeAcronym.active = true;
+                return {
+                  completeAcronym,
+                  returnAcronym,
+                };
+              },
+              publications[i].year,
+              publications[i].acronym
+            );
+            publications[i].core = coreScrapping.returnAcronym;
+            dataCore.push(coreScrapping.completeAcronym);
+            if (publications[i].core.core_category === "A*")
+              authorData.core.numero_publicaciones_AA++;
+            else if (publications[i].core.core_category === "A")
+              authorData.core.numero_publicaciones_A++;
+            else if (publications[i].core.core_category === "B")
+              authorData.core.numero_publicaciones_B++;
+            else if (publications[i].core.core_category === "C")
+              authorData.core.numero_publicaciones_C++;
+          } else {
+            publications[i].core = {
+              core_year: null,
+              core_category: null /* Si no tiene ranking CORE, ambos a null */,
+            };
+            let completeAcronym = {
+              acronym: publications[i].acronym,
+              tableCore: [],
+              active: false,
+            };
+            dataCore.push(completeAcronym);
+          }
         }
       }
     }
