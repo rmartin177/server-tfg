@@ -10,6 +10,7 @@ const { send } = require("process");
 exports.getJSON = async (req, res) => {
   let { authors, filters } = req.body;
   console.log(authors);
+  console.log(filters);
   let page = await res.locals.browser.newPage();
   let scrapping = new scrappingHelper();
   await scrapping.optimizationWeb(page);
@@ -58,6 +59,7 @@ async function getAllData(authors, browser, dataCore, filters) {
     //este objeto se completa durante la iteracion del for y se introduce en el array de autores
     let checkAndBibtexAndName = await goToXML(page, authors[i].link);
     let authorData = initAuthor(authors[i].author);
+    authorData.orcid = "";
     let checkName = checkAndBibtexAndName.checkName;
     let authorsChecking = {
       authors: AuthorsData,
@@ -66,7 +68,8 @@ async function getAllData(authors, browser, dataCore, filters) {
     let publications = await page.evaluate(
       (checkName, authorsChecking, filter) => {
         let valuesHTML = null,
-          fullHTML = null;
+          fullHTML = null,
+          orcid = null;
         if (checkName) {
           //Si hay dos con el mismo nombre el XML cambia, debe usar estos selectores
           fullHTML = document.querySelectorAll(
@@ -75,6 +78,7 @@ async function getAllData(authors, browser, dataCore, filters) {
           valuesHTML = document.querySelectorAll(
             "#folder0  > .opened  > .folder:not(#folder2) .opened .folder:first-child .line span:nth-child(2):not(.html-attribute-value):not(.html-attribute)"
           );
+          orcid = document.querySelector("url").innerHTML;
         } else {
           //Estos son los estandard para el 99.9%
           valuesHTML = document.querySelectorAll(
@@ -83,6 +87,7 @@ async function getAllData(authors, browser, dataCore, filters) {
           fullHTML = document.querySelectorAll(
             "#folder0  > .opened  > .folder .opened .folder:first-child .line > span:first-child"
           );
+          orcid = document.querySelector("url").innerHTML;
         }
         let doc = { authors: [] },
           checkIfIsInformal = false,
@@ -94,7 +99,10 @@ async function getAllData(authors, browser, dataCore, filters) {
           duplicateArticles: [],
           duplicateInproceedings: [],
           duplicateIncollections: [],
+          orcid: "",
         };
+        if (orcid.includes("orcid"))
+          publicationsDataAux.orcid = orcid.slice(18);
         for (let j = 0; j < fullHTML.length; j++) {
           if (fullHTML[j].className == "folder-button fold") {
             //Inicio de un articulo nuevo, procedemos a cargar el antiguo y resetear el objeto que lo lee
@@ -190,6 +198,8 @@ async function getAllData(authors, browser, dataCore, filters) {
               doc.journal = valuesHTML[contValues].innerText;
             } else if (fullHTML[j].innerText.includes("number")) {
               doc.issue = valuesHTML[contValues].innerText;
+            } else if (fullHTML[j].innerText.includes("url")) {
+              doc.url = valuesHTML[contValues].innerText;
             }
           }
           contValues++;
@@ -270,26 +280,28 @@ async function getAllData(authors, browser, dataCore, filters) {
         authorData,
         page
       );
+    await jrc(publications.articles, authorData, page, browser);
+    /*if (publications.orcid != "") {
+      await scopus(
+        publications.articles,
+        publications.inproceedings,
+        publications.incollections,
+        authorData,
+        publications.orcid,
+        page,
+        browser
+      );
+    }*/
     publicationsData = publications.incollections.concat(publicationsData);
     publicationsData = publications.inproceedings.concat(publicationsData);
     publicationsData = publications.articles.concat(publicationsData);
     AuthorsData.push(authorData);
   }
-  /*await jrc(browser, page);*/
   /*await page.close()*/
   return {
     authors: AuthorsData,
     publications: publicationsData,
   };
-}
-
-async function jrc(browser, page) {
-  await page.goto("https://dblp.org/db/conf/ictac/ictac2020.html#0001020");
-  await page.waitForSelector("#breadcrumbs ul li a span");
-  let a = await page.evaluate(() => {
-    let a = document.querySelectorAll("#breadcrumbs ul li a span");
-    return a[a.length - 1].innerText;
-  });
 }
 
 async function googleScholar(
@@ -714,6 +726,415 @@ function checkAcronym(data, acronym, year) {
     }
   }
   return null;
+}
+
+async function jrc(articles, author, page, browser) {
+  const mail = "franga06@ucm.es";
+  const pass = "GAFITAS99";
+  let contardor_q1 = 0;
+  let contardor_q2 = 0;
+  let contardor_q3 = 0;
+  let contardor_q4 = 0;
+  //Selecionar UCM
+  await page.goto("http://jcr-incites.fecyt.es/");
+  await page.waitForSelector(".dd-selected");
+  await page.click(".dd-selected");
+  await page.evaluate(() => {
+    let a = document.querySelectorAll(".dd-option");
+    let check = false;
+    for (let i = 0; i < a.length && !check; i++) {
+      if (a[i].children[2].innerText.includes("ompluten")) {
+        check = true;
+        a[i].click();
+        a[i].click();
+      }
+    }
+  });
+  await page.click("#form_submit_wayf");
+
+  async function delay(time) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, time);
+    });
+  }
+  //Meter username y pass en la pagina de la UCM de login
+  await page.waitForSelector("#username");
+  await page.waitForSelector("#password");
+  await page.type("#username", mail);
+  await page.type("#password", pass);
+  await page.keyboard.press("Enter");
+
+  //Buscamos publicacion por publicacion
+  for (let i = 1; i < articles.length; i++) {
+    //Cogemos el nombre de la revista
+
+    let link = "https://dblp.org/" + articles[i].url;
+    articles[i].jcr = {
+      categoria: "",
+      impact_factor: "",
+      position: "",
+      quartile: "",
+    };
+    const pageAux = await browser.newPage();
+    await pageAux.goto(link);
+    await pageAux.waitForSelector("#breadcrumbs ul li a span");
+    await pageAux.evaluate(() => {
+      let a = document.querySelectorAll("#breadcrumbs ul li a span");
+      a[a.length - 1].click();
+      //return a[a.length - 1].innerText;
+    });
+    await pageAux.waitForSelector(".hide-body ");
+    let a = await pageAux.evaluate(() => {
+      return document.querySelector(".hide-body > ul > li").innerText;
+    });
+    //Tratamos el Issn
+    let b = a
+      .replace("issn:", "")
+      .replace(";", "")
+      .replace("(old)", "")
+      .replace(" ", "")
+      .replace("(print)", "")
+      .replace("(online)", "");
+    console.log("Esto es b" + b);
+    let c = b.split(" ");
+    let contador = 0;
+    let d = [];
+    for (let i = 0; i < c.length; i++) {
+      if (c[i] != "") {
+        d[contador] = c[i];
+        contador++;
+      }
+    }
+    for (let i = 0; i < d.length; i++) {
+      console.log(d[i] + " " + i);
+    }
+    console.log("El Issn es: " + d);
+
+    await pageAux.close();
+    //Meter el nombre de la revista
+    await page.waitForSelector("#search-inputEl");
+    await page.type("#search-inputEl", c[0]);
+    await page.waitForSelector(".x-boundlist");
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Enter");
+
+    //Esperamos a que se abra la pestaña y utilizamos ea a partir de ahora
+    await delay(5000);
+    let pages = await browser.pages();
+    console.log(pages.length);
+    let page2 = pages[2];
+    await page.reload();
+    await page2.waitForSelector(
+      ".indicators-table > div .c .tb > table > tbody > tr"
+    );
+
+    const years = await page2.evaluate(() => {
+      let hijos = document.querySelectorAll(
+        ".indicators-table > div .c .tb > table > tbody > tr"
+      );
+      let allYears = [];
+      for (let i = 0; i < hijos.length; i++) {
+        allYears[i] = {};
+        allYears[i].year = hijos[i].children[0].innerText;
+        allYears[i].JIF = hijos[i].children[2].innerText;
+      }
+      return allYears;
+    });
+
+    //Cogemos el impact factor del año mas proximo sin pasarse
+    let out = false;
+    for (let j = 0; j < years.length && !out; j++) {
+      if (years[j].year <= articles[i].year) {
+        articles[i].jcr.impact_factor = years[j].JIF;
+        out = true;
+      }
+    }
+
+    //Para darle click en rank usamos ".tabset-head div" y hacemos el for que hecho ruben y click en el que incluya rank
+    await page2.waitForSelector(".tabset-head div");
+    await page2.evaluate(() => {
+      let b = document.querySelectorAll(".tabset-head div");
+      let check = false;
+      for (let i = 0; i < b.length && !check; i++) {
+        if (b[i].innerText.includes("Rank")) {
+          console.log(b[i].innerText);
+          check = true;
+          b[i].click();
+          b[i].click();
+        }
+      }
+    });
+    await page2.click(
+      ".tabset.cur-tab-1.journal-data-tabset > .tabset-head > .tab-3"
+    );
+    //Cogemos las categorias
+    await delay(4000);
+    await page2.waitForSelector(".rank-table");
+    let categorias = await page2.evaluate(() => {
+      console.log("Entro en el ecaluate de categorias");
+      let b = document.querySelectorAll(".rank-table-categories > td > div");
+      let categorias = [];
+      let cont = 0;
+      for (let i = 0; i < b.length / 2; i++) {
+        categorias[cont] = {};
+        categorias[cont] = b[i].attributes[0].value;
+        cont++;
+      }
+      let hijos = document.querySelectorAll(
+        ".rank-table > div > .component-body > div > div> .c >.tb > table > tbody > tr"
+      );
+      let rankTable = [];
+      let datosCategory = [];
+      for (let i = 0; i < hijos.length; i++) {
+        rankTable[i] = [];
+        rankTable[i][0] = hijos[i].children[0].innerText;
+        let contador = 1;
+        for (let j = 0; j < categorias.length; j++) {
+          datosCategory[0] = {};
+          datosCategory[0].categoria = categorias[j];
+          datosCategory[0].rank = hijos[i].children[contador].innerText;
+          contador++;
+          datosCategory[0].quartile = hijos[i].children[contador].innerText;
+          contador++;
+          datosCategory[0].jif = hijos[i].children[contador].innerText;
+          contador++;
+          rankTable[i][j + 1] = datosCategory[0];
+          contador = 1;
+        }
+      }
+
+      return rankTable;
+    });
+    await page2.close();
+    console.log(categorias);
+    //Cogemos el indice del año correspondiente en la tabla rank
+    let out2 = false;
+    let indice = 0;
+    for (let j = 0; j < categorias.length && !out2; j++) {
+      if (categorias[j][0] <= articles[i].year) {
+        indice = j;
+        out2 = true;
+      }
+    }
+    let maximoJIF = "";
+    let indiceCategoria = "";
+    for (let i = 0; i < categorias[indice].length; i++) {
+      if (categorias[indice][i].jif > maximoJIF) {
+        indiceCategoria = i;
+      }
+    }
+    articles[i].jcr.categoria = categorias[indice][indiceCategoria].categoria;
+    articles[i].jcr.position = categorias[indice][indiceCategoria].rank;
+    articles[i].jcr.quartile = categorias[indice][indiceCategoria].quartile;
+    if (articles[i].jcr.quartile == "Q1") contardor_q1++;
+    if (articles[i].jcr.quartile == "Q2") contardor_q2++;
+    if (articles[i].jcr.quartile == "Q3") contardor_q3++;
+    if (articles[i].jcr.quartile == "Q4") contardor_q4++;
+  }
+  author.jcr.numero_publicaciones_q1 = contardor_q1;
+  author.jcr.numero_publicaciones_q2 = contardor_q2;
+  author.jcr.numero_publicaciones_q3 = contardor_q3;
+  author.jcr.numero_publicaciones_q4 = contardor_q4;
+}
+
+async function scopus(
+  articles,
+  inproceedings,
+  incollections,
+  authorData,
+  orcid,
+  page,
+  browser
+) {
+  const mail = "franga06@ucm.es";
+  const pass = "GAFITAS99";
+  //Vamos a loguearnos lo primero
+  await page.goto("https://www.scopus.com/home.uri");
+  await page.evaluate(() => {
+    let botonSearch = document.querySelectorAll(".btn-text");
+    botonSearch[1].click();
+  });
+  await page.waitForSelector("#bdd-email");
+  await page.type("#bdd-email", mail);
+  await page.keyboard.press("Enter");
+
+  await page.waitForSelector("#bdd-elsPrimaryBtn");
+  await page.evaluate(() => {
+    let botonSearch = document.querySelector("#bdd-elsPrimaryBtn");
+    botonSearch.click();
+  });
+  //Meter username y pass en la pagina de la UCM de login
+  await page.waitForSelector("#username");
+  await page.waitForSelector("#password");
+  await page.type("#username", mail);
+  await page.type("#password", pass);
+  await page.keyboard.press("Enter");
+
+  //Buscamos por orcid en Scopus
+  await page.waitForSelector("#authors-tab");
+  await page.evaluate(() => {
+    let botonSearch = document.querySelector("#authors-tab");
+    botonSearch.click();
+  });
+
+  await page.waitForSelector(".button__icon");
+  await page.waitForSelector("option[value='orcid']");
+  await page.select(
+    ".els-select.els-select--small.els-select--dirty > label > select",
+    "orcid"
+  );
+  await page.waitForSelector("input[name='orcidId']");
+  await page.type("input[name='orcidId']", orcid);
+  await page.evaluate(() => {
+    let botonSearch = document.querySelector(
+      "#SubmitButton-module__submitButton___3L4a8"
+    );
+    botonSearch.click();
+  });
+
+  //Le damos click en el nombre para que entre en su scopus
+  await page.waitForSelector(".docTitle");
+  const pageScopus = await page.evaluate(() => {
+    return document.querySelector(".docTitle").href;
+  });
+
+  await page.goto(pageScopus);
+
+  async function delay(time) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, time);
+    });
+  }
+
+  await page.waitForSelector("._2Y8rC6tZxrdhz4UUWoh3gQ");
+  let metrics = await page.evaluate(() => {
+    let metric = document.querySelectorAll("._2Y8rC6tZxrdhz4UUWoh3gQ");
+    var result = [];
+    for (let i = 0; i < metric.length; i++) {
+      result[i] = metric[i].innerText;
+    }
+    return result;
+  });
+
+  authorData.indices.indice_h_total_scopus = metrics[2].replace(
+    "\n\nh-index:\n\nViewh-graph",
+    ""
+  );
+  authorData.citas.citas_total_scopus = metrics[1];
+
+  await page.waitForSelector("#export_results");
+  //Le damos click a export
+  await page.evaluate(() => {
+    let botonExport = document.querySelector("#export_results");
+    botonExport.click();
+    let opcionAll = document.querySelector(
+      "label[for='selectedCitationInformationItemsAll-Export']"
+    );
+    opcionAll.click();
+    let title = document.querySelector(
+      "label[for='selectedCitationInformationItems-Export2']"
+    );
+    title.click();
+    let cita = document.querySelector(
+      "label[for='selectedCitationInformationItems-Export6']"
+    );
+    cita.click();
+    let text = document.querySelector("#TEXT");
+    text.click();
+    let expor = document.querySelectorAll(".btnText");
+    expor[2].click();
+  });
+
+  await delay(8000);
+  let pages = await browser.pages();
+  let page2 = pages[2];
+  const Texto = await page2.evaluate(() => {
+    let a = document.querySelector("pre").innerText;
+
+    return a;
+  });
+  //Creamos un objeto con los title y las citas de scopus para comparar despues
+  let a = Texto.split("\n");
+  let scopusFinal = [];
+  let contador = 0;
+  for (let i = 3; i < a.length; i++) {
+    scopusFinal[contador] = {};
+    scopusFinal[contador].title = a[i];
+    scopusFinal[contador].citas = a[i + 1];
+    contador++;
+    i += 3;
+  }
+
+  for (let j = 0; j < articles.length; j++) {
+    articles[j].citas = { numero_citas_scopus: null };
+    let checkFor = false;
+    for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
+      if (
+        articles[j].title.toLowerCase().replace("–", "-").replace(".", "") ===
+        scopusFinal[i].title.toLowerCase().replace("–", "-")
+      ) {
+        const cite = {
+          numero_citas_scopus: scopusFinal[i].citas
+            .replace(".", "")
+            .replace("Cited", "")
+            .replace("times.", "")
+            .replace(" ", ""),
+        };
+        if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
+        articles[j].citas = cite;
+        checkFor = true;
+      }
+    }
+  }
+  for (let j = 0; j < inproceedings.length; j++) {
+    inproceedings[j].citas = { numero_citas_scopus: null };
+    let checkFor = false;
+    for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
+      if (
+        inproceedings[j].title
+          .toLowerCase()
+          .replace("–", "-")
+          .replace(".", "") ===
+        scopusFinal[i].title.toLowerCase().replace("–", "-")
+      ) {
+        const cite = {
+          numero_citas_scopus: scopusFinal[i].citas
+            .replace(".", "")
+            .replace("Cited", "")
+            .replace("times.", "")
+            .replace(" ", ""),
+        };
+        if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
+        inproceedings[j].citas = cite;
+        checkFor = true;
+      }
+    }
+  }
+
+  for (let j = 0; j < incollections.length; j++) {
+    incollections[j].citas = { numero_citas_scopus: null };
+    let checkFor = false;
+    for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
+      if (
+        incollections[j].title
+          .toLowerCase()
+          .replace("–", "-")
+          .replace(".", "") ===
+        scopusFinal[i].title.toLowerCase().replace("–", "-")
+      ) {
+        const cite = {
+          numero_citas_scopus: scopusFinal[i].citas
+            .replace(".", "")
+            .replace("Cited", "")
+            .replace("times.", "")
+            .replace(" ", ""),
+        };
+        if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
+        incollections[j].citas = cite;
+        checkFor = true;
+      }
+    }
+  }
 }
 
 function initAuthor(name) {
