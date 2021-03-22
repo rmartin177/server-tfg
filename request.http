@@ -2,7 +2,19 @@
 POST http://localhost:4000/api/getjson
 Content-Type: application/json
 
-["Adrian Riesco"]
+{
+    "authors":["alberto verdejo"],
+    "filters":{
+    "checkInproceedings": true,
+    "checkArticles": true,
+    "checkIncollections": true,
+    "checkSchoolar": false,
+    "checkGGS": false,
+    "checkCore": false,
+    "initYear": 1900,
+    "endYear": 2050
+    }
+}
 
 ###
 POST http://localhost:4000/api/getjsonsanitize
