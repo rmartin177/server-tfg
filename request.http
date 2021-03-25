@@ -2,13 +2,47 @@
 POST http://localhost:4000/api/getjson
 Content-Type: application/json
 
-["Adrian Riesco"]
+{
+    "authors":["alberto verdejo"],
+    "filters":{
+    "checkInproceedings": true,
+    "checkArticles": true,
+    "checkIncollections": true,
+    "checkSchoolar": false,
+    "checkGGS": false,
+    "checkCore": false,
+    "scopus": true,
+    "jcr": false,
+    "mail": "franga06@ucm.es",
+    "pass":"GAFITAS99",
+    "initYear": 1900,
+    "endYear": 2050
+    }
+}
 
 ###
 POST http://localhost:4000/api/getjsonsanitize
 Content-Type: application/json
 
-[{"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"}]
+
+{
+    "authors":[{"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"}],
+    "filters":{
+    "checkInproceedings": true,
+    "checkArticles": true,
+    "checkIncollections": true,
+    "checkSchoolar": false,
+    "checkGGS": false,
+    "checkCore": false,
+    "scopus": true,
+    "jcr": false,
+    "mail": "franga06@ucm.es",
+    "pass":"GAFITAS99",
+    "initYear": 1900,
+    "endYear": 2050
+    }
+}
+
 
 ###
 POST http://localhost:4000/api/getjsonsanitize
