@@ -280,18 +280,22 @@ async function getAllData(authors, browser, dataCore, filters) {
         authorData,
         page
       );
-    await jrc(publications.articles, authorData, page, browser);
-    /*if (publications.orcid != "") {
-      await scopus(
-        publications.articles,
-        publications.inproceedings,
-        publications.incollections,
-        authorData,
-        publications.orcid,
-        page,
-        browser
-      );
-    }*/
+      if(filters.checkJCR)await jcr(publications.articles, authorData, page, browser);
+      if(filters.checkScopus){
+        if (publications.orcid != "") {
+          await scopus(
+            publications.articles,
+            publications.inproceedings,
+            publications.incollections,
+            authorData,
+            publications.orcid,
+            page,
+            browser,
+            filters.mail,
+            filters.pass
+          );
+        }
+      }
     publicationsData = publications.incollections.concat(publicationsData);
     publicationsData = publications.inproceedings.concat(publicationsData);
     publicationsData = publications.articles.concat(publicationsData);
@@ -728,7 +732,7 @@ function checkAcronym(data, acronym, year) {
   return null;
 }
 
-async function jrc(articles, author, page, browser) {
+async function jcr(articles, author, page, browser) {
   const mail = "franga06@ucm.es";
   const pass = "GAFITAS99";
   let contardor_q1 = 0;
@@ -806,7 +810,7 @@ async function jrc(articles, author, page, browser) {
       }
     }
     for (let i = 0; i < d.length; i++) {
-      console.log(d[i] + " " + i);
+      console.log(d[i] + " " + " array position: " +i);
     }
     console.log("El Issn es: " + d);
 
@@ -944,10 +948,10 @@ async function scopus(
   authorData,
   orcid,
   page,
-  browser
+  browser, 
+  mail,
+  pass
 ) {
-  const mail = "franga06@ucm.es";
-  const pass = "GAFITAS99";
   //Vamos a loguearnos lo primero
   await page.goto("https://www.scopus.com/home.uri");
   await page.evaluate(() => {
@@ -1075,10 +1079,10 @@ async function scopus(
       ) {
         const cite = {
           numero_citas_scopus: scopusFinal[i].citas
-            .replace(".", "")
-            .replace("Cited", "")
-            .replace("times.", "")
-            .replace(" ", ""),
+          .replace(".", "")
+          .replace("Cited", "")
+          .replace("times.", "")
+          .trim()
         };
         if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
         articles[j].citas = cite;
@@ -1102,7 +1106,7 @@ async function scopus(
             .replace(".", "")
             .replace("Cited", "")
             .replace("times.", "")
-            .replace(" ", ""),
+            .trim()
         };
         if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
         inproceedings[j].citas = cite;
@@ -1124,10 +1128,10 @@ async function scopus(
       ) {
         const cite = {
           numero_citas_scopus: scopusFinal[i].citas
-            .replace(".", "")
-            .replace("Cited", "")
-            .replace("times.", "")
-            .replace(" ", ""),
+          .replace(".", "")
+          .replace("Cited", "")
+          .replace("times.", "")
+          .trim()
         };
         if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
         incollections[j].citas = cite;
