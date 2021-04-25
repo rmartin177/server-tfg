@@ -765,9 +765,9 @@ async function jrc(articles, author, page, browser) {
   await page.keyboard.press("Enter");
 
   //Buscamos publicacion por publicacion
-  for (let i = 1; i < articles.length; i++) {
+  for (let i = 0; i < 6; i++) {
     //Cogemos el nombre de la revista
-
+    
     let link = "https://dblp.org/" + articles[i].url;
     articles[i].jcr = {
       categoria: "",
@@ -776,12 +776,17 @@ async function jrc(articles, author, page, browser) {
       quartile: "",
     };
     const pageAux = await browser.newPage();
+    console.log("El link de dblp es: " + link);
     await pageAux.goto(link);
     await pageAux.waitForSelector("#breadcrumbs ul li a span");
+    let nombre = await pageAux.evaluate(() => {
+      let a = document.querySelectorAll("#breadcrumbs ul li a span");
+      return a[a.length - 1].innerText;
+    });
     await pageAux.evaluate(() => {
       let a = document.querySelectorAll("#breadcrumbs ul li a span");
       a[a.length - 1].click();
-      //return a[a.length - 1].innerText;
+  
     });
     await pageAux.waitForSelector(".hide-body ");
     let a = await pageAux.evaluate(() => {
@@ -795,7 +800,6 @@ async function jrc(articles, author, page, browser) {
       .replace(" ", "")
       .replace("(print)", "")
       .replace("(online)", "");
-    console.log("Esto es b" + b);
     let c = b.split(" ");
     let contador = 0;
     let d = [];
@@ -805,23 +809,42 @@ async function jrc(articles, author, page, browser) {
         contador++;
       }
     }
-    for (let i = 0; i < d.length; i++) {
-      console.log(d[i] + " " + i);
-    }
-    console.log("El Issn es: " + d);
+   console.log("c tiene:" + c);
 
     await pageAux.close();
     //Meter el nombre de la revista
+    await page.reload();
+    let paginaJcr = await page.url();
     await page.waitForSelector("#search-inputEl");
     await page.type("#search-inputEl", c[0]);
     await page.waitForSelector(".x-boundlist");
     await page.keyboard.press("Enter");
     await page.keyboard.press("Enter");
-
+    await delay(3000);
+    if(paginaJcr != await page.url()){
+      console.log("Las paginas no son iguales");
+      await page.evaluate(() => {
+       let x = document.querySelectorAll(".x-grid-cell-inner");
+       x[0].click();
+      });
+      
+    }
     //Esperamos a que se abra la pestaña y utilizamos ea a partir de ahora
     await delay(5000);
+    await page.goto(paginaJcr);
     let pages = await browser.pages();
-    console.log(pages.length);
+    if(pages.length == 2){//Comprobamos si ha encontrado con el iisn y si no probamos con el nombre
+      await page.reload();
+      await page.waitForSelector("#search-inputEl");
+      await page.type("#search-inputEl", nombre);
+      await page.waitForSelector(".x-boundlist");
+      await page.keyboard.press("Enter");
+      await page.keyboard.press("Enter");
+      await delay(5000);
+     
+    }
+    pages = await browser.pages();
+    if(pages.length == 3){//Si no ha encontrado con ninguna de las dos pues no hacemos nada
     let page2 = pages[2];
     await page.reload();
     await page2.waitForSelector(
@@ -931,6 +954,8 @@ async function jrc(articles, author, page, browser) {
     if (articles[i].jcr.quartile == "Q3") contardor_q3++;
     if (articles[i].jcr.quartile == "Q4") contardor_q4++;
   }
+  await page.reload();
+  }
   author.jcr.numero_publicaciones_q1 = contardor_q1;
   author.jcr.numero_publicaciones_q2 = contardor_q2;
   author.jcr.numero_publicaciones_q3 = contardor_q3;
@@ -950,6 +975,9 @@ async function scopus(
   const pass = "GAFITAS99";
   //Vamos a loguearnos lo primero
   await page.goto("https://www.scopus.com/home.uri");
+  //If si no se ha netrado en jcr
+  let bul = false
+  if(bul == true){
   await page.evaluate(() => {
     let botonSearch = document.querySelectorAll(".btn-text");
     botonSearch[1].click();
@@ -976,7 +1004,7 @@ async function scopus(
     let botonSearch = document.querySelector("#authors-tab");
     botonSearch.click();
   });
-
+  }
   await page.waitForSelector(".button__icon");
   await page.waitForSelector("option[value='orcid']");
   await page.select(
@@ -1020,7 +1048,7 @@ async function scopus(
     "\n\nh-index:\n\nViewh-graph",
     ""
   );
-  authorData.citas.citas_total_scopus = metrics[1];
+  authorData.citas.citas_total_scopus = metrics[1].replace("\n\n"," ");
 
   await page.waitForSelector("#export_results");
   //Le damos click a export
@@ -1053,6 +1081,8 @@ async function scopus(
 
     return a;
   });
+  await page.close();
+  await page2.close();
   //Creamos un objeto con los title y las citas de scopus para comparar despues
   let a = Texto.split("\n");
   let scopusFinal = [];
@@ -1066,28 +1096,28 @@ async function scopus(
   }
 
   for (let j = 0; j < articles.length; j++) {
-    articles[j].citas = { numero_citas_scopus: null };
+    articles[j].citas.numero_citas_scopus =  null;
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (
         articles[j].title.toLowerCase().replace("–", "-").replace(".", "") ===
         scopusFinal[i].title.toLowerCase().replace("–", "-")
       ) {
-        const cite = {
-          numero_citas_scopus: scopusFinal[i].citas
+        articles[j].citas.numero_citas_scopus= scopusFinal[i].citas
             .replace(".", "")
             .replace("Cited", "")
             .replace("times.", "")
-            .replace(" ", ""),
-        };
-        if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
-        articles[j].citas = cite;
+            .replace("time.","")
+            .replace(" ", "")
+        
+        if(articles[j].citas.numero_citas_scopus === "") articles[j].citas.numero_citas_scopus = "0";
+        
         checkFor = true;
       }
     }
   }
   for (let j = 0; j < inproceedings.length; j++) {
-    inproceedings[j].citas = { numero_citas_scopus: null };
+    inproceedings[j].citas.numero_citas_scopus=  null ;
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (
@@ -1097,22 +1127,22 @@ async function scopus(
           .replace(".", "") ===
         scopusFinal[i].title.toLowerCase().replace("–", "-")
       ) {
-        const cite = {
-          numero_citas_scopus: scopusFinal[i].citas
+       
+        inproceedings[j].citas.numero_citas_scopus= scopusFinal[i].citas
             .replace(".", "")
             .replace("Cited", "")
             .replace("times.", "")
-            .replace(" ", ""),
-        };
-        if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
-        inproceedings[j].citas = cite;
+            .replace("time.","")
+            .replace(" ", "")
+        
+        if (inproceedings[j].citas.numero_citas_scopus === "") inproceedings[j].citas.numero_citas_scopus=  "0";
         checkFor = true;
       }
     }
   }
 
   for (let j = 0; j < incollections.length; j++) {
-    incollections[j].citas = { numero_citas_scopus: null };
+    incollections[j].citas.numero_citas_scopus= null ;
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (
@@ -1122,15 +1152,15 @@ async function scopus(
           .replace(".", "") ===
         scopusFinal[i].title.toLowerCase().replace("–", "-")
       ) {
-        const cite = {
-          numero_citas_scopus: scopusFinal[i].citas
+        
+        incollections[j].citas.numero_citas_scopus= scopusFinal[i].citas
             .replace(".", "")
             .replace("Cited", "")
             .replace("times.", "")
-            .replace(" ", ""),
-        };
-        if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
-        incollections[j].citas = cite;
+            .replace("time.","")
+            .replace(" ", "")
+        
+        if (incollections[j].citas.numero_citas_scopus === "") incollections[j].citas.numero_citas_scopus= "0";
         checkFor = true;
       }
     }
