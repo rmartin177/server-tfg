@@ -280,7 +280,7 @@ async function getAllData(authors, browser, dataCore, filters) {
         authorData,
         page
       );
-      if(filters.checkJCR)await jcr(publications.articles, authorData, page, browser);
+      if(filters.checkJCR)await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass);
       if(filters.checkScopus){
         if (publications.orcid != "") {
           await scopus(
@@ -607,13 +607,15 @@ async function countGGSandCore(
 async function checkCorrectAuthors(page, authors) {
   let linkToAuthor = [],
     homonyms = false;
-  for (let i = 0; i < authors.length; i++) {
+    let error = false;
+  for (let i = 0; i < authors.length && !error; i++) {
     await page.goto("https://dblp.org/", { waitUntil: "networkidle2" });
     await page.type('input[type="search"]', authors[i]);
     await page.keyboard.press("Enter");
     await page.waitForSelector("#completesearch-authors");
     //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
-    let error = false;
+    console.log("aqui hay un error: ")
+    console.log(error)
     try{
       let link = await page.evaluate(() => {
         let result = { authors: [] };
@@ -650,7 +652,7 @@ async function checkCorrectAuthors(page, authors) {
     error = true;
   }
 }
-if(error){
+if(error === true){
   return {errors: "nombre de autor no encontrado"}
 }
   /*await page.waitTimeout("300000")*/
@@ -740,9 +742,7 @@ function checkAcronym(data, acronym, year) {
   return null;
 }
 
-async function jcr(articles, author, page, browser) {
-  const mail = "franga06@ucm.es";
-  const pass = "GAFITAS99";
+async function jcr(articles, author, page, browser, mail, pass) {
   let contardor_q1 = 0;
   let contardor_q2 = 0;
   let contardor_q3 = 0;
