@@ -16,7 +16,7 @@ exports.getJSON = async (req, res) => {
   await scrapping.optimizationWeb(page);
   let haveHomonymsAndLinks = await checkCorrectAuthors(page, authors);
   console.log(haveHomonymsAndLinks);
-  if (haveHomonymsAndLinks.haveHomonyms) {
+  if (haveHomonymsAndLinks.haveHomonyms || haveHomonymsAndLinks.errors) {
     await page.close();
     res.send(haveHomonymsAndLinks.authors);
   } else {
@@ -280,18 +280,22 @@ async function getAllData(authors, browser, dataCore, filters) {
         authorData,
         page
       );
-    await jrc(publications.articles, authorData, page, browser);
-    /*if (publications.orcid != "") {
-      await scopus(
-        publications.articles,
-        publications.inproceedings,
-        publications.incollections,
-        authorData,
-        publications.orcid,
-        page,
-        browser
-      );
-    }*/
+      if(filters.checkJCR)await jcr(publications.articles, authorData, page, browser);
+      if(filters.checkScopus){
+        if (publications.orcid != "") {
+          await scopus(
+            publications.articles,
+            publications.inproceedings,
+            publications.incollections,
+            authorData,
+            publications.orcid,
+            page,
+            browser,
+            filters.mail,
+            filters.pass
+          );
+        }
+      }
     publicationsData = publications.incollections.concat(publicationsData);
     publicationsData = publications.inproceedings.concat(publicationsData);
     publicationsData = publications.articles.concat(publicationsData);
@@ -609,38 +613,46 @@ async function checkCorrectAuthors(page, authors) {
     await page.keyboard.press("Enter");
     await page.waitForSelector("#completesearch-authors");
     //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
-    let link = await page.evaluate(() => {
-      let result = { authors: [] };
-      let namesAndLinks = document.querySelectorAll(
-        "#completesearch-authors ul.result-list li"
-      );
-      for (let j = 0; j < namesAndLinks.length; j++) {
-        for (let t = 0; t < namesAndLinks[j].children.length; t++) {
-          console.log(namesAndLinks[j].children[t].localName);
-          if (namesAndLinks[j].children[t].localName === "a") {
-            result.authors.push({
-              author: namesAndLinks[j].children[t].innerText,
-              link: namesAndLinks[j].children[t].href,
-            });
-          } else if (namesAndLinks[j].children[t].localName === "small") {
-            let data = namesAndLinks[j].children[t].innerText,
-              aux = "";
-            aux = data.split("\n");
-            if (
-              !aux[aux.length - 1].includes("aka") &&
-              aux[aux.length - 1] !== ""
-            ) {
-              result.authors[result.authors.length - 1].identified =
-                aux[aux.length - 1];
+    let error = false;
+    try{
+      let link = await page.evaluate(() => {
+        let result = { authors: [] };
+        let namesAndLinks = document.querySelectorAll(
+          "#completesearch-authors ul.result-list li"
+        );
+        for (let j = 0; j < namesAndLinks.length; j++) {
+          for (let t = 0; t < namesAndLinks[j].children.length; t++) {
+            console.log(namesAndLinks[j].children[t].localName);
+            if (namesAndLinks[j].children[t].localName === "a") {
+              result.authors.push({
+                author: namesAndLinks[j].children[t].innerText,
+                link: namesAndLinks[j].children[t].href,
+              });
+            } else if (namesAndLinks[j].children[t].localName === "small") {
+              let data = namesAndLinks[j].children[t].innerText,
+                aux = "";
+              aux = data.split("\n");
+              if (
+                !aux[aux.length - 1].includes("aka") &&
+                aux[aux.length - 1] !== ""
+              ) {
+                result.authors[result.authors.length - 1].identified =
+                  aux[aux.length - 1];
+              }
             }
           }
         }
-      }
-      return result;
-    });
-    if (link.authors.length > 1) homonyms = true;
-    linkToAuthor.push(link);
+        return result;
+      });
+      if (link.authors.length > 1) homonyms = true;
+      linkToAuthor.push(link);
+  }catch{
+    error = true;
   }
+}
+if(error){
+  return {errors: "nombre de autor no encontrado"}
+}
   /*await page.waitTimeout("300000")*/
   return {
     authors: linkToAuthor,
@@ -728,7 +740,7 @@ function checkAcronym(data, acronym, year) {
   return null;
 }
 
-async function jrc(articles, author, page, browser) {
+async function jcr(articles, author, page, browser) {
   const mail = "franga06@ucm.es";
   const pass = "GAFITAS99";
   let contardor_q1 = 0;
@@ -974,10 +986,10 @@ async function scopus(
   authorData,
   orcid,
   page,
-  browser
+  browser, 
+  mail,
+  pass
 ) {
-  const mail = "franga06@ucm.es";
-  const pass = "GAFITAS99";
   //Vamos a loguearnos lo primero
   await page.goto("https://www.scopus.com/home.uri");
   //If si no se ha netrado en jcr
