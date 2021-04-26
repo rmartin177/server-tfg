@@ -779,7 +779,6 @@ async function jrc(articles, author, page, browser) {
       
     
     const pageAux = await browser.newPage();
-    console.log("El link de dblp es: " + link);
     await pageAux.goto(link);
     await pageAux.waitForSelector("#breadcrumbs ul li a span");
     let nombre = await pageAux.evaluate(() => {
@@ -812,7 +811,7 @@ async function jrc(articles, author, page, browser) {
         contador++;
       }
     }
-   console.log("c tiene:" + c);
+
 
     await pageAux.close();
     //Meter el nombre de la revista
@@ -825,7 +824,6 @@ async function jrc(articles, author, page, browser) {
     await page.keyboard.press("Enter");
     await delay(3000);
     if(paginaJcr != await page.url()){
-      console.log("Las paginas no son iguales");
       await page.evaluate(() => {
        let x = document.querySelectorAll(".x-grid-cell-inner");
        x[0].click();
@@ -883,7 +881,6 @@ async function jrc(articles, author, page, browser) {
       let check = false;
       for (let i = 0; i < b.length && !check; i++) {
         if (b[i].innerText.includes("Rank")) {
-          console.log(b[i].innerText);
           check = true;
           b[i].click();
           b[i].click();
@@ -897,7 +894,6 @@ async function jrc(articles, author, page, browser) {
     await delay(4000);
     await page2.waitForSelector(".rank-table");
     let categorias = await page2.evaluate(() => {
-      console.log("Entro en el ecaluate de categorias");
       let b = document.querySelectorAll(".rank-table-categories > td > div");
       let categorias = [];
       let cont = 0;
