@@ -765,7 +765,7 @@ async function jrc(articles, author, page, browser) {
   await page.keyboard.press("Enter");
 
   //Buscamos publicacion por publicacion
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < articles.length; i++) {
     //Cogemos el nombre de la revista
     
     let link = "https://dblp.org/" + articles[i].url;
@@ -775,6 +775,9 @@ async function jrc(articles, author, page, browser) {
       position: "",
       quartile: "",
     };
+    try {
+      
+    
     const pageAux = await browser.newPage();
     console.log("El link de dblp es: " + link);
     await pageAux.goto(link);
@@ -955,7 +958,13 @@ async function jrc(articles, author, page, browser) {
     if (articles[i].jcr.quartile == "Q4") contardor_q4++;
   }
   await page.reload();
+ } catch (error) {
+      console.log("Ha habido un error con JCR en el articulo" + link);
+      //return {errors:"Ha habido un error con JCR en el articulo" + link }
+      
+ }
   }
+  
   author.jcr.numero_publicaciones_q1 = contardor_q1;
   author.jcr.numero_publicaciones_q2 = contardor_q2;
   author.jcr.numero_publicaciones_q3 = contardor_q3;
