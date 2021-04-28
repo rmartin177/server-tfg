@@ -618,47 +618,43 @@ async function checkCorrectAuthors(page, authors) {
     await page.keyboard.press("Enter");
     await page.waitForSelector("#completesearch-authors");
     //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
-    console.log("aqui hay un error: ")
-    console.log(error)
-    try{
-      let link = await page.evaluate(() => {
-        let result = { authors: [] };
-        let namesAndLinks = document.querySelectorAll(
-          "#completesearch-authors ul.result-list li"
-        );
-        for (let j = 0; j < namesAndLinks.length; j++) {
-          for (let t = 0; t < namesAndLinks[j].children.length; t++) {
-            console.log(namesAndLinks[j].children[t].localName);
-            if (namesAndLinks[j].children[t].localName === "a") {
-              result.authors.push({
-                author: namesAndLinks[j].children[t].innerText,
-                link: namesAndLinks[j].children[t].href,
-              });
-            } else if (namesAndLinks[j].children[t].localName === "small") {
-              let data = namesAndLinks[j].children[t].innerText,
-                aux = "";
-              aux = data.split("\n");
-              if (
-                !aux[aux.length - 1].includes("aka") &&
-                aux[aux.length - 1] !== ""
-              ) {
-                result.authors[result.authors.length - 1].identified =
-                  aux[aux.length - 1];
-              }
+    let link = await page.evaluate(() => {
+      let result = { authors: [] };
+      let namesAndLinks = document.querySelectorAll(
+        "#completesearch-authors ul.result-list li"
+      );
+      for (let j = 0; j < namesAndLinks.length; j++) {
+        for (let t = 0; t < namesAndLinks[j].children.length; t++) {
+          console.log(namesAndLinks[j].children[t].localName);
+          if (namesAndLinks[j].children[t].localName === "a") {
+            result.authors.push({
+              author: namesAndLinks[j].children[t].innerText,
+              link: namesAndLinks[j].children[t].href,
+            });
+          } else if (namesAndLinks[j].children[t].localName === "small") {
+            let data = namesAndLinks[j].children[t].innerText,
+              aux = "";
+            aux = data.split("\n");
+            if (
+              !aux[aux.length - 1].includes("aka") &&
+              aux[aux.length - 1] !== ""
+            ) {
+              result.authors[result.authors.length - 1].identified =
+                aux[aux.length - 1];
             }
           }
         }
-        return result;
-      });
-      if (link.authors.length > 1) homonyms = true;
-      linkToAuthor.push(link);
-  }catch{
-    error = true;
-  }
+      }
+      return result;
+    });
+    if (link.authors.length > 1) homonyms = true;
+    if(link.authors.length === 0) error = true;
+    linkToAuthor.push(link);
 }
+console.log("aqui hay un error: ")
+console.log(error)
 if(error === true){
-  let aux = "un nombre de autor no ha sido encontrado, revisa los nombres";
-  return {errors: aux}
+  return {errors:"un nombre de autor no ha sido encontrado, revisa los nombres"}
 }
   /*await page.waitTimeout("300000")*/
   return {
