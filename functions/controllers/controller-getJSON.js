@@ -16,7 +16,10 @@ exports.getJSON = async (req, res) => {
   await scrapping.optimizationWeb(page);
   let haveHomonymsAndLinks = await checkCorrectAuthors(page, authors);
   console.log(haveHomonymsAndLinks);
-  if (haveHomonymsAndLinks.haveHomonyms || haveHomonymsAndLinks.errors) {
+  if (haveHomonymsAndLinks.errors) {
+    await page.close();
+    res.send(haveHomonymsAndLinks.errors);
+  } else if (haveHomonymsAndLinks.haveHomonyms) {
     await page.close();
     res.send(haveHomonymsAndLinks.authors);
   } else {
@@ -608,6 +611,7 @@ async function checkCorrectAuthors(page, authors) {
   let linkToAuthor = [],
     homonyms = false;
     let error = false;
+    let authorError = "";
   for (let i = 0; i < authors.length && !error; i++) {
     await page.goto("https://dblp.org/", { waitUntil: "networkidle2" });
     await page.type('input[type="search"]', authors[i]);
@@ -653,7 +657,8 @@ async function checkCorrectAuthors(page, authors) {
   }
 }
 if(error === true){
-  return {errors: "nombre de autor no encontrado"}
+  let aux = "un nombre de autor no ha sido encontrado, revisa los nombres";
+  return {errors: aux}
 }
   /*await page.waitTimeout("300000")*/
   return {

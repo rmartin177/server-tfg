@@ -3,16 +3,16 @@ POST http://localhost:4000/api/getjson
 Content-Type: application/json
 
 {
-    "authors":["cristiano ronaldo arven"],
+    "authors":["alberto verdejo"],
     "filters":{
     "checkInproceedings": true,
     "checkArticles": true,
     "checkIncollections": true,
-    "checkSchoolar": false,
-    "checkGGS": false,
-    "checkCore": false,
-    "scopus": true,
-    "jcr": false,
+    "checkSchoolar": true,
+    "checkGGS": true,
+    "checkCore": true,
+    "checkScopus": true,
+    "checkJCR": true,
     "mail": "franga06@ucm.es",
     "pass":"GAFITAS99",
     "initYear": 1900,
