@@ -782,7 +782,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
   await page.keyboard.press("Enter");
 
   //Buscamos publicacion por publicacion
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < articles.length; i++) {
     //Cogemos el nombre de la revista
     
     let link = "https://dblp.org/" + articles[i].url;
@@ -792,8 +792,10 @@ async function jcr(articles, author, page, browser, mail, pass) {
       position: "",
       quartile: "",
     };
+    try {
+      
+    
     const pageAux = await browser.newPage();
-    console.log("El link de dblp es: " + link);
     await pageAux.goto(link);
     await pageAux.waitForSelector("#breadcrumbs ul li a span");
     let nombre = await pageAux.evaluate(() => {
@@ -826,7 +828,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
         contador++;
       }
     }
-   console.log("c tiene:" + c);
+
 
     await pageAux.close();
     //Meter el nombre de la revista
@@ -839,7 +841,6 @@ async function jcr(articles, author, page, browser, mail, pass) {
     await page.keyboard.press("Enter");
     await delay(3000);
     if(paginaJcr != await page.url()){
-      console.log("Las paginas no son iguales");
       await page.evaluate(() => {
        let x = document.querySelectorAll(".x-grid-cell-inner");
        x[0].click();
@@ -897,7 +898,6 @@ async function jcr(articles, author, page, browser, mail, pass) {
       let check = false;
       for (let i = 0; i < b.length && !check; i++) {
         if (b[i].innerText.includes("Rank")) {
-          console.log(b[i].innerText);
           check = true;
           b[i].click();
           b[i].click();
@@ -911,7 +911,6 @@ async function jcr(articles, author, page, browser, mail, pass) {
     await delay(4000);
     await page2.waitForSelector(".rank-table");
     let categorias = await page2.evaluate(() => {
-      console.log("Entro en el ecaluate de categorias");
       let b = document.querySelectorAll(".rank-table-categories > td > div");
       let categorias = [];
       let cont = 0;
@@ -972,7 +971,13 @@ async function jcr(articles, author, page, browser, mail, pass) {
     if (articles[i].jcr.quartile == "Q4") contardor_q4++;
   }
   await page.reload();
+ } catch (error) {
+      console.log("Ha habido un error con JCR en el articulo" + link);
+      //return {errors:"Ha habido un error con JCR en el articulo" + link }
+      
+ }
   }
+  
   author.jcr.numero_publicaciones_q1 = contardor_q1;
   author.jcr.numero_publicaciones_q2 = contardor_q2;
   author.jcr.numero_publicaciones_q3 = contardor_q3;
