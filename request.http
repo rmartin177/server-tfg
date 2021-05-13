@@ -12,7 +12,7 @@ Content-Type: application/json
     "checkGGS": false,
     "checkCore": false,
     "checkScopus": false,
-    "checkJCR": true,
+    "checkJRC": true,
     "mail": "franga06@ucm.es",
     "pass":"GAFITAS99",
     "initYear": 1900,
