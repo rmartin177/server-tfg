@@ -280,7 +280,7 @@ async function getAllData(authors, browser, dataCore, filters) {
         authorData,
         page
       );
-      if(filters.checkJCR) {
+      if(filters.checkJRC) {
         var errores = [];
         errores = await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass);
       }
