@@ -280,10 +280,13 @@ async function getAllData(authors, browser, dataCore, filters) {
         authorData,
         page
       );
-      if(filters.checkJCR)await jcr(publications.articles, authorData, page, browser);
+      if(filters.checkJCR) {
+        var errores = [];
+        errores = await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass);
+      }
       if(filters.checkScopus){
         if (publications.orcid != "") {
-          await scopus(
+           await scopus(
             publications.articles,
             publications.inproceedings,
             publications.incollections,
@@ -305,6 +308,7 @@ async function getAllData(authors, browser, dataCore, filters) {
   return {
     authors: AuthorsData,
     publications: publicationsData,
+    errors: errores
   };
 }
 
@@ -607,13 +611,15 @@ async function countGGSandCore(
 async function checkCorrectAuthors(page, authors) {
   let linkToAuthor = [],
     homonyms = false;
-  for (let i = 0; i < authors.length; i++) {
+    let error = false;
+  for (let i = 0; i < authors.length && !error; i++) {
     await page.goto("https://dblp.org/", { waitUntil: "networkidle2" });
     await page.type('input[type="search"]', authors[i]);
     await page.keyboard.press("Enter");
     await page.waitForSelector("#completesearch-authors");
     //sameName sirve para ver si hay un selector homonimo (por si dos personas se llaman igual vamos, solo vi el caso de adrian riesco pero cambia toda la cabecera de su XML)
-    let error = false;
+    console.log("aqui hay un error: ")
+    console.log(error)
     try{
       let link = await page.evaluate(() => {
         let result = { authors: [] };
@@ -650,7 +656,7 @@ async function checkCorrectAuthors(page, authors) {
     error = true;
   }
 }
-if(error){
+if(error === true){
   return {errors: "nombre de autor no encontrado"}
 }
   /*await page.waitTimeout("300000")*/
@@ -739,15 +745,16 @@ function checkAcronym(data, acronym, year) {
   }
   return null;
 }
-
-async function jcr(articles, author, page, browser) {
-  const mail = "franga06@ucm.es";
-  const pass = "GAFITAS99";
+//Función que coge los parametros de JCR
+async function jcr(articles, author, page, browser, mail, pass) {
+  //Inicializamos los contadores que vamos a utilizar para saber cuantos articulos de cada tipo hay
   let contardor_q1 = 0;
   let contardor_q2 = 0;
   let contardor_q3 = 0;
   let contardor_q4 = 0;
-  //Selecionar UCM
+  let errores = [];
+  let contadorErrors = 0;
+  //Habrimos la pagina de JCR y a la hora de loguearnos y selecionar UCM
   await page.goto("http://jcr-incites.fecyt.es/");
   await page.waitForSelector(".dd-selected");
   await page.click(".dd-selected");
@@ -777,9 +784,9 @@ async function jcr(articles, author, page, browser) {
   await page.keyboard.press("Enter");
 
   //Buscamos publicacion por publicacion
-  for (let i = 1; i < articles.length; i++) {
-    //Cogemos el nombre de la revista
+  for (let i = 0; i < articles.length; i++) {
 
+    //Cogemos el nombre de la revista desde el link de dblp
     let link = "https://dblp.org/" + articles[i].url;
     articles[i].jcr = {
       categoria: "",
@@ -787,14 +794,25 @@ async function jcr(articles, author, page, browser) {
       position: "",
       quartile: "",
     };
+    delete articles[i].url;
+    //Creamos un try catch por si ocurre algun error en la busqueda de datos.
+    try {
+
     const pageAux = await browser.newPage();
+    //Vamos a la pagina de la revista en DBLP
     await pageAux.goto(link);
     await pageAux.waitForSelector("#breadcrumbs ul li a span");
+    //Hacemos dos evaluate de la pagina para coger en nombre y clickar en el;
+    var nombre = await pageAux.evaluate(() => {
+      let a = document.querySelectorAll("#breadcrumbs ul li a span");
+      return a[a.length - 1].innerText;
+    });
     await pageAux.evaluate(() => {
       let a = document.querySelectorAll("#breadcrumbs ul li a span");
       a[a.length - 1].click();
-      //return a[a.length - 1].innerText;
+  
     });
+    //Cogemos el Issn de la revista
     await pageAux.waitForSelector(".hide-body ");
     let a = await pageAux.evaluate(() => {
       return document.querySelector(".hide-body > ul > li").innerText;
@@ -807,7 +825,6 @@ async function jcr(articles, author, page, browser) {
       .replace(" ", "")
       .replace("(print)", "")
       .replace("(online)", "");
-    console.log("Esto es b" + b);
     let c = b.split(" ");
     let contador = 0;
     let d = [];
@@ -817,29 +834,52 @@ async function jcr(articles, author, page, browser) {
         contador++;
       }
     }
-    for (let i = 0; i < d.length; i++) {
-      console.log(d[i] + " " + " array position: " +i);
-    }
-    console.log("El Issn es: " + d);
 
+    //Cerramos la pagina de la DBLP de la revista
     await pageAux.close();
-    //Meter el nombre de la revista
+    //Meter el Issn de la revista en JCR
+    await page.reload();
+    let paginaJcr = await page.url();
     await page.waitForSelector("#search-inputEl");
     await page.type("#search-inputEl", c[0]);
     await page.waitForSelector(".x-boundlist");
     await page.keyboard.press("Enter");
     await page.keyboard.press("Enter");
+    await delay(3000);
 
-    //Esperamos a que se abra la pestaña y utilizamos ea a partir de ahora
+    //Si hay mas de un nombre o Issn igual elegimos el primero para entrar.
+    if(paginaJcr != await page.url()){
+      await page.evaluate(() => {
+       let x = document.querySelectorAll(".x-grid-cell-inner");
+       x[0].click();
+      });
+      
+    }
+    //Esperamos a que se abra la pestaña y utilizamos esa a partir de ahora
     await delay(5000);
+    await page.goto(paginaJcr);
+    //Comprobamos si ha llegado a una pestaña con el Issn y si no probamos con el nombre.
     let pages = await browser.pages();
-    console.log(pages.length);
+    if(pages.length == 2){
+      await page.reload();
+      await page.waitForSelector("#search-inputEl");
+      await page.type("#search-inputEl", nombre);
+      await page.waitForSelector(".x-boundlist");
+      await page.keyboard.press("Enter");
+      await page.keyboard.press("Enter");
+      await delay(5000);
+     
+    }
+    //Volvemos a ver si ha encontrado resultado con el nombre si no ha sido asi no hacemos nada.
+    pages = await browser.pages();
+    if(pages.length == 3){
     let page2 = pages[2];
     await page.reload();
     await page2.waitForSelector(
       ".indicators-table > div .c .tb > table > tbody > tr"
     );
 
+    //Cogemos todos los datos de todos los años para sacar el impact factor.
     const years = await page2.evaluate(() => {
       let hijos = document.querySelectorAll(
         ".indicators-table > div .c .tb > table > tbody > tr"
@@ -852,7 +892,7 @@ async function jcr(articles, author, page, browser) {
       }
       return allYears;
     });
-
+    
     //Cogemos el impact factor del año mas proximo sin pasarse
     let out = false;
     for (let j = 0; j < years.length && !out; j++) {
@@ -869,7 +909,6 @@ async function jcr(articles, author, page, browser) {
       let check = false;
       for (let i = 0; i < b.length && !check; i++) {
         if (b[i].innerText.includes("Rank")) {
-          console.log(b[i].innerText);
           check = true;
           b[i].click();
           b[i].click();
@@ -883,7 +922,6 @@ async function jcr(articles, author, page, browser) {
     await delay(4000);
     await page2.waitForSelector(".rank-table");
     let categorias = await page2.evaluate(() => {
-      console.log("Entro en el ecaluate de categorias");
       let b = document.querySelectorAll(".rank-table-categories > td > div");
       let categorias = [];
       let cont = 0;
@@ -918,7 +956,7 @@ async function jcr(articles, author, page, browser) {
       return rankTable;
     });
     await page2.close();
-    console.log(categorias);
+    
     //Cogemos el indice del año correspondiente en la tabla rank
     let out2 = false;
     let indice = 0;
@@ -935,6 +973,7 @@ async function jcr(articles, author, page, browser) {
         indiceCategoria = i;
       }
     }
+    //Pasamos todos los datos de tank y los metemos en el Json y ademas añadimos 1 al contador del tipo que sea.
     articles[i].jcr.categoria = categorias[indice][indiceCategoria].categoria;
     articles[i].jcr.position = categorias[indice][indiceCategoria].rank;
     articles[i].jcr.quartile = categorias[indice][indiceCategoria].quartile;
@@ -943,10 +982,25 @@ async function jcr(articles, author, page, browser) {
     if (articles[i].jcr.quartile == "Q3") contardor_q3++;
     if (articles[i].jcr.quartile == "Q4") contardor_q4++;
   }
+  await page.reload();
+ } catch (error) {
+
+    pages = await browser.pages();
+    if(pages.length == 3){
+    await pages[2].close();
+    }
+     errores[contadorErrors] = "Ha ocurrido un error con JCR en el articulo "  + articles.title + " con nombre de revista: " + nombre + " cuyo autor es: "+ author.name + " link:" + link;
+      contadorErrors++
+      
+      
+ }
+  }
+
   author.jcr.numero_publicaciones_q1 = contardor_q1;
   author.jcr.numero_publicaciones_q2 = contardor_q2;
   author.jcr.numero_publicaciones_q3 = contardor_q3;
   author.jcr.numero_publicaciones_q4 = contardor_q4;
+  return errores;
 }
 
 async function scopus(
@@ -962,9 +1016,15 @@ async function scopus(
 ) {
   //Vamos a loguearnos lo primero
   await page.goto("https://www.scopus.com/home.uri");
+  //If si no se ha netrado en jcr
+  let bul = false
+  
   await page.evaluate(() => {
     let botonSearch = document.querySelectorAll(".btn-text");
     botonSearch[1].click();
+    //let botonSearch = document.querySelector("#pendo-button-03876376");
+    //botonSearch.click();
+    
   });
   await page.waitForSelector("#bdd-email");
   await page.type("#bdd-email", mail);
@@ -988,7 +1048,7 @@ async function scopus(
     let botonSearch = document.querySelector("#authors-tab");
     botonSearch.click();
   });
-
+  
   await page.waitForSelector(".button__icon");
   await page.waitForSelector("option[value='orcid']");
   await page.select(
@@ -1032,7 +1092,7 @@ async function scopus(
     "\n\nh-index:\n\nViewh-graph",
     ""
   );
-  authorData.citas.citas_total_scopus = metrics[1];
+  authorData.citas.citas_total_scopus = metrics[1].replace("\n\n"," ");
 
   await page.waitForSelector("#export_results");
   //Le damos click a export
@@ -1065,6 +1125,8 @@ async function scopus(
 
     return a;
   });
+  await page.close();
+  await page2.close();
   //Creamos un objeto con los title y las citas de scopus para comparar despues
   let a = Texto.split("\n");
   let scopusFinal = [];
@@ -1078,28 +1140,28 @@ async function scopus(
   }
 
   for (let j = 0; j < articles.length; j++) {
-    articles[j].citas = { numero_citas_scopus: null };
+    articles[j].citas.numero_citas_scopus =  null;
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (
         articles[j].title.toLowerCase().replace("–", "-").replace(".", "") ===
         scopusFinal[i].title.toLowerCase().replace("–", "-")
       ) {
-        const cite = {
-          numero_citas_scopus: scopusFinal[i].citas
-          .replace(".", "")
-          .replace("Cited", "")
-          .replace("times.", "")
-          .trim()
-        };
-        if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
-        articles[j].citas = cite;
+        articles[j].citas.numero_citas_scopus= scopusFinal[i].citas
+            .replace(".", "")
+            .replace("Cited", "")
+            .replace("times.", "")
+            .replace("time.","")
+            .replace(" ", "")
+        
+        if(articles[j].citas.numero_citas_scopus === "") articles[j].citas.numero_citas_scopus = "0";
+        
         checkFor = true;
       }
     }
   }
   for (let j = 0; j < inproceedings.length; j++) {
-    inproceedings[j].citas = { numero_citas_scopus: null };
+    inproceedings[j].citas.numero_citas_scopus=  null ;
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (
@@ -1109,22 +1171,22 @@ async function scopus(
           .replace(".", "") ===
         scopusFinal[i].title.toLowerCase().replace("–", "-")
       ) {
-        const cite = {
-          numero_citas_scopus: scopusFinal[i].citas
+       
+        inproceedings[j].citas.numero_citas_scopus= scopusFinal[i].citas
             .replace(".", "")
             .replace("Cited", "")
             .replace("times.", "")
-            .trim()
-        };
-        if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
-        inproceedings[j].citas = cite;
+            .replace("time.","")
+            .replace(" ", "")
+        
+        if (inproceedings[j].citas.numero_citas_scopus === "") inproceedings[j].citas.numero_citas_scopus=  "0";
         checkFor = true;
       }
     }
   }
 
   for (let j = 0; j < incollections.length; j++) {
-    incollections[j].citas = { numero_citas_scopus: null };
+    incollections[j].citas.numero_citas_scopus= null ;
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (
@@ -1134,15 +1196,15 @@ async function scopus(
           .replace(".", "") ===
         scopusFinal[i].title.toLowerCase().replace("–", "-")
       ) {
-        const cite = {
-          numero_citas_scopus: scopusFinal[i].citas
-          .replace(".", "")
-          .replace("Cited", "")
-          .replace("times.", "")
-          .trim()
-        };
-        if (cite.numero_citas_scopus === "") cite.numero_citas_scopus = "0";
-        incollections[j].citas = cite;
+        
+        incollections[j].citas.numero_citas_scopus= scopusFinal[i].citas
+            .replace(".", "")
+            .replace("Cited", "")
+            .replace("times.", "")
+            .replace("time.","")
+            .replace(" ", "")
+        
+        if (incollections[j].citas.numero_citas_scopus === "") incollections[j].citas.numero_citas_scopus= "0";
         checkFor = true;
       }
     }
@@ -1180,6 +1242,8 @@ function initAuthor(name) {
       numero_publicaciones_A: 0,
       numero_publicaciones_B: 0,
       numero_publicaciones_C: 0,
+    },
+    errors: {
     },
   };
 }
