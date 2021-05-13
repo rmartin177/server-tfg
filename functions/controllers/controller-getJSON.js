@@ -839,6 +839,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
       }
     }
 
+    if(c[0] != "1571-0661"){
     //Cerramos la pagina de la DBLP de la revista
     await pageAux.close();
     //Meter el Issn de la revista en JCR
@@ -987,6 +988,10 @@ async function jcr(articles, author, page, browser, mail, pass) {
     if (articles[i].jcr.quartile == "Q4") contardor_q4++;
   }
   await page.reload();
+}
+else{
+  await pageAux.close();
+}
  } catch (error) {
 
     pages = await browser.pages();
@@ -999,6 +1004,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
       
  }
   }
+  
 
   author.jcr.numero_publicaciones_q1 = contardor_q1;
   author.jcr.numero_publicaciones_q2 = contardor_q2;
