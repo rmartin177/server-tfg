@@ -755,6 +755,9 @@ async function jcr(articles, author, page, browser, mail, pass) {
   let errores = [];
   let contadorErrors = 0;
   //Habrimos la pagina de JCR y a la hora de loguearnos y selecionar UCM
+  try {
+    
+  
   await page.goto("http://jcr-incites.fecyt.es/");
   await page.waitForSelector(".dd-selected");
   await page.click(".dd-selected");
@@ -1000,6 +1003,9 @@ async function jcr(articles, author, page, browser, mail, pass) {
   author.jcr.numero_publicaciones_q2 = contardor_q2;
   author.jcr.numero_publicaciones_q3 = contardor_q3;
   author.jcr.numero_publicaciones_q4 = contardor_q4;
+} catch (error) {
+  errores[contadorErrors]= "Ha ocurrido un error con la redirecion ezterna de JCR, intenta la consulta de nuevo";
+}
   return errores;
 }
 
