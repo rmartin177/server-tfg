@@ -280,10 +280,13 @@ async function getAllData(authors, browser, dataCore, filters) {
         authorData,
         page
       );
-      if(filters.checkJCR)await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass);
+      if(filters.checkJCR) {
+        var errores = [];
+        errores = await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass);
+      }
       if(filters.checkScopus){
         if (publications.orcid != "") {
-          await scopus(
+           await scopus(
             publications.articles,
             publications.inproceedings,
             publications.incollections,
@@ -305,6 +308,7 @@ async function getAllData(authors, browser, dataCore, filters) {
   return {
     authors: AuthorsData,
     publications: publicationsData,
+    errors: errores
   };
 }
 
@@ -741,13 +745,16 @@ function checkAcronym(data, acronym, year) {
   }
   return null;
 }
-
+//Función que coge los parametros de JCR
 async function jcr(articles, author, page, browser, mail, pass) {
+  //Inicializamos los contadores que vamos a utilizar para saber cuantos articulos de cada tipo hay
   let contardor_q1 = 0;
   let contardor_q2 = 0;
   let contardor_q3 = 0;
   let contardor_q4 = 0;
-  //Selecionar UCM
+  let errores = [];
+  let contadorErrors = 0;
+  //Habrimos la pagina de JCR y a la hora de loguearnos y selecionar UCM
   await page.goto("http://jcr-incites.fecyt.es/");
   await page.waitForSelector(".dd-selected");
   await page.click(".dd-selected");
@@ -778,8 +785,8 @@ async function jcr(articles, author, page, browser, mail, pass) {
 
   //Buscamos publicacion por publicacion
   for (let i = 0; i < articles.length; i++) {
-    //Cogemos el nombre de la revista
-    
+
+    //Cogemos el nombre de la revista desde el link de dblp
     let link = "https://dblp.org/" + articles[i].url;
     articles[i].jcr = {
       categoria: "",
@@ -787,13 +794,16 @@ async function jcr(articles, author, page, browser, mail, pass) {
       position: "",
       quartile: "",
     };
+    delete articles[i].url;
+    //Creamos un try catch por si ocurre algun error en la busqueda de datos.
     try {
-      
-    
+
     const pageAux = await browser.newPage();
+    //Vamos a la pagina de la revista en DBLP
     await pageAux.goto(link);
     await pageAux.waitForSelector("#breadcrumbs ul li a span");
-    let nombre = await pageAux.evaluate(() => {
+    //Hacemos dos evaluate de la pagina para coger en nombre y clickar en el;
+    var nombre = await pageAux.evaluate(() => {
       let a = document.querySelectorAll("#breadcrumbs ul li a span");
       return a[a.length - 1].innerText;
     });
@@ -802,6 +812,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
       a[a.length - 1].click();
   
     });
+    //Cogemos el Issn de la revista
     await pageAux.waitForSelector(".hide-body ");
     let a = await pageAux.evaluate(() => {
       return document.querySelector(".hide-body > ul > li").innerText;
@@ -824,9 +835,9 @@ async function jcr(articles, author, page, browser, mail, pass) {
       }
     }
 
-
+    //Cerramos la pagina de la DBLP de la revista
     await pageAux.close();
-    //Meter el nombre de la revista
+    //Meter el Issn de la revista en JCR
     await page.reload();
     let paginaJcr = await page.url();
     await page.waitForSelector("#search-inputEl");
@@ -835,6 +846,8 @@ async function jcr(articles, author, page, browser, mail, pass) {
     await page.keyboard.press("Enter");
     await page.keyboard.press("Enter");
     await delay(3000);
+
+    //Si hay mas de un nombre o Issn igual elegimos el primero para entrar.
     if(paginaJcr != await page.url()){
       await page.evaluate(() => {
        let x = document.querySelectorAll(".x-grid-cell-inner");
@@ -842,11 +855,12 @@ async function jcr(articles, author, page, browser, mail, pass) {
       });
       
     }
-    //Esperamos a que se abra la pestaña y utilizamos ea a partir de ahora
+    //Esperamos a que se abra la pestaña y utilizamos esa a partir de ahora
     await delay(5000);
     await page.goto(paginaJcr);
+    //Comprobamos si ha llegado a una pestaña con el Issn y si no probamos con el nombre.
     let pages = await browser.pages();
-    if(pages.length == 2){//Comprobamos si ha encontrado con el iisn y si no probamos con el nombre
+    if(pages.length == 2){
       await page.reload();
       await page.waitForSelector("#search-inputEl");
       await page.type("#search-inputEl", nombre);
@@ -856,14 +870,16 @@ async function jcr(articles, author, page, browser, mail, pass) {
       await delay(5000);
      
     }
+    //Volvemos a ver si ha encontrado resultado con el nombre si no ha sido asi no hacemos nada.
     pages = await browser.pages();
-    if(pages.length == 3){//Si no ha encontrado con ninguna de las dos pues no hacemos nada
+    if(pages.length == 3){
     let page2 = pages[2];
     await page.reload();
     await page2.waitForSelector(
       ".indicators-table > div .c .tb > table > tbody > tr"
     );
 
+    //Cogemos todos los datos de todos los años para sacar el impact factor.
     const years = await page2.evaluate(() => {
       let hijos = document.querySelectorAll(
         ".indicators-table > div .c .tb > table > tbody > tr"
@@ -876,7 +892,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
       }
       return allYears;
     });
-
+    
     //Cogemos el impact factor del año mas proximo sin pasarse
     let out = false;
     for (let j = 0; j < years.length && !out; j++) {
@@ -940,7 +956,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
       return rankTable;
     });
     await page2.close();
-    console.log(categorias);
+    
     //Cogemos el indice del año correspondiente en la tabla rank
     let out2 = false;
     let indice = 0;
@@ -957,6 +973,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
         indiceCategoria = i;
       }
     }
+    //Pasamos todos los datos de tank y los metemos en el Json y ademas añadimos 1 al contador del tipo que sea.
     articles[i].jcr.categoria = categorias[indice][indiceCategoria].categoria;
     articles[i].jcr.position = categorias[indice][indiceCategoria].rank;
     articles[i].jcr.quartile = categorias[indice][indiceCategoria].quartile;
@@ -967,16 +984,23 @@ async function jcr(articles, author, page, browser, mail, pass) {
   }
   await page.reload();
  } catch (error) {
-      console.log("Ha habido un error con JCR en el articulo" + link);
-      //return {errors:"Ha habido un error con JCR en el articulo" + link }
+
+    pages = await browser.pages();
+    if(pages.length == 3){
+    await pages[2].close();
+    }
+     errores[contadorErrors] = "Ha ocurrido un error con JCR en el articulo "  + articles.title + " con nombre de revista: " + nombre + " cuyo autor es: "+ author.name + " link:" + link;
+      contadorErrors++
+      
       
  }
   }
-  
+
   author.jcr.numero_publicaciones_q1 = contardor_q1;
   author.jcr.numero_publicaciones_q2 = contardor_q2;
   author.jcr.numero_publicaciones_q3 = contardor_q3;
   author.jcr.numero_publicaciones_q4 = contardor_q4;
+  return errores;
 }
 
 async function scopus(
@@ -994,10 +1018,13 @@ async function scopus(
   await page.goto("https://www.scopus.com/home.uri");
   //If si no se ha netrado en jcr
   let bul = false
-  if(bul == true){
+  
   await page.evaluate(() => {
     let botonSearch = document.querySelectorAll(".btn-text");
     botonSearch[1].click();
+    //let botonSearch = document.querySelector("#pendo-button-03876376");
+    //botonSearch.click();
+    
   });
   await page.waitForSelector("#bdd-email");
   await page.type("#bdd-email", mail);
@@ -1021,7 +1048,7 @@ async function scopus(
     let botonSearch = document.querySelector("#authors-tab");
     botonSearch.click();
   });
-  }
+  
   await page.waitForSelector(".button__icon");
   await page.waitForSelector("option[value='orcid']");
   await page.select(
@@ -1215,6 +1242,8 @@ function initAuthor(name) {
       numero_publicaciones_A: 0,
       numero_publicaciones_B: 0,
       numero_publicaciones_C: 0,
+    },
+    errors: {
     },
   };
 }
