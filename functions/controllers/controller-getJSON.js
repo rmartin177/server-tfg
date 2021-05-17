@@ -790,7 +790,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
   await page.keyboard.press("Enter");
 
   //Buscamos publicacion por publicacion
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < articles.length; i++) {
 
     //Cogemos el nombre de la revista desde el link de dblp
     let link = "https://dblp.org/" + articles[i].url;
