@@ -295,10 +295,13 @@ async function getAllData(authors, browser, dataCore, filters) {
             page,
             browser,
             filters.mail,
-            filters.pass
+            filters.pass,
+            filters.checkJRC
           );
         }
+        delete authorData.orcid;
       }
+      
     publicationsData = publications.incollections.concat(publicationsData);
     publicationsData = publications.inproceedings.concat(publicationsData);
     publicationsData = publications.articles.concat(publicationsData);
@@ -787,7 +790,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
   await page.keyboard.press("Enter");
 
   //Buscamos publicacion por publicacion
-  for (let i = 0; i < articles.length; i++) {
+  for (let i = 0; i < 2; i++) {
 
     //Cogemos el nombre de la revista desde el link de dblp
     let link = "https://dblp.org/" + articles[i].url;
@@ -1024,7 +1027,8 @@ async function scopus(
   page,
   browser, 
   mail,
-  pass
+  pass,
+  checkJRC
 ) {
   //Vamos a loguearnos lo primero
   await page.goto("https://www.scopus.com/home.uri");
@@ -1047,13 +1051,14 @@ async function scopus(
     let botonSearch = document.querySelector("#bdd-elsPrimaryBtn");
     botonSearch.click();
   });
+  if(!checkJRC){
   //Meter username y pass en la pagina de la UCM de login
   await page.waitForSelector("#username");
   await page.waitForSelector("#password");
   await page.type("#username", mail);
   await page.type("#password", pass);
   await page.keyboard.press("Enter");
-
+  }
   //Buscamos por orcid en Scopus
   await page.waitForSelector("#authors-tab");
   await page.evaluate(() => {
@@ -1152,7 +1157,7 @@ async function scopus(
   }
 
   for (let j = 0; j < articles.length; j++) {
-    articles[j].citas.numero_citas_scopus =  null;
+    articles[j].citas.numero_citas_scopus =  "";
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (
@@ -1173,7 +1178,7 @@ async function scopus(
     }
   }
   for (let j = 0; j < inproceedings.length; j++) {
-    inproceedings[j].citas.numero_citas_scopus=  null ;
+    inproceedings[j].citas.numero_citas_scopus=  "" ;
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (
@@ -1198,7 +1203,7 @@ async function scopus(
   }
 
   for (let j = 0; j < incollections.length; j++) {
-    incollections[j].citas.numero_citas_scopus= null ;
+    incollections[j].citas.numero_citas_scopus= "" ;
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (
@@ -1254,8 +1259,6 @@ function initAuthor(name) {
       numero_publicaciones_A: 0,
       numero_publicaciones_B: 0,
       numero_publicaciones_C: 0,
-    },
-    errors: {
-    },
+    }
   };
 }
