@@ -248,7 +248,7 @@ async function getAllData(authors, browser, dataCore, filters) {
       authorsChecking,
       filters
     );
-
+    var errores = [];
     let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex);
     if (filters.checkGGS || filters.checkCore)
       await countGGSandCore(
@@ -281,7 +281,7 @@ async function getAllData(authors, browser, dataCore, filters) {
         page
       );
       if(filters.checkJRC) {
-        var errores = [];
+      
         errores = await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass);
       }
       if(filters.checkScopus){
