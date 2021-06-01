@@ -172,7 +172,8 @@ async function getAllData(authors, browser, dataCore, filters) {
                 }
               }
             }
-            doc = { authors: [] };
+            doc = { authors: [],
+              citas: {numero_citas_google_scholar: null}  };
             checkIfIsInformal = false;
             if (valuesHTML[contValues].innerText.includes("informal"))
               checkIfIsInformal = true;
@@ -418,7 +419,7 @@ async function googleScholar(
 
     //– -
     for (let j = 0; j < articles.length; j++) {
-      articles[j].citas = { numero_citas_google_scholar: null };
+      
       let checkFor = false;
       for (let i = 0; i < citas.length && !checkFor; i++) {
         if (
@@ -436,7 +437,7 @@ async function googleScholar(
       }
     }
     for (let j = 0; j < inproceedings.length; j++) {
-      inproceedings[j].citas = { numero_citas_google_scholar: null };
+      
       let checkFor = false;
       for (let i = 0; i < citas.length && !checkFor; i++) {
         if (
@@ -456,7 +457,7 @@ async function googleScholar(
       }
     }
     for (let j = 0; j < incollections.length; j++) {
-      incollections[j].citas = { numero_citas_google_scholar: null };
+      
       let checkFor = false;
       for (let i = 0; i < citas.length && !checkFor; i++) {
         if (
@@ -1158,7 +1159,9 @@ async function scopus(
   }
 
   for (let j = 0; j < articles.length; j++) {
-    articles[j].citas.numero_citas_scopus =  "";
+    console.log(articles[j])
+    articles[j].citas = {}
+    articles[j].citas.numero_citas_scopus = "";
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
       if (

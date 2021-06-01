@@ -26,15 +26,18 @@ Content-Type: application/json
 
 
 {
-    "authors":[{"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"}],
+    "authors":[
+        {"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"},
+        {"author": "Alberto Verdejo", "link": "https://dblp.org/pid/70/253.html"}
+        ],
     "filters":{
     "checkInproceedings": true,
     "checkArticles": true,
     "checkIncollections": true,
-    "checkSchoolar": true,
-    "checkGGS": true,
-    "checkCore": true,
-    "checkScopus": true,
+    "checkSchoolar": false,
+    "checkGGS": false,
+    "checkCore": false,
+    "checkScopus": false,
     "checkJRC": true,
     "mail": "franga06@ucm.es",
     "pass":"GAFITAS99",
