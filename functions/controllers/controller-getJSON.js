@@ -58,6 +58,8 @@ async function getAllData(authors, browser, dataCore, filters) {
   await scrapping.optimizationWeb(page);
   let AuthorsData = [],
     publicationsData = []; //arrays donde meteremos los datos extraidos de cada autor y publicaciones, resultado final a procesar
+  let contadorScopus = 0;
+
   for (let i = 0; i < authors.length; i++) {
     //este objeto se completa durante la iteracion del for y se introduce en el array de autores
     let checkAndBibtexAndName = await goToXML(page, authors[i].link);
@@ -252,6 +254,7 @@ async function getAllData(authors, browser, dataCore, filters) {
       authorsChecking,
       filters
     );
+    console.log("Esto es publications data aux: " + publications);
     var errores = [];
     let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex);
     if (filters.checkGGS || filters.checkCore)
@@ -286,7 +289,7 @@ async function getAllData(authors, browser, dataCore, filters) {
       );
       if(filters.checkJRC) {
       
-        errores = await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass);
+        errores = await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass,i);
       }
       if(filters.checkScopus){
         if (publications.orcid != "") {
@@ -300,8 +303,11 @@ async function getAllData(authors, browser, dataCore, filters) {
             browser,
             filters.mail,
             filters.pass,
-            filters.checkJRC
+            filters.checkJRC,
+            contadorScopus
+            
           );
+          contadorScopus++;
         }
         delete authorData.orcid;
       }
@@ -751,7 +757,7 @@ function checkAcronym(data, acronym, year) {
   return null;
 }
 //Función que coge los parametros de JCR
-async function jcr(articles, author, page, browser, mail, pass) {
+async function jcr(articles, author, page, browser, mail, pass,contador) {
   //Inicializamos los contadores que vamos a utilizar para saber cuantos articulos de cada tipo hay
   let contardor_q1 = 0;
   let contardor_q2 = 0;
@@ -764,6 +770,8 @@ async function jcr(articles, author, page, browser, mail, pass) {
     
   
   await page.goto("http://jcr-incites.fecyt.es/");
+  //Si buscamos un segundo autor no hace falta loguearse
+  if ( contador == 0)){
   await page.waitForSelector(".dd-selected");
   await page.click(".dd-selected");
   await page.evaluate(() => {
@@ -790,7 +798,7 @@ async function jcr(articles, author, page, browser, mail, pass) {
   await page.type("#username", mail);
   await page.type("#password", pass);
   await page.keyboard.press("Enter");
-
+  }
   //Buscamos publicacion por publicacion
   for (let i = 0; i < articles.length; i++) {
 
@@ -1030,7 +1038,8 @@ async function scopus(
   browser, 
   mail,
   pass,
-  checkJRC
+  checkJRC,
+  contador
 ) {
   //Vamos a loguearnos lo primero
   await page.goto("https://www.scopus.com/home.uri");
