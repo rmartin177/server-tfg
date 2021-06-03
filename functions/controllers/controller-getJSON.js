@@ -9,13 +9,10 @@ const { send } = require("process");
 
 exports.getJSON = async (req, res) => {
   let { authors, filters } = req.body;
-  console.log(authors);
-  console.log(filters);
   let page = await res.locals.browser.newPage();
   let scrapping = new scrappingHelper();
   await scrapping.optimizationWeb(page);
   let haveHomonymsAndLinks = await checkCorrectAuthors(page, authors);
-  console.log(haveHomonymsAndLinks);
   if (haveHomonymsAndLinks.errors) {
     await page.close();
     res.send(haveHomonymsAndLinks.errors);
@@ -40,7 +37,6 @@ exports.getJSON = async (req, res) => {
 
 exports.getJSONsanitize = async (req, res) => {
   let { authors, filters } = req.body;
-  console.log(req.body);
   let result = await getAllData(
     authors,
     res.locals.browser,
@@ -51,14 +47,14 @@ exports.getJSONsanitize = async (req, res) => {
 };
 
 async function getAllData(authors, browser, dataCore, filters) {
-  console.log(authors);
   let page = await browser.newPage();
   let ggs = new excelGGS();
   let scrapping = new scrappingHelper();
   await scrapping.optimizationWeb(page);
   let AuthorsData = [],
     publicationsData = []; //arrays donde meteremos los datos extraidos de cada autor y publicaciones, resultado final a procesar
-  let contadorScopus = 0;
+  let contadorScopus = true;
+  var errores = [];
 
   for (let i = 0; i < authors.length; i++) {
     //este objeto se completa durante la iteracion del for y se introduce en el array de autores
@@ -70,6 +66,8 @@ async function getAllData(authors, browser, dataCore, filters) {
       authors: AuthorsData,
       actualPosition: i,
     };
+    var erroresJCR = [];
+    var errorScopus = "";
     let publications = await page.evaluate(
       (checkName, authorsChecking, filter) => {
         let valuesHTML = null,
@@ -254,8 +252,6 @@ async function getAllData(authors, browser, dataCore, filters) {
       authorsChecking,
       filters
     );
-    console.log("Esto es publications data aux: " + publications);
-    var errores = [];
     let book_titles = await getBooktitles(page, checkAndBibtexAndName.bibtex);
     if (filters.checkGGS || filters.checkCore)
       await countGGSandCore(
@@ -289,11 +285,13 @@ async function getAllData(authors, browser, dataCore, filters) {
       );
       if(filters.checkJRC) {
       
-        errores = await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass,i);
+    
+       erroresJCR = await jcr(publications.articles, authorData, page, browser, filters.mail, filters.pass,i);
       }
       if(filters.checkScopus){
+       
         if (publications.orcid != "") {
-           await scopus(
+           errorScopus = await scopus(
             publications.articles,
             publications.inproceedings,
             publications.incollections,
@@ -307,7 +305,9 @@ async function getAllData(authors, browser, dataCore, filters) {
             contadorScopus
             
           );
-          contadorScopus++;
+          contadorScopus = false;
+        }else{
+          errorScopus = " Error en Scopus el author "+ authorData.name +" no tiene ORCID,no se puede extraer informacion de Scopus"
         }
         delete authorData.orcid;
       }
@@ -316,12 +316,18 @@ async function getAllData(authors, browser, dataCore, filters) {
     publicationsData = publications.inproceedings.concat(publicationsData);
     publicationsData = publications.articles.concat(publicationsData);
     AuthorsData.push(authorData);
+    if(erroresJCR.length > 0)
+    errores.push(erroresJCR);
+    
+    if(errorScopus != "" && errorScopus != null)
+    errores.push(errorScopus);
+    
   }
-  /*await page.close()*/
   return {
+    errors: errores,
     authors: AuthorsData,
     publications: publicationsData,
-    errors: errores
+    
   };
 }
 
@@ -338,7 +344,6 @@ async function googleScholar(
     /[0-9`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
     ""
   );
-  console.log("author good: " + authorGood);
   let aaa = await page.url();
   await page.waitForSelector("#gs_hdr_tsi");
   await page.type("#gs_hdr_tsi", authorGood);
@@ -384,7 +389,6 @@ async function googleScholar(
       }
       let boton = document.querySelector("#gsc_bpf_more:disabled");
       let botonActive = document.querySelector("#gsc_bpf_more");
-      console.log("Boton esta en =", boton);
 
       while (boton === null) {
         //Mirar si esta haciendo click en el boton
@@ -569,9 +573,6 @@ async function countGGSandCore(
                   if (coreHTML[i].innerText.includes("ERA"))
                     core = coreHTML[i].innerText.substring(11);
                   else core = coreHTML[i].innerText.substring(12);
-                  if (acronym === "PPDP") {
-                    console.log("valor core: " + core + " valor year: " + year);
-                  }
                   if (core <= year || coreHTML.length == i + 1) {
                     returnAcronym = {
                       core_year: core,
@@ -639,7 +640,6 @@ async function checkCorrectAuthors(page, authors) {
       );
       for (let j = 0; j < namesAndLinks.length; j++) {
         for (let t = 0; t < namesAndLinks[j].children.length; t++) {
-          console.log(namesAndLinks[j].children[t].localName);
           if (namesAndLinks[j].children[t].localName === "a") {
             result.authors.push({
               author: namesAndLinks[j].children[t].innerText,
@@ -665,8 +665,6 @@ async function checkCorrectAuthors(page, authors) {
     if(link.authors.length === 0) error = true;
     linkToAuthor.push(link);
 }
-console.log("aqui hay un error: ")
-console.log(error)
 if(error === true){
   return {errors:"un nombre de autor no ha sido encontrado, revisa los nombres"}
 }
@@ -757,7 +755,7 @@ function checkAcronym(data, acronym, year) {
   return null;
 }
 //Función que coge los parametros de JCR
-async function jcr(articles, author, page, browser, mail, pass,contador) {
+async function jcr(articles, author, page, browser, mail, pass,contar) {
   //Inicializamos los contadores que vamos a utilizar para saber cuantos articulos de cada tipo hay
   let contardor_q1 = 0;
   let contardor_q2 = 0;
@@ -771,33 +769,34 @@ async function jcr(articles, author, page, browser, mail, pass,contador) {
   
   await page.goto("http://jcr-incites.fecyt.es/");
   //Si buscamos un segundo autor no hace falta loguearse
-  if ( contador == 0)){
-  await page.waitForSelector(".dd-selected");
-  await page.click(".dd-selected");
-  await page.evaluate(() => {
-    let a = document.querySelectorAll(".dd-option");
-    let check = false;
-    for (let i = 0; i < a.length && !check; i++) {
-      if (a[i].children[2].innerText.includes("ompluten")) {
-        check = true;
-        a[i].click();
-        a[i].click();
-      }
-    }
-  });
-  await page.click("#form_submit_wayf");
-
   async function delay(time) {
     return new Promise(function (resolve) {
       setTimeout(resolve, time);
     });
   }
-  //Meter username y pass en la pagina de la UCM de login
-  await page.waitForSelector("#username");
-  await page.waitForSelector("#password");
-  await page.type("#username", mail);
-  await page.type("#password", pass);
-  await page.keyboard.press("Enter");
+  if ( contar == 0){
+    await page.waitForSelector(".dd-selected");
+    await page.click(".dd-selected");
+    await page.evaluate(() => {
+      let a = document.querySelectorAll(".dd-option");
+      let check = false;
+      for (let i = 0; i < a.length && !check; i++) {
+        if (a[i].children[2].innerText.includes("ompluten")) {
+          check = true;
+          a[i].click();
+          a[i].click();
+        }
+      }
+    });
+    await page.click("#form_submit_wayf");
+
+   
+    //Meter username y pass en la pagina de la UCM de login
+    await page.waitForSelector("#username");
+    await page.waitForSelector("#password");
+    await page.type("#username", mail);
+    await page.type("#password", pass);
+    await page.keyboard.press("Enter");
   }
   //Buscamos publicacion por publicacion
   for (let i = 0; i < articles.length; i++) {
@@ -1023,7 +1022,7 @@ else{
   author.jcr.numero_publicaciones_q3 = contardor_q3;
   author.jcr.numero_publicaciones_q4 = contardor_q4;
 } catch (error) {
-  errores[contadorErrors]= "Ha ocurrido un error con la redirecion ezterna de JCR, intenta la consulta de nuevo";
+  errores[contadorErrors]= "Ha ocurrido un error con la redirecion externa de JCR con el autor " + author.name + " no se ha podido extraer ningun dato, intenta la consulta de nuevo";
 }
   return errores;
 }
@@ -1039,12 +1038,17 @@ async function scopus(
   mail,
   pass,
   checkJRC,
-  contador
+  contadorScopus
 ) {
+  try {
+    
+ 
   //Vamos a loguearnos lo primero
   await page.goto("https://www.scopus.com/home.uri");
   //If si no se ha netrado en jcr
   let bul = false
+  if (contadorScopus) {
+    
   
   await page.evaluate(() => {
     let botonSearch = document.querySelectorAll(".btn-text");
@@ -1070,6 +1074,7 @@ async function scopus(
   await page.type("#password", pass);
   await page.keyboard.press("Enter");
   }
+}
   //Buscamos por orcid en Scopus
   await page.waitForSelector("#authors-tab");
   await page.evaluate(() => {
@@ -1083,7 +1088,11 @@ async function scopus(
     ".els-select.els-select--small.els-select--dirty > label > select",
     "orcid"
   );
+  //Escribimos el Orcid
   await page.waitForSelector("input[name='orcidId']");
+ 
+  await page.evaluate( () => document.querySelector("input[name='orcidId']").value = "")
+  
   await page.type("input[name='orcidId']", orcid);
   await page.evaluate(() => {
     let botonSearch = document.querySelector(
@@ -1153,7 +1162,7 @@ async function scopus(
 
     return a;
   });
-  await page.close();
+  //await page.close();
   await page2.close();
   //Creamos un objeto con los title y las citas de scopus para comparar despues
   let a = Texto.split("\n");
@@ -1168,8 +1177,6 @@ async function scopus(
   }
 
   for (let j = 0; j < articles.length; j++) {
-    console.log(articles[j])
-    articles[j].citas = {}
     articles[j].citas.numero_citas_scopus = "";
     let checkFor = false;
     for (let i = 0; i < scopusFinal.length && !checkFor; i++) {
@@ -1183,6 +1190,7 @@ async function scopus(
             .replace("times.", "")
             .replace("time.","")
             .replace(" ", "")
+            .trim()
         
         if(articles[j].citas.numero_citas_scopus === "") articles[j].citas.numero_citas_scopus = "0";
         
@@ -1208,6 +1216,7 @@ async function scopus(
             .replace("times.", "")
             .replace("time.","")
             .replace(" ", "")
+            .trim()
         
         if (inproceedings[j].citas.numero_citas_scopus === "") inproceedings[j].citas.numero_citas_scopus=  "0";
         checkFor = true;
@@ -1233,12 +1242,16 @@ async function scopus(
             .replace("times.", "")
             .replace("time.","")
             .replace(" ", "")
+            .trim()
         
         if (incollections[j].citas.numero_citas_scopus === "") incollections[j].citas.numero_citas_scopus= "0";
         checkFor = true;
       }
     }
   }
+} catch (error) {
+    return "Ha ocurrido un error interno en Scopus con el autor " + authorData.name + " no se ha podido extraer ningun dato."
+}
 }
 
 function initAuthor(name) {

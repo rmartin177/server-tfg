@@ -15,7 +15,7 @@ const port = process.env.PORT || "4000";
 
 //middleware que inicializa el servidor con una instancia de chrome
 app.use( async (req, res, next) => {
-    res.locals.browser = await pup.launch({headless: false, args: ['--no-sandbox']})
+    res.locals.browser = await pup.launch({headless: true, args: ['--no-sandbox']})
     res.locals.dataCore =  []
     next();
 })

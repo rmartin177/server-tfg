@@ -11,10 +11,10 @@ Content-Type: application/json
     "checkSchoolar": false,
     "checkGGS": false,
     "checkCore": false,
-    "checkScopus": false,
+    "checkScopus": true,
     "checkJRC": false,
     "mail": "franga06@ucm.es",
-    "pass":"GAFITAS99",
+    "pass":"TFG20202021",
     "initYear": 1900,
     "endYear": 2050
     }
@@ -28,19 +28,21 @@ Content-Type: application/json
 {
     "authors":[
         {"author": "Adrian Riesco 001", "link": "https://dblp.org/pid/35/4359.html"},
-        {"author": "Alberto Verdejo", "link": "https://dblp.org/pid/70/253.html"}
+        {"author": "Alberto Verdejo", "link": "https://dblp.org/pid/70/253.html"},
+        {"author": "Isabel Pita", "link": "https://dblp.org/pid/35/2414.html"},
+        {"author": "Narciso Martí-Oliet", "link": "https://dblp.org/pid/34/4176.html"}
         ],
     "filters":{
     "checkInproceedings": true,
     "checkArticles": true,
     "checkIncollections": true,
-    "checkSchoolar": false,
-    "checkGGS": false,
-    "checkCore": false,
-    "checkScopus": false,
+    "checkSchoolar": true,
+    "checkGGS": true,
+    "checkCore": true,
+    "checkScopus": true,
     "checkJRC": true,
     "mail": "franga06@ucm.es",
-    "pass":"GAFITAS99",
+    "pass":"TFG20202021",
     "initYear": 1900,
     "endYear": 2050
     }
