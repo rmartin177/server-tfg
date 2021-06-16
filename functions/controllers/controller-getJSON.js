@@ -32,7 +32,6 @@ exports.getJSON = async (req, res) => {
       res.locals.dataCore,
       filters
     );
-    await page.close();
     await res.locals.browser.close();
     res.json(result);
   }
