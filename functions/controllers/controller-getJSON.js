@@ -13,15 +13,14 @@ exports.getJSON = async (req, res) => {
   let scrapping = new scrappingHelper();
   await scrapping.optimizationWeb(page);
   let haveHomonymsAndLinks = await checkCorrectAuthors(page, authors);
+  console.log(haveHomonymsAndLinks)
   if (haveHomonymsAndLinks.errors) {
     await page.close();
     res.send(haveHomonymsAndLinks.errors);
   } else if (haveHomonymsAndLinks.haveHomonyms) {
-    await page.close();
-    await res.locals.browser.close();
+   await page.close();
     res.send(haveHomonymsAndLinks.authors);
   } else {
-    await page.close();
     let authorsLinkAndName = [];
     for (let i = 0; i < haveHomonymsAndLinks.authors.length; i++) {
       authorsLinkAndName.push(haveHomonymsAndLinks.authors[i].authors[0]);
@@ -32,7 +31,6 @@ exports.getJSON = async (req, res) => {
       res.locals.dataCore,
       filters
     );
-    await res.locals.browser.close();
     res.json(result);
   }
 };
@@ -45,7 +43,7 @@ exports.getJSONsanitize = async (req, res) => {
     res.locals.dataCore,
     filters
   );
-  await res.locals.browser.close();
+  
   res.json(result);
 };
 
