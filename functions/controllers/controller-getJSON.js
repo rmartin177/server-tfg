@@ -18,6 +18,7 @@ exports.getJSON = async (req, res) => {
     res.send(haveHomonymsAndLinks.errors);
   } else if (haveHomonymsAndLinks.haveHomonyms) {
     await page.close();
+    await res.locals.browser.close();
     res.send(haveHomonymsAndLinks.authors);
   } else {
     await page.close();
@@ -31,6 +32,8 @@ exports.getJSON = async (req, res) => {
       res.locals.dataCore,
       filters
     );
+    await page.close();
+    await res.locals.browser.close();
     res.json(result);
   }
 };
@@ -43,6 +46,7 @@ exports.getJSONsanitize = async (req, res) => {
     res.locals.dataCore,
     filters
   );
+  await res.locals.browser.close();
   res.json(result);
 };
 
@@ -319,8 +323,12 @@ async function getAllData(authors, browser, dataCore, filters) {
     if(erroresJCR.length > 0)
     errores.push(erroresJCR);
     
-    if(errorScopus != "" && errorScopus != null)
-    errores.push(errorScopus);
+    if(errorScopus != "" && errorScopus != null){
+      let erroresScopus = []
+      erroresScopus.push(errorScopus);
+      errores.push(erroresScopus);
+    }
+    
     
   }
   return {
